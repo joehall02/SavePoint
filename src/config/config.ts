@@ -1,7 +1,7 @@
 import dotenv from "dotenv";
 
 // Load .env file
-dotenv.config();
+dotenv.config({ quiet: true });
 
 // Application configuration options
 interface Config {

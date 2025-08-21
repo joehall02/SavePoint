@@ -3,5 +3,3 @@ export interface console {
   name: string;
   igdb_id: number;
 }
-
-export let consoles: Console[] = [];

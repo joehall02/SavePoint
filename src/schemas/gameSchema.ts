@@ -8,3 +8,7 @@ export const createGameSchema = z.object({
   igdb_id: z.number(),
   console_id: z.number(),
 });
+
+export const getAllGamesSchema = z.object({
+  title: z.string(),
+});

@@ -1,5 +1,4 @@
 export interface Game {
-  id: number;
   title: string;
   condition: string;
   notes: string;
@@ -7,5 +6,3 @@ export interface Game {
   igdb_id: number;
   console_id: number;
 }
-
-export let games: Game[] = [];

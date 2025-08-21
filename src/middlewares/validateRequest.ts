@@ -8,7 +8,7 @@ export const validateRequest = (schema: ZodObject) => {
       req.body = schema.parse(req.body); // throws error if data is invalid
       next();
     } catch (err: any) {
-      return res.status(400).json({ error: err.errors || err.message }); // Return error
+      return res.status(400).json({ error: err.message }); // Return error
     }
   };
 };

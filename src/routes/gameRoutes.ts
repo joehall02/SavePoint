@@ -8,5 +8,6 @@ const router = Router();
 
 // Define Routes
 router.post("/", validateRequest(createGameSchema), createGame);
+router.get("/", getGames);
 
 export default router;
