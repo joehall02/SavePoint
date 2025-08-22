@@ -1,9 +1,9 @@
-import app from "./app";
-import config from "./config/config";
-import db from "./db";
+import app from "./app.js";
+import config from "./config/config.js";
+import db from "./db.js";
 
 app.listen(config.port, () => {
-  console.log(`Server running on port ${config.port}`);
+  console.log(`${config.nodeEnv} server running on port ${config.port}`);
 });
 
 // Close database connection when server closes

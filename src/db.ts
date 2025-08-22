@@ -1,7 +1,8 @@
 import Database from "better-sqlite3";
+import config from "./config/config.js";
 
 // Create sqlite database object
-const db = new Database("app.db");
+const db = new Database(config.databaseUri);
 
 // Execute table create if they don't already exist
 db.exec(`

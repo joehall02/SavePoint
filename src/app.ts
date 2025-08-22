@@ -1,7 +1,7 @@
 import express from "express";
-import gameRoutes from "./routes/gameRoutes";
+import gameRoutes from "./routes/gameRoutes.js";
 import morgan from "morgan";
-import { errorHandler } from "./middlewares/errorHandler";
+import { errorHandler } from "./middlewares/errorHandler.js";
 
 // Create an express app instance
 const app = express();
