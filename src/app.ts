@@ -1,4 +1,4 @@
-import express from "express";
+import express, { NextFunction, Request, Response } from "express";
 import gameRoutes from "./routes/gameRoutes.js";
 import morgan from "morgan";
 import { errorHandler } from "./middlewares/errorHandler.js";
@@ -12,6 +12,11 @@ app.use(morgan("combined")); // Log requests
 
 // Routes
 app.use("/api/games", gameRoutes);
+
+// 404 Error handler
+app.use((req: Request, res: Response, next: NextFunction) => {
+  res.status(404).json({ error: "Requested resource not found" });
+});
 
 // Error handling middleware
 app.use(errorHandler);

@@ -10,5 +10,15 @@ export const createGameSchema = z.object({
 });
 
 export const getAllGamesSchema = z.object({
+  id: z.number(),
   title: z.string(),
+});
+
+export const editGameSchema = z.object({
+  id: z.number().optional(),
+  title: z.string().optional(),
+  condition: z.string().optional(),
+  notes: z.string().optional(),
+  rating: z.number().optional(),
+  console_id: z.number().optional(),
 });

@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import { getAllGamesSchema } from "../schemas/gameSchema.js";
-import { addGame, fetchGames } from "../services/gameService.js";
+import { addGame, fetchGames, updateGame, removeGame } from "../services/gameService.js";
 
 // Add a game to the collection
 export const createGame = (req: Request, res: Response, next: NextFunction) => {
@@ -34,6 +34,16 @@ export const getGames = (req: Request, res: Response, next: NextFunction) => {
 // Edit game in the collection
 export const editGame = (req: Request, res: Response, next: NextFunction) => {
   try {
+    // Get game id from the parameters
+    const gameId: number = Number(req.params.id);
+
+    // Get attributes from request body
+    const { title, condition, notes, rating, console_id } = req.body;
+
+    // updateGame service to handle business logic
+    const updatedGame = updateGame(gameId, title, condition, notes, rating, console_id);
+
+    res.status(200).json(updatedGame);
   } catch (error) {
     next(error);
   }
@@ -42,6 +52,12 @@ export const editGame = (req: Request, res: Response, next: NextFunction) => {
 // Delete a game from the collection
 export const deleteGame = (req: Request, res: Response, next: NextFunction) => {
   try {
+    // Get game id from the parameters
+    const gameId: number = Number(req.params.id);
+
+    const response = removeGame(gameId);
+
+    res.status(200).json(response);
   } catch (error) {
     next(error);
   }
