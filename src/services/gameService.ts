@@ -2,23 +2,24 @@ import { Game } from "../models/game.js";
 import db from "../db.js";
 import { AppError } from "../middlewares/errorHandler.js";
 
-export const addGame = (title: string, condition: string, notes: string, rating: number, igdb_id: number, console_id: number) => {
+export const addGame = (title: string, condition: string, notes: string, boxIncluded: boolean, rating: number, igdbId: number, platformId: number) => {
   // Create a new game object
-  const newGame: Game = { title, condition, notes, rating, igdb_id, console_id };
+  const newGame: Game = { title, condition, notes, boxIncluded, rating, igdbId, platformId };
 
   // Insert game attributes into a new row in the games table in the database
   const query = db.prepare(`
-        INSERT INTO games (title, condition, notes, rating, igdb_id, console_id) 
-        VALUES (@title, @condition, @notes, @rating, @igdb_id, @console_id )
+        INSERT INTO games (title, condition, notes, box_included, rating, igdb_id, platform_id) 
+        VALUES (@title, @condition, @notes, @boxIncluded, @rating, @igdbId, @platformId )
   `);
 
   query.run({
     title: newGame.title,
     condition: newGame.condition,
     notes: newGame.notes,
+    boxIncluded: newGame.boxIncluded ? 1 : 0, // Sets box included parameter to either 1 or 0 to be compatible with SQLite
     rating: newGame.rating,
-    igdb_id: newGame.igdb_id,
-    console_id: newGame.console_id,
+    igdbId: newGame.igdbId,
+    platformId: newGame.platformId,
   });
 
   return newGame;
@@ -31,10 +32,25 @@ export const fetchGames = () => {
   return games;
 };
 
-export const updateGame = (gameId: number, newTitle: string, newCondition: string, newNotes: string, newRating: number, newConsoleId: number) => {
+export const updateGame = (gameId: number, newTitle: string, newCondition: string, newNotes: string, newBoxIncluded: boolean, newRating: number, newPlatformId: number) => {
   // Selects game with the same id from the game table and asserts its type as Game
-  const game = db.prepare("SELECT * FROM games WHERE id = ?").get(gameId) as Game;
+  const getGamequery = db.prepare(`
+    SELECT 
+      id,
+      title,
+      condition,
+      notes,
+      box_included AS boxIncluded,
+      rating,
+      igdb_id AS igdbId,
+      platform_id AS platformId 
+    FROM games
+    WHERE id = ?
+  `);
 
+  const game = getGamequery.get(gameId) as Game;
+
+  // Check to make sure the game is in the database, if not throw an error
   if (!game) {
     const err: AppError = new Error("Game not found");
     err.status = 404;
@@ -46,12 +62,13 @@ export const updateGame = (gameId: number, newTitle: string, newCondition: strin
     title?: string;
     condition?: string;
     notes?: string;
+    boxIncluded?: boolean;
     rating?: number;
-    console_id?: number;
+    platformId?: number;
   };
 
   // Declares updates as type updateGameInput and assigns it the values passed into the function
-  const updates: updateGameInput = { title: newTitle, condition: newCondition, notes: newNotes, rating: newRating, console_id: newConsoleId };
+  const updates: updateGameInput = { title: newTitle, condition: newCondition, notes: newNotes, boxIncluded: newBoxIncluded, rating: newRating, platformId: newPlatformId };
 
   // Declares updatedGame with original values from the db
   // and overwrites with updated values if they are not undefined
@@ -66,15 +83,21 @@ export const updateGame = (gameId: number, newTitle: string, newCondition: strin
     SET title = @title,
         condition = @condition,
         notes = @notes,
+        box_included = @boxIncluded,
         rating = @rating,
-        console_id = @console_id
+        platform_id = @platformId
     WHERE id = @id
   `);
 
   // Runs the query, passing in updatedGame and gameId
   query.run({
-    ...updatedGame,
     id: gameId,
+    title: updatedGame.title,
+    condition: updatedGame.condition,
+    notes: updatedGame.notes,
+    boxIncluded: updatedGame.boxIncluded ? 1 : 0, // Sets box included parameter to either 1 or 0 to be compatible with SQLite
+    rating: updatedGame.rating,
+    platformId: updatedGame.platformId,
   });
 
   return updatedGame;
@@ -88,6 +111,7 @@ export const removeGame = (gameId: number) => {
 
   const result = query.run({ id: gameId });
 
+  // Check if the game with the provided id was deleted from the database, if not then throw an error
   if (result.changes === 0) {
     const err: AppError = new Error("Game not found");
     err.status = 404;

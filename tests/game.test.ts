@@ -11,20 +11,21 @@ describe("games test", () => {
     db.exec("BEGIN TRANSACTION");
 
     // Create a new game object
-    const newGame: Game = { title: "Game1", condition: "Good", notes: "Example", rating: 3, igdb_id: 21, console_id: 1 };
+    const newGame: Game = { title: "Game1", condition: "Good", notes: "Example", boxIncluded: true, rating: 3, igdbId: 21, platformId: 1 };
 
     const query = db.prepare(`
-      INSERT INTO games (title, condition, notes, rating, igdb_id, console_id) 
-      VALUES (@title, @condition, @notes, @rating, @igdb_id, @console_id )
-      `);
+      INSERT INTO games (title, condition, notes, box_included, rating, igdb_id, platform_id) 
+      VALUES (@title, @condition, @notes, @boxIncluded, @rating, @igdbId, @platformId )
+    `);
 
     query.run({
       title: newGame.title,
       condition: newGame.condition,
       notes: newGame.notes,
+      boxIncluded: newGame.boxIncluded ? 1 : 0, // Sets box included parameter to either 1 or 0 to be compatible with SQLite
       rating: newGame.rating,
-      igdb_id: newGame.igdb_id,
-      console_id: newGame.console_id,
+      igdbId: newGame.igdbId,
+      platformId: newGame.platformId,
     });
   });
 
@@ -34,7 +35,7 @@ describe("games test", () => {
   });
 
   test("POST /games should create a new game", async () => {
-    const newGame: Game = { title: "Game1", condition: "Good", notes: "Example", rating: 3, igdb_id: 21, console_id: 1 };
+    const newGame: Game = { title: "Game1", condition: "Good", notes: "Example", boxIncluded: true, rating: 3, igdbId: 21, platformId: 1 };
 
     const res = await request(app).post("/api/games/").send(newGame);
 
@@ -52,7 +53,7 @@ describe("games test", () => {
   });
 
   test("PUT /games/:id should edit a game", async () => {
-    const updatedGame = { id: 1, title: "UpdatedTitle", condition: "Bad", notes: "UpdatedNotes", igdb_id: 21, rating: 2.4, console_id: 5 };
+    const updatedGame = { id: 1, title: "UpdatedTitle", condition: "Bad", notes: "UpdatedNotes", boxIncluded: false, rating: 2.4, igdbId: 21, platformId: 5 };
 
     const res = await request(app).put("/api/games/1").send(updatedGame);
 

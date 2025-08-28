@@ -6,10 +6,10 @@ import { addGame, fetchGames, updateGame, removeGame } from "../services/gameSer
 export const createGame = (req: Request, res: Response, next: NextFunction) => {
   try {
     // Get attributes from request body
-    const { title, condition, notes, rating, igdb_id, console_id } = req.body;
+    const { title, condition, notes, boxIncluded, rating, igdbId, platformId } = req.body;
 
     // addGame service to hand business logic
-    const newGame = addGame(title, condition, notes, rating, igdb_id, console_id);
+    const newGame = addGame(title, condition, notes, boxIncluded, rating, igdbId, platformId);
 
     // Return response with 201 and new game
     res.status(201).json(newGame);
@@ -38,10 +38,10 @@ export const editGame = (req: Request, res: Response, next: NextFunction) => {
     const gameId: number = Number(req.params.id);
 
     // Get attributes from request body
-    const { title, condition, notes, rating, console_id } = req.body;
+    const { title, condition, notes, boxIncluded, rating, platformId } = req.body;
 
     // updateGame service to handle business logic
-    const updatedGame = updateGame(gameId, title, condition, notes, rating, console_id);
+    const updatedGame = updateGame(gameId, title, condition, notes, boxIncluded, rating, platformId);
 
     res.status(200).json(updatedGame);
   } catch (error) {

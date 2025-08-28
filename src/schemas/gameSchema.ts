@@ -4,9 +4,10 @@ export const createGameSchema = z.object({
   title: z.string(),
   condition: z.string(),
   notes: z.string(),
+  boxIncluded: z.boolean(),
   rating: z.number(),
-  igdb_id: z.number(),
-  console_id: z.number(),
+  igdbId: z.number(),
+  platformId: z.number(),
 });
 
 export const getAllGamesSchema = z.object({
@@ -19,6 +20,7 @@ export const editGameSchema = z.object({
   title: z.string().optional(),
   condition: z.string().optional(),
   notes: z.string().optional(),
+  boxIncluded: z.boolean().optional(),
   rating: z.number().optional(),
-  console_id: z.number().optional(),
+  platformId: z.number().optional(),
 });

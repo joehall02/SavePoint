@@ -2,7 +2,8 @@ export interface Game {
   title: string;
   condition: string;
   notes: string;
+  boxIncluded: boolean;
   rating: number;
-  igdb_id: number;
-  console_id: number;
+  igdbId: number;
+  platformId: number;
 }

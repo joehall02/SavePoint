@@ -6,3 +6,4 @@
 app.db
 prod.db
 /dist
+src/platformImages/*
