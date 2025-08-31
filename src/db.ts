@@ -6,13 +6,13 @@ const db = new Database(config.databaseUri);
 
 // Execute table create if they don't already exist
 db.exec(`
-    CREATE TABLE IF NOT EXISTS platform (
+    CREATE TABLE IF NOT EXISTS platforms (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
-        name TEXT NOT NULL,
+        title TEXT NOT NULL,
         cover TEXT NOT NULL
     );
 
-    INSERT INTO platform (name, cover)
+    INSERT INTO platforms (title, cover)
     VALUES 
         ('PS1', 'ps1.jpg'),
         ('PS2', 'ps2.jpg'),

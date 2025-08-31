@@ -10,6 +10,16 @@ export const createGameSchema = z.object({
   platformId: z.number(),
 });
 
+export const getGameDetailsSchema = z.object({
+  title: z.string(),
+  condition: z.string(),
+  notes: z.string(),
+  boxIncluded: z.boolean(),
+  rating: z.number(),
+  igdbId: z.number(),
+  platformId: z.number(),
+});
+
 export const getAllGamesSchema = z.object({
   id: z.number(),
   title: z.string(),

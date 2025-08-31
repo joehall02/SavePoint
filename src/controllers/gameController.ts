@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from "express";
-import { getAllGamesSchema } from "../schemas/gameSchema.js";
-import { addGame, fetchGames, updateGame, removeGame } from "../services/gameService.js";
+import { getAllGamesSchema, getGameDetailsSchema } from "../schemas/gameSchema.js";
+import { addGame, fetchAllGames, fetchGameDetails, updateGame, removeGame } from "../services/gameService.js";
 
 // Add a game to the collection
 export const createGame = (req: Request, res: Response, next: NextFunction) => {
@@ -19,13 +19,29 @@ export const createGame = (req: Request, res: Response, next: NextFunction) => {
 };
 
 // Get games from collection
-export const getGames = (req: Request, res: Response, next: NextFunction) => {
+export const getAllGames = (req: Request, res: Response, next: NextFunction) => {
   try {
     // fetchGames service to handle business logic
-    const games = fetchGames();
+    const games = fetchAllGames();
 
     // Return response 200 with games, validating the data against the schema
     res.status(200).json(getAllGamesSchema.array().parse(games));
+  } catch (error) {
+    next(error);
+  }
+};
+
+// Get games from collection
+export const getGameDetails = (req: Request, res: Response, next: NextFunction) => {
+  try {
+    // Get game id from the parameters
+    const gameId: number = Number(req.params.id);
+
+    // fetchGames service to handle business logic
+    const game = fetchGameDetails(gameId);
+
+    // Return response 200 with games, validating the data against the schema
+    res.status(200).json(getGameDetailsSchema.parse(game));
   } catch (error) {
     next(error);
   }

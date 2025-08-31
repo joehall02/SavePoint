@@ -52,6 +52,15 @@ describe("games test", () => {
     assert.equal(res.body[0].title, game.title);
   });
 
+  test("GET /games:id should get a game", async () => {
+    const game: Game = { title: "Game1", condition: "Good", notes: "Example", boxIncluded: true, rating: 3, igdbId: 21, platformId: 1 };
+
+    const res = await request(app).get("/api/games/1");
+
+    assert.equal(res.status, 200);
+    assert.deepEqual(res.body, game);
+  });
+
   test("PUT /games/:id should edit a game", async () => {
     const updatedGame = { id: 1, title: "UpdatedTitle", condition: "Bad", notes: "UpdatedNotes", boxIncluded: false, rating: 2.4, igdbId: 21, platformId: 5 };
 
