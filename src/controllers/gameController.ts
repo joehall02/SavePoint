@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import { getAllGamesSchema, getGameDetailsSchema } from "../schemas/gameSchema.js";
-import { addGame, fetchAllGames, fetchGameDetails, updateGame, removeGame } from "../services/gameService.js";
+import { addGame, fetchAllGames, fetchGameDetails, updateGame, removeGame, searchIgdbGame } from "../services/gameService.js";
 
 // Add a game to the collection
 export const createGame = (req: Request, res: Response, next: NextFunction) => {
@@ -72,6 +72,18 @@ export const deleteGame = (req: Request, res: Response, next: NextFunction) => {
     const gameId: number = Number(req.params.id);
 
     const response = removeGame(gameId);
+
+    res.status(200).json(response);
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const searchGame = (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const searchParam: string = String(req.query);
+
+    const response = searchIgdbGame(searchParam);
 
     res.status(200).json(response);
   } catch (error) {

@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { createGame, getAllGames, getGameDetails, editGame, deleteGame } from "../controllers/gameController.js";
+import { createGame, getAllGames, getGameDetails, editGame, deleteGame, searchGame } from "../controllers/gameController.js";
 import { createGameSchema, editGameSchema } from "../schemas/gameSchema.js";
 import { validateRequest } from "../middlewares/validateRequest.js";
 
@@ -12,5 +12,6 @@ router.get("/", getAllGames);
 router.get("/:id", getGameDetails);
 router.put("/:id", validateRequest(editGameSchema), editGame);
 router.delete("/:id", deleteGame);
+router.post("/search", searchGame);
 
 export default router;

@@ -104,3 +104,11 @@ export const removeGame = (gameId: number) => {
 
   return { message: "Game deleted successfully" };
 };
+
+export const searchIgdbGame = (searchParam: string) => {
+  if (searchParam === null) {
+    const err: AppError = new Error("No search term provided");
+    err.status = 400;
+    throw err;
+  }
+};
