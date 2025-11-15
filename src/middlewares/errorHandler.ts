@@ -10,3 +10,9 @@ export const errorHandler = (err: AppError, req: Request, res: Response, next: N
     error: err.message || "Internal Server Error",
   });
 };
+
+export const throwGameNotFoundError = () => {
+    const err: AppError = new Error("Game not found");
+    err.status = 404;
+    throw err;
+}

@@ -79,6 +79,7 @@ export const deleteGame = (req: Request, res: Response, next: NextFunction) => {
   }
 };
 
+// Search igdb for game
 export const searchGame = (req: Request, res: Response, next: NextFunction) => {
   try {
     const searchParam: string = String(req.query);

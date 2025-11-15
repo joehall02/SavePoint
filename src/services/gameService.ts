@@ -1,5 +1,5 @@
 import { Game } from "../models/game.js";
-import { AppError } from "../middlewares/errorHandler.js";
+import { AppError, throwGameNotFoundError } from "../middlewares/errorHandler.js";
 import { insertGame, editGame, getAllGames, getGame, deleteGame } from "../repositories/gameRepository.js";
 
 export const addGame = (title: string, condition: string, notes: string, boxIncluded: boolean, rating: number, igdbId: number, platformId: number) => {
@@ -36,9 +36,7 @@ export const fetchGameDetails = (gameId: number) => {
 
   // Check to make sure the game is in the database, if not throw an error
   if (!gameDetails) {
-    const err: AppError = new Error("Game not found");
-    err.status = 404;
-    throw err;
+    throwGameNotFoundError();
   }
 
   const game: Game = {
@@ -60,9 +58,7 @@ export const updateGame = (gameId: number, newTitle: string, newCondition: strin
 
   // Check to make sure the game is in the database, if not throw an error
   if (!game) {
-    const err: AppError = new Error("Game not found");
-    err.status = 404;
-    throw err;
+    throwGameNotFoundError();
   }
 
   // Defines a type to allow for optional attributes
@@ -97,9 +93,7 @@ export const removeGame = (gameId: number) => {
 
   // Check if the game with the provided id was deleted from the database, if not then throw an error
   if (result.changes === 0) {
-    const err: AppError = new Error("Game not found");
-    err.status = 404;
-    throw err;
+    throwGameNotFoundError();
   }
 
   return { message: "Game deleted successfully" };
