@@ -11,8 +11,8 @@ export const errorHandler = (err: AppError, req: Request, res: Response, next: N
   });
 };
 
-export const throwGameNotFoundError = () => {
-    const err: AppError = new Error("Game not found");
-    err.status = 404;
-    throw err;
-}
+export const throwError = (errorMessage: string, errorCode: number) => {
+  const err: AppError = new Error(errorMessage);
+  err.status = errorCode;
+  throw err
+};

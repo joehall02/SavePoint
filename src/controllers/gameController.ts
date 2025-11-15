@@ -79,12 +79,27 @@ export const deleteGame = (req: Request, res: Response, next: NextFunction) => {
   }
 };
 
-// Search igdb for game
-export const searchGame = (req: Request, res: Response, next: NextFunction) => {
+// Search igdb for game from home page
+export const searchGameHome = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const searchParam: string = String(req.query);
+    const { searchParam } = req.body
+    const searchLimit = 6
 
-    const response = searchIgdbGame(searchParam);
+    const response = await searchIgdbGame(searchParam, searchLimit);
+
+    res.status(200).json(response);
+  } catch (error) {
+    next(error);
+  }
+};
+
+// Search igdb for game results page
+export const searchGameResults = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const searchParam: string = String(req.query.search);
+    const searchLimit: number = Number(req.query.limit);
+
+    const response = await searchIgdbGame(searchParam, searchLimit);
 
     res.status(200).json(response);
   } catch (error) {

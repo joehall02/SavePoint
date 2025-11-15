@@ -1,6 +1,7 @@
 import { Game } from "../models/game.js";
-import { AppError, throwGameNotFoundError } from "../middlewares/errorHandler.js";
+import { throwError } from "../middlewares/errorHandler.js";
 import { insertGame, editGame, getAllGames, getGame, deleteGame } from "../repositories/gameRepository.js";
+import { searchGame } from "../apis/igdbApi.js"
 
 export const addGame = (title: string, condition: string, notes: string, boxIncluded: boolean, rating: number, igdbId: number, platformId: number) => {
   // Create a new game object
@@ -36,7 +37,7 @@ export const fetchGameDetails = (gameId: number) => {
 
   // Check to make sure the game is in the database, if not throw an error
   if (!gameDetails) {
-    throwGameNotFoundError();
+    throwError("Game not found", 404);
   }
 
   const game: Game = {
@@ -58,7 +59,7 @@ export const updateGame = (gameId: number, newTitle: string, newCondition: strin
 
   // Check to make sure the game is in the database, if not throw an error
   if (!game) {
-    throwGameNotFoundError();
+    throwError("Game not found", 404);
   }
 
   // Defines a type to allow for optional attributes
@@ -93,16 +94,27 @@ export const removeGame = (gameId: number) => {
 
   // Check if the game with the provided id was deleted from the database, if not then throw an error
   if (result.changes === 0) {
-    throwGameNotFoundError();
+    throwError("Game not found", 404);
   }
 
   return { message: "Game deleted successfully" };
 };
 
-export const searchIgdbGame = (searchParam: string) => {
+export const searchIgdbGame = async (searchParam: string, searchLimit: number) => {
   if (searchParam === null) {
-    const err: AppError = new Error("No search term provided");
-    err.status = 400;
-    throw err;
+    throwError("No search term provided", 400);
   }
+
+  if (searchLimit === null) {
+    searchLimit = 10
+  }
+
+  console.log("search params " + searchParam)
+  console.log("search limit " + searchLimit)
+  // TODO When not working still returns error 200 with {}
+  const searchResults = await searchGame(searchParam, searchLimit)
+
+  console.log(searchResults)
+
+  return searchResults
 };

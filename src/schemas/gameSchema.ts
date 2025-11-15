@@ -42,3 +42,7 @@ export const editGameSchema = z
     // (value) => value !== undefined: callback function, determine if the value
     return Object.values(data).some((value) => value !== undefined);
   });
+
+export const  searchGameHomeSchema = z.object({
+  searchParam: z.string()
+})
