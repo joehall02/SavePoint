@@ -1,16 +1,18 @@
 import { Request, Response, NextFunction } from "express";
-import { getAllPlatformsSchema } from "../schemas/platformSchema.js";
-import { fetchPlatforms } from "../services/platformService.js";
+import { PlatformServiceProtocol } from "../services/protocols/platformServiceProtocol.js";
 
-// Get platforms from collection
-export const getPlatforms = (req: Request, res: Response, next: NextFunction) => {
-  try {
-    // fetchPlatforms service to handle business logic
-    const platforms = fetchPlatforms();
+export class PlatformController {
+  constructor(private service: PlatformServiceProtocol) {}
 
-    // Return response 200 with platforms, validating the data against the schema
-    res.status(200).json(getAllPlatformsSchema.array().parse(platforms));
-  } catch (error) {
-    next(error);
+  public getPlatforms = async(req: Request, res: Response, next: NextFunction) => {
+    try {
+      // fetchPlatforms service to handle business logic
+      const platforms = await this.service.fetchPlatforms();
+    
+      // Return response 200 with platforms, validating the data against the schema
+      res.status(200).json(platforms);
+    } catch (error) {
+      next(error);
+    }
   }
-};
+}

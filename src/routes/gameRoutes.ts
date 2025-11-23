@@ -1,18 +1,25 @@
 import { Router } from "express";
-import { createGame, getAllGames, getGameDetails, editGame, deleteGame, searchGameHome, searchGameResults } from "../controllers/gameController.js";
-import { createGameSchema, editGameSchema, searchGameHomeSchema } from "../schemas/gameSchema.js";
+import { GameController } from "../controllers/gameController.js";
+import * as Schema from "../schemas/gameSchema.js";
 import { validateRequest } from "../middlewares/validateRequest.js";
+import { IGDBClient } from "../apis/igdbClient.js";
+import { GameService } from "../services/gameService.js";
 
 // Create a router object
 const router = Router();
 
+// Dependancy injection
+const igdbClient = new IGDBClient()
+const gameService = new GameService(igdbClient)
+const gameController = new GameController(gameService)
+
 // Define Routes
-router.post("/", validateRequest(createGameSchema), createGame);
-router.get("/", getAllGames);
-router.get("/:id", getGameDetails);
-router.put("/:id", validateRequest(editGameSchema), editGame);
-router.delete("/:id", deleteGame);
-router.post("/search", validateRequest(searchGameHomeSchema), searchGameHome);
-router.post("/result/", searchGameResults);
+router.post("/", validateRequest(Schema.createGameSchema), gameController.createGame);
+router.get("/", gameController.getAllGames);
+router.get("/:id", gameController.getGameDetails);
+router.put("/:id", validateRequest(Schema.editGameSchema), gameController.editGame);
+router.delete("/:id", gameController.deleteGame);
+router.post("/search", validateRequest(Schema.searchGameHomeSchema), gameController.searchGameHome);
+router.post("/result/", gameController.searchGameResults);
 
 export default router;

@@ -7,3 +7,8 @@ export interface Game {
   igdbId: number;
   platformId: number;
 }
+
+export interface PartialGame {
+  id: number;
+  title: String;
+}
