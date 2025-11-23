@@ -4,13 +4,15 @@ import * as Schema from "../schemas/gameSchema.js";
 import { validateRequest } from "../middlewares/validateRequest.js";
 import { IGDBClient } from "../apis/igdbClient.js";
 import { GameService } from "../services/gameService.js";
+import { GameRepository } from "../repositories/gameRepository.js";
 
 // Create a router object
 const router = Router();
 
 // Dependancy injection
 const igdbClient = new IGDBClient()
-const gameService = new GameService(igdbClient)
+const gameRepo = new GameRepository
+const gameService = new GameService(igdbClient, gameRepo)
 const gameController = new GameController(gameService)
 
 // Define Routes
