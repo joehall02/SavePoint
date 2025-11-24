@@ -1,5 +1,5 @@
 export interface Platform {
   id: number;
-  name: string;
+  title: string;
   cover: string;
 }

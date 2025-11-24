@@ -11,7 +11,7 @@ const router = Router();
 
 // Dependancy injection
 const igdbClient = new IGDBClient()
-const gameRepo = new GameRepository
+const gameRepo = new GameRepository()
 const gameService = new GameService(igdbClient, gameRepo)
 const gameController = new GameController(gameService)
 

@@ -107,12 +107,7 @@ export class GameService implements GameServiceProtocol {
 
   async removeGame(gameId: number): Promise<void> {
     // Delete game in database
-    const result = await this.gameRepo.deleteGame(gameId);
-
-    // Check if the game with the provided id was deleted from the database, if not then throw an error
-    if (result.changes === 0) {
-      throwError("Game not found", 404);
-    }
+    await this.gameRepo.deleteGame(gameId);
   };
 
   async searchIgdbGame(searchParam: string, searchLimit: number): Promise<Array<IGDBGame>> {
@@ -123,8 +118,7 @@ export class GameService implements GameServiceProtocol {
     if (searchLimit === null) {
       searchLimit = 10;
     }
-
-    // TODO When not working still returns error 200 with {}
+    
     const searchResults = await this.igdbClient.searchGame(searchParam, searchLimit) as Array<IGDBGame>;
 
     return searchResults;

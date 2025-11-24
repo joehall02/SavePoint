@@ -1,12 +1,13 @@
 import { Platform } from "../models/platform.js";
-import { getAllPlatforms } from "../repositories/platformRepository.js";
+import { PlatformRepoProtocol } from "../repositories/protocols/platformRepoProtocol.js";
 import { PlatformServiceProtocol } from "./protocols/platformServiceProtocol.js";
 
 export class PlatformService implements PlatformServiceProtocol {
-  
+  constructor(private platformRepo: PlatformRepoProtocol) {}
+
   async fetchPlatforms(): Promise<Array<Platform>> {
     // Fetch all platforms from the database
-    const platforms = getAllPlatforms() as Array<Platform>;
+    const platforms = this.platformRepo.getAllPlatforms();
     
     return platforms;
   };

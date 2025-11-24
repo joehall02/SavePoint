@@ -1,7 +1,7 @@
-import { RunResult } from "better-sqlite3";
 import db from "../db.js";
 import { Game, GameDetails, PartialGame } from "../models/game.js";
 import { GameRepoProtocol } from "./protocols/gameRepoProtocol.js";
+import { throwError } from "../middlewares/errorHandler.js";
 
 export class GameRepository implements GameRepoProtocol {
  async insertGame(game: Game): Promise<void> {
@@ -75,7 +75,7 @@ export class GameRepository implements GameRepoProtocol {
     return gameDetails;
   };
 
- async deleteGame(gameId: number): Promise<RunResult> {
+ async deleteGame(gameId: number): Promise<void> {
     const query = db.prepare(`
           DELETE FROM games
           WHERE id = @id  
@@ -83,6 +83,9 @@ export class GameRepository implements GameRepoProtocol {
 
     const result = query.run({ id: gameId });
 
-    return result
+    // Check if the game with the provided id was deleted from the database, if not then throw an error
+    if (result.changes === 0) {
+      throwError("Game not found", 404);
+    }
   }
 }
