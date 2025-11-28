@@ -1,0 +1,21 @@
+meta {
+  name: Search game (results page)
+  type: http
+  seq: 7
+}
+
+post {
+  url: {{base_url}}/{{game_route}}/result?search=Halo&limit=2
+  body: none
+  auth: inherit
+}
+
+params:query {
+  search: Halo
+  limit: 2
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}

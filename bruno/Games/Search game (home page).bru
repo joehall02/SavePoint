@@ -1,0 +1,22 @@
+meta {
+  name: Search game (home page)
+  type: http
+  seq: 6
+}
+
+post {
+  url: {{base_url}}/{{game_route}}/search/
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "searchParam": ""
+  }
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}

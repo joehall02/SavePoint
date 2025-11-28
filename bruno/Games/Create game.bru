@@ -1,0 +1,28 @@
+meta {
+  name: Create game
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{base_url}}/{{game_route}}/
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "title": "Test title",
+    "condition": "Good",
+    "notes": "Some notes and that",
+    "boxIncluded": true,
+    "rating": 1,
+    "igdbId": 123,
+    "platformId": 2
+  }
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}
