@@ -5,15 +5,28 @@ import { validateRequest } from "../middlewares/validateRequest.js";
 import { IGDBClient } from "../apis/igdbClient.js";
 import { GameService } from "../services/gameService.js";
 import { GameRepository } from "../repositories/gameRepository.js";
+import { container } from "tsyringe";
 
 // Create a router object
 const router = Router();
 
 // Dependancy injection
-const igdbClient = new IGDBClient()
-const gameRepo = new GameRepository()
-const gameService = new GameService(igdbClient, gameRepo)
-const gameController = new GameController(gameService)
+container.register("IDGBClient", {
+    useClass: IGDBClient
+})
+
+container.register("GameRepository", {
+    useClass: GameRepository
+})
+
+container.register("GameService", {
+    useClass: GameService
+})
+
+// const igdbClient = new IGDBClient()
+// const gameRepo = new GameRepository()
+// const gameService = new GameService(igdbClient, gameRepo)
+const gameController = container.resolve(GameController)
 
 // Define Routes
 router.post("/", validateRequest(Schema.createGameSchema), gameController.createGame);

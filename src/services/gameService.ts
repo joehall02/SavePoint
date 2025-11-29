@@ -4,9 +4,11 @@ import { throwError } from "../middlewares/errorHandler.js";
 import { GameServiceProtocol } from "./protocols/gameServiceProtocol.js";
 import { IGDBClientProtocol } from "../apis/protocols/IGDBClientProtocol.js";
 import { GameRepoProtocol } from "../repositories/protocols/gameRepoProtocol.js";
+import { inject, injectable } from "tsyringe";
 
+@injectable()
 export class GameService implements GameServiceProtocol {
-  constructor(private igdbClient: IGDBClientProtocol, private gameRepo: GameRepoProtocol) {}
+  constructor(@inject("IGDBClientProtocol") private igdbClient: IGDBClientProtocol, @inject("GameRepoProtocol") private gameRepo: GameRepoProtocol) {}
 
   async addGame(
     title: string,

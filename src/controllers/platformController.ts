@@ -1,8 +1,10 @@
 import { Request, Response, NextFunction } from "express";
 import { PlatformServiceProtocol } from "../services/protocols/platformServiceProtocol.js";
+import { inject, injectable } from "tsyringe";
 
+@injectable()
 export class PlatformController {
-  constructor(private service: PlatformServiceProtocol) {}
+  constructor(@inject("PlatformServiceProtocol") private service: PlatformServiceProtocol) {}
 
   public getPlatforms = async(req: Request, res: Response, next: NextFunction) => {
     try {
