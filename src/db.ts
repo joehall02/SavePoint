@@ -8,11 +8,11 @@ const db = new Database(config.databaseUri);
 db.exec(`
     CREATE TABLE IF NOT EXISTS platforms (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
-        title TEXT NOT NULL,
+        title TEXT NOT NULL UNIQUE,
         cover TEXT NOT NULL
     );
 
-    INSERT INTO platforms (title, cover)
+    INSERT OR IGNORE INTO platforms (title, cover)
     VALUES 
         ('PS1', 'ps1.jpg'),
         ('PS2', 'ps2.jpg'),

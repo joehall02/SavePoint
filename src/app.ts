@@ -3,7 +3,6 @@ import gameRoutes from "./routes/gameRoutes.js";
 import platformRoutes from "./routes/platformRoutes.js";
 import morgan from "morgan";
 import { errorHandler } from "./middlewares/errorHandler.js";
-import "reflect-metadata";
 
 // Create an express app instance
 const app = express();
