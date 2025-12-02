@@ -1,10 +1,11 @@
 import { Request, Response, NextFunction } from "express";
 import { inject, injectable } from "tsyringe";
 import { GameServiceProtocol } from "../services/protocols/gameServiceProtocol.js";
+import { TOKENS } from "../di/tokens.js";
 
 @injectable()
 export class GameController {
-  constructor(@inject("GameServiceProtocol") private service: GameServiceProtocol) {}
+  constructor(@inject(TOKENS.GameService) private service: GameServiceProtocol) {}
 
   public createGame = async(req: Request, res: Response, next: NextFunction) => {
     try {

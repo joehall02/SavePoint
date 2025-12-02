@@ -5,10 +5,11 @@ import { GameServiceProtocol } from "./protocols/gameServiceProtocol.js";
 import { IGDBClientProtocol } from "../apis/protocols/IGDBClientProtocol.js";
 import { GameRepoProtocol } from "../repositories/protocols/gameRepoProtocol.js";
 import { inject, injectable } from "tsyringe";
+import { TOKENS } from "../di/tokens.js";
 
 @injectable()
 export class GameService implements GameServiceProtocol {
-  constructor(@inject("IGDBClientProtocol") private igdbClient: IGDBClientProtocol, @inject("GameRepoProtocol") private gameRepo: GameRepoProtocol) {}
+  constructor(@inject(TOKENS.IGDBClient) private igdbClient: IGDBClientProtocol, @inject(TOKENS.GameRepository) private gameRepo: GameRepoProtocol) {}
 
   async addGame(
     title: string,
