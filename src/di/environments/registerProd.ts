@@ -25,10 +25,10 @@ export function registerProd() {
   });
 
   container.register<PlatformRepoProtocol>(TOKENS.PlatformRepository, {
-      useClass: PlatformRepository
-  })
-  
+    useClass: PlatformRepository
+  });
+
   container.register<PlatformServiceProtocol>(TOKENS.PlatformService, {
-      useClass: PlatformService
-  })
+    useClass: PlatformService
+  });
 }
