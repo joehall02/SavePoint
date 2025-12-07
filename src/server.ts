@@ -1,7 +1,9 @@
 import "reflect-metadata"
-import app from "./app.js";
+import { createApp } from "./app.js";
 import config from "./config/config.js";
 import db from "./db.js";
+
+const app = createApp();
 
 app.listen(config.port, () => {
   console.log(`${config.nodeEnv} server running on port ${config.port}`);

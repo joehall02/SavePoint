@@ -8,6 +8,8 @@ import { PlatformRepoProtocol } from "../../repositories/protocols/platformRepoP
 import { PlatformServiceProtocol } from "../../services/protocols/platformServiceProtocol.js";
 import { TOKENS } from "../tokens.js";
 import { MockIGDBClient } from "../../tests/mocks/apis/mockIgdbClient.js";
+import { MockGameRepo } from "../../tests/mocks/repositories/mockGameRepo.js";
+import { MockPlatformRepo } from "../../tests/mocks/repositories/mockPlatformRepo.js";
 
 export function registerTest() {
   container.register<IGDBClientProtocol>(TOKENS.IGDBClient, {
@@ -15,7 +17,7 @@ export function registerTest() {
   });
 
   container.register<GameRepoProtocol>(TOKENS.GameRepository, {
-    useClass: 
+    useClass: MockGameRepo
   });
 
   container.register<GameServiceProtocol>(TOKENS.GameService, {
@@ -23,7 +25,7 @@ export function registerTest() {
   });
 
   container.register<PlatformRepoProtocol>(TOKENS.PlatformRepository, {
-      useClass: 
+      useClass: MockPlatformRepo
   })
   
   container.register<PlatformServiceProtocol>(TOKENS.PlatformService, {

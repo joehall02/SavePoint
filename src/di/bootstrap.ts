@@ -1,6 +1,6 @@
 import { DependencyContainer, container } from "tsyringe";
 import { registerProd } from "./environments/registerProd.js";
-// import { registerTest } from "./environments/registerTest.js";
+import { registerTest } from "./environments/registerTest.js";
 
 export function createContainer(
   env: string,
@@ -9,7 +9,7 @@ export function createContainer(
   container.reset();
 
   if (env === "test") {
-    // registerTest();
+    registerTest();
   } else {
     registerProd();
   }
