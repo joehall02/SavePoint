@@ -4,7 +4,7 @@ import { registerProd } from "./environments/registerProd.js";
 
 export function createContainer(
   env: string,
-  overrides?: Array<{ token: string; protocol: any; useClass: any }>
+  overrides?: Array<{ token: symbol; useClass: any }>
 ): DependencyContainer {
   container.reset();
 

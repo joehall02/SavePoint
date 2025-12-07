@@ -12,7 +12,7 @@ axios.defaults.timeout = 5000; // 5 Seconds Timeout
 export class IGDBClient implements IGDBClientProtocol {
   async searchGame (searchParam: string, searchLimit: number): Promise<Array<IGDBGame>> {
     const response = await axios.post("/games", `search "${searchParam}"; fields name, cover.image_id; limit ${searchLimit};`);
-  
+
     return response.data as Array<IGDBGame>;
   };
 }

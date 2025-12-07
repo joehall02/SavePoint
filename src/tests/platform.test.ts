@@ -1,7 +1,7 @@
 import test, { describe } from "node:test";
 import assert from "node:assert/strict";
 import request from "supertest";
-import app from "../src/app.js";
+import app from "../app.js";
 
 describe("platforms test", () => {
   test("GET /platforms/ should get all platforms", async () => {

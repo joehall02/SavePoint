@@ -12,11 +12,12 @@ import { PlatformController } from "./controllers/platformController.js";
 // Create an express app instance
 const app = express();
 
-// Dependency Injection
+// Create dependency container
 if (config.nodeEnv === "development" || config.nodeEnv === "production") {
   createContainer(config.nodeEnv);
 }
 
+// Resolve controllers
 const gameController = container.resolve(GameController)
 const platformController = container.resolve(PlatformController)
 

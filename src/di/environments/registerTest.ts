@@ -7,10 +7,11 @@ import { PlatformService } from "../../services/platformService.js";
 import { PlatformRepoProtocol } from "../../repositories/protocols/platformRepoProtocol.js";
 import { PlatformServiceProtocol } from "../../services/protocols/platformServiceProtocol.js";
 import { TOKENS } from "../tokens.js";
+import { MockIGDBClient } from "../../tests/mocks/apis/mockIgdbClient.js";
 
 export function registerTest() {
   container.register<IGDBClientProtocol>(TOKENS.IGDBClient, {
-    useClass: 
+    useClass: MockIGDBClient
   });
 
   container.register<GameRepoProtocol>(TOKENS.GameRepository, {
