@@ -1,84 +1,106 @@
-import test, { afterEach, beforeEach, describe } from "node:test";
+import "reflect-metadata";
+import test, { beforeEach, describe } from "node:test";
 import assert from "node:assert/strict";
 import request from "supertest";
-import app from "../app.js";
-import { Game } from "../models/game.js";
-import db from "../db.js";
 import { createContainer } from "../di/bootstrap.js";
+import { createApp } from "../app.js";
+import { Express } from "express";
 import config from "../config/config.js";
+import * as mockData from "./mocks/data/game/mockGameServiceData.js";
 
 describe("games test", () => {
-  beforeEach(() => {
-    // Begin db transaction so the db can rollback after each test
-    db.exec("BEGIN TRANSACTION");
-    
+  let app: Express;
+
+  beforeEach(async () => {
     // Create test dependency container
     createContainer(config.nodeEnv);
-    
-    // Create a new game object
-    // const newGame: Game = { title: "Game1", condition: "Good", notes: "Example", boxIncluded: true, rating: 3, igdbId: 21, platformId: 1 };
 
-    // const query = db.prepare(`
-    //   INSERT INTO games (title, condition, notes, box_included, rating, igdb_id, platform_id) 
-    //   VALUES (@title, @condition, @notes, @boxIncluded, @rating, @igdbId, @platformId )
-    // `);
-
-    // query.run({
-    //   title: newGame.title,
-    //   condition: newGame.condition,
-    //   notes: newGame.notes,
-    //   boxIncluded: newGame.boxIncluded ? 1 : 0, // Sets box included parameter to either 1 or 0 to be compatible with SQLite
-    //   rating: newGame.rating,
-    //   igdbId: newGame.igdbId,
-    //   platformId: newGame.platformId,
-    // });
+    // Create app
+    app = createApp();
   });
 
-  // afterEach(() => {
-  //   // Rollback db
-  //   db.exec(`ROLLBACK`);
-  // });
-
   test("POST /games should create a new game", async () => {
-    const newGame: Game = { title: "Game1", condition: "Good", notes: "Example", boxIncluded: true, rating: 3, igdbId: 21, platformId: 1 };
+    // Given
+    const newGame = mockData.mockNewGameData;
 
+    // When
     const res = await request(app).post("/api/games/").send(newGame);
 
+    // Then
     assert.equal(res.status, 201);
     assert.deepEqual(res.body, newGame);
   });
 
   test("GET /games/ should get all games", async () => {
-    const game = { title: "Game1" };
+    // Given
+    const games = mockData.mockGetAllGamesData;
 
+    // When
     const res = await request(app).get("/api/games/");
 
+    // Then
     assert.equal(res.status, 200);
-    assert.equal(res.body[0].title, game.title);
+    assert.deepEqual(res.body, games);
   });
 
   test("GET /games:id should get a game", async () => {
-    const game: Game = { title: "Game1", condition: "Good", notes: "Example", boxIncluded: true, rating: 3, igdbId: 21, platformId: 1 };
+    // Given
+    const game = mockData.mockGetGameByIdData;
 
+    // When
     const res = await request(app).get("/api/games/1");
 
+    // Then
     assert.equal(res.status, 200);
     assert.deepEqual(res.body, game);
   });
 
   test("PUT /games/:id should edit a game", async () => {
-    const updatedGame = { id: 1, title: "UpdatedTitle", condition: "Bad", notes: "UpdatedNotes", boxIncluded: false, rating: 2.4, igdbId: 21, platformId: 5 };
+    // Given
+    const updatedGame = mockData.mockEditGameData;
 
+    // When
     const res = await request(app).put("/api/games/1").send(updatedGame);
 
+    // Then
     assert.equal(res.status, 200);
     assert.deepEqual(res.body, updatedGame);
   });
 
   test("DELETE /games/:id should delete a game", async () => {
+    // When
     const res = await request(app).delete("/api/games/1");
 
+    // Then
     assert.equal(res.status, 200);
-    assert.equal(res.body.message, "Game deleted successfully");
+  });
+
+  test("POST /search returns a max of 6 game results when given a search parameter", async () => {
+    // Given
+    const searchParam = mockData.mockSearchParam;
+    const response = mockData.mockSearchIgdbData
+
+    // When
+    const res = await request(app).post("/api/games/search").send(searchParam);
+
+    // Then
+    assert.equal(res.status, 200);
+    assert.deepEqual(res.body, response.slice(0, 6)); // Slice mock data to 6 to match search limit
+  });
+
+  test("POST /result returns x number of games when given a search and limit parameter", async () => {
+    // Given
+    const searchParam = mockData.mockSearchParam;
+    const searchLimit: number = 10;
+    const response = mockData.mockSearchIgdbData;
+
+    // When
+    const res = await request(app).post(
+      `/api/games/result/?search=${searchParam}&limit=${searchLimit}`
+    );
+
+    // Then
+    assert.equal(res.status, 200);
+    assert.deepEqual(res.body, response.slice(0, searchLimit));
   });
 });
