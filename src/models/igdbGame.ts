@@ -17,7 +17,6 @@ export interface RawIGDBGame {
     name: string;
 }
 
-// Raw IGDB response types (include internal ids)
 export interface RawExternalGameDetails {
 
   id: number;
@@ -30,7 +29,7 @@ export interface RawExternalGameDetails {
   }> | null;
   cover?: {
     id: number;
-    url: string;
+    image_id: string;
   } | null;
   videos?: Array<{
     id: number;
@@ -42,7 +41,7 @@ export interface RawExternalGameDetails {
   }> | null;
   artworks?: Array<{
     id: number;
-    url: string;
+    image_id: string;
   }> | null;
   release_dates?: Array<{
     id: number;
@@ -50,7 +49,6 @@ export interface RawExternalGameDetails {
   }> | null;
 }
 
-// Sanitized type used by the rest of the app
 export interface ExternalGameDetails {
   id: number;
   name: string;
@@ -60,7 +58,7 @@ export interface ExternalGameDetails {
     name: string;
   }> | null;
   cover?: {
-    url: string;
+    image_id: string;
   } | null;
   videos?: Array<{
     video_id: string;
@@ -69,7 +67,7 @@ export interface ExternalGameDetails {
     name: string;
   }> | null;
   artworks?: Array<{
-    url: string;
+    image_id: string;
   }> | null;
   release_dates?: Array<{
     date: number; // unix timestamp

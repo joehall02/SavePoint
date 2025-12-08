@@ -242,60 +242,60 @@ export const mockExternalGameDetails: RawExternalGameDetails[] = [
     artworks: [
       {
         id: 177,
-        url: "//images.igdb.com/igdb/image/upload/t_thumb/p5nul4inxjpvi05tnn1r.jpg",
+        image_id: "//images.igdb.com/igdb/image/upload/t_thumb/p5nul4inxjpvi05tnn1r.jpg",
       },
       {
         id: 169,
-        url: "//images.igdb.com/igdb/image/upload/t_thumb/snmb2kvu6uz2vr7uzgzp.jpg",
+        image_id: "//images.igdb.com/igdb/image/upload/t_thumb/snmb2kvu6uz2vr7uzgzp.jpg",
       },
       {
         id: 179,
-        url: "//images.igdb.com/igdb/image/upload/t_thumb/q6d8jv0yflv8hbomthqm.jpg",
+        image_id: "//images.igdb.com/igdb/image/upload/t_thumb/q6d8jv0yflv8hbomthqm.jpg",
       },
       {
         id: 171,
-        url: "//images.igdb.com/igdb/image/upload/t_thumb/c7mid4aolyj7fboecnuu.jpg",
+        image_id: "//images.igdb.com/igdb/image/upload/t_thumb/c7mid4aolyj7fboecnuu.jpg",
       },
       {
         id: 170,
-        url: "//images.igdb.com/igdb/image/upload/t_thumb/egrcjzat6ssiuymf0pwb.jpg",
+        image_id: "//images.igdb.com/igdb/image/upload/t_thumb/egrcjzat6ssiuymf0pwb.jpg",
       },
       {
         id: 178,
-        url: "//images.igdb.com/igdb/image/upload/t_thumb/dootpbeulmf5yxwqulvx.jpg",
+        image_id: "//images.igdb.com/igdb/image/upload/t_thumb/dootpbeulmf5yxwqulvx.jpg",
       },
       {
         id: 172,
-        url: "//images.igdb.com/igdb/image/upload/t_thumb/tplycmyhelqc4kx8lxzn.jpg",
+        image_id: "//images.igdb.com/igdb/image/upload/t_thumb/tplycmyhelqc4kx8lxzn.jpg",
       },
       {
         id: 180,
-        url: "//images.igdb.com/igdb/image/upload/t_thumb/ksgt1c400zmgamznhh9h.jpg",
+        image_id: "//images.igdb.com/igdb/image/upload/t_thumb/ksgt1c400zmgamznhh9h.jpg",
       },
       {
         id: 174,
-        url: "//images.igdb.com/igdb/image/upload/t_thumb/ypfrlwt0ybgkbx6fsprq.jpg",
+        image_id: "//images.igdb.com/igdb/image/upload/t_thumb/ypfrlwt0ybgkbx6fsprq.jpg",
       },
       {
         id: 175,
-        url: "//images.igdb.com/igdb/image/upload/t_thumb/beb3c77tggywfbygohpg.jpg",
+        image_id: "//images.igdb.com/igdb/image/upload/t_thumb/beb3c77tggywfbygohpg.jpg",
       },
       {
         id: 173,
-        url: "//images.igdb.com/igdb/image/upload/t_thumb/bblukgqk83m8xqimar6h.jpg",
+        image_id: "//images.igdb.com/igdb/image/upload/t_thumb/bblukgqk83m8xqimar6h.jpg",
       },
       {
         id: 176,
-        url: "//images.igdb.com/igdb/image/upload/t_thumb/eh5ythnopfxa6hrcmd5v.jpg",
+        image_id: "//images.igdb.com/igdb/image/upload/t_thumb/eh5ythnopfxa6hrcmd5v.jpg",
       },
       {
         id: 216656,
-        url: "//images.igdb.com/igdb/image/upload/t_thumb/ar4n68.jpg",
+        image_id: "//images.igdb.com/igdb/image/upload/t_thumb/ar4n68.jpg",
       },
     ],
     cover: {
       id: 85100,
-      url: "//images.igdb.com/igdb/image/upload/t_thumb/co1tnw.jpg",
+      image_id: "//images.igdb.com/igdb/image/upload/t_thumb/co1tnw.jpg",
     },
     genres: [
       {

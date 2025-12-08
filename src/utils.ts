@@ -10,10 +10,10 @@ export function mapExternalGameDetails(data: object[]): ExternalGameDetails {
     storyline: raw.storyline ?? null,
     summary: raw.summary ?? null,
     platforms: raw.platforms?.map((p) => ({ name: p.name })) ?? null,
-    cover: raw.cover ? { url: raw.cover.url } : null,
+    cover: raw.cover ? { image_id: raw.cover.image_id } : null,
     videos: raw.videos?.map((v) => ({ video_id: v.video_id })) ?? null,
     genres: raw.genres?.map((g) => ({ name: g.name })) ?? null,
-    artworks: raw.artworks?.map((a) => ({ url: a.url })) ?? null,
+    artworks: raw.artworks?.map((a) => ({ image_id: a.image_id })) ?? null,
     release_dates: raw.release_dates?.map((r) => ({ date: r.date })) ?? null,
   };
 }
