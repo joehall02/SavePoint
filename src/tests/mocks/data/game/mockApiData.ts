@@ -1,4 +1,4 @@
-import { ExternalGameDetails } from "../../../../models/igdbGame.js";
+import { RawExternalGameDetails } from "../../../../models/igdbGame.js";
 
 export const mockSearchIgdbResponseData: object[] = [
   {
@@ -235,7 +235,7 @@ export const mockSearchIgdbResponseData: object[] = [
   },
 ];
 
-export const mockExternalGameDetails: object[] = [
+export const mockExternalGameDetails: RawExternalGameDetails[] = [
   {
     id: 472,
     artworks: [
