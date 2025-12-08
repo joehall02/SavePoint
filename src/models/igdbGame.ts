@@ -8,8 +8,18 @@ export interface IGDBGame {
     name: string;
 }
 
+export interface RawIGDBGame {
+    id: number;
+    cover?: {
+        id: number;
+        image_id: string;
+    } | null;
+    name: string;
+}
+
 // Raw IGDB response types (include internal ids)
 export interface RawExternalGameDetails {
+
   id: number;
   name: string;
   storyline?: string | null;

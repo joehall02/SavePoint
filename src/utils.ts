@@ -1,6 +1,7 @@
-import { RawExternalGameDetails, ExternalGameDetails } from "./models/igdbGame.js";
+import { RawExternalGameDetails, ExternalGameDetails, IGDBGame, RawIGDBGame } from "./models/igdbGame.js";
 
 export function mapExternalGameDetails(data: object[]): ExternalGameDetails {
+
   const raw = data[0] as RawExternalGameDetails;
 
   return {
@@ -16,3 +17,14 @@ export function mapExternalGameDetails(data: object[]): ExternalGameDetails {
     release_dates: raw.release_dates?.map((r) => ({ date: r.date })) ?? null,
   };
 }
+
+export function mapExternalGame(data: object[]): IGDBGame[] {
+  const rawList = data as RawIGDBGame[];
+
+  return rawList.map((raw) => ({
+    id: raw.id,
+    name: raw.name,
+    cover: raw.cover ? { image_id: raw.cover.image_id } : null,
+  }));
+}
+

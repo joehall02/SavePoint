@@ -2,7 +2,7 @@ import axios from "axios";
 import config from "../config/config.js";
 import { IGDBGame, ExternalGameDetails, RawExternalGameDetails } from "../models/igdbGame.js";
 import { IGDBClientProtocol } from "./protocols/IGDBClientProtocol.js";
-import { mapExternalGameDetails } from "../utils.js";
+import { mapExternalGameDetails, mapExternalGame } from "../utils.js";
 
 axios.defaults.baseURL = config.igdbBaseUrl;
 axios.defaults.headers.common["Authorization"] = `Bearer ${config.igdbAccessToken}`;
@@ -14,8 +14,9 @@ export class IGDBClient implements IGDBClientProtocol {
   async searchGame (searchParam: string, searchLimit: number): Promise<Array<IGDBGame>> {
     const response = await axios.post("/games", `search "${searchParam}"; fields name, cover.image_id; limit ${searchLimit};`);
 
-    return response.data as Array<IGDBGame>;
+    return mapExternalGame(response.data as object[]);
   };
+
 
   async fetchGameDetails (gameId: number): Promise<ExternalGameDetails> {
     const response = await axios.post("/games", `fields name, storyline, summary, platforms.name, cover.url, videos.video_id, genres.name, artworks.url, release_dates.date; where id = ${gameId};`);
