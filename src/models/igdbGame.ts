@@ -1,5 +1,5 @@
 interface GameCover {
-    image_id: string;
+    url: string;
 }
 
 export interface IGDBGame {
@@ -58,16 +58,16 @@ export interface ExternalGameDetails {
     name: string;
   }> | null;
   cover?: {
-    image_id: string;
+    url: string;
   } | null;
   videos?: Array<{
-    video_id: string;
+    url: string;
   }> | null;
   genres?: Array<{
     name: string;
   }> | null;
   artworks?: Array<{
-    image_id: string;
+    url: string;
   }> | null;
   release_dates?: Array<{
     date: number; // unix timestamp

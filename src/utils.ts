@@ -1,5 +1,17 @@
 import { RawExternalGameDetails, ExternalGameDetails, IGDBGame, RawIGDBGame } from "./models/igdbGame.js";
 
+enum ImageSize {
+  cover_small = "cover_small",
+  screenshot_med = "screenshot_med",
+  cover_big = "cover_big",
+  logo_med = "logo_med",
+  screenshot_big = "screenshot_big",
+  thumb = "thumb",
+  micro = "micro",
+  r_720p = "720p",
+  r_1080p = "1080p",
+}
+
 export function mapExternalGameDetails(data: object[]): ExternalGameDetails {
 
   const raw = data[0] as RawExternalGameDetails;
@@ -10,10 +22,10 @@ export function mapExternalGameDetails(data: object[]): ExternalGameDetails {
     storyline: raw.storyline ?? null,
     summary: raw.summary ?? null,
     platforms: raw.platforms?.map((p) => ({ name: p.name })) ?? null,
-    cover: raw.cover ? { image_id: raw.cover.image_id } : null,
-    videos: raw.videos?.map((v) => ({ video_id: v.video_id })) ?? null,
+    cover: raw.cover ? { url: mapImageIdToUrl(raw.cover.image_id, ImageSize.cover_small) } : null,
+    videos: raw.videos?.map((v) => ({ url: mapVideoIdToUrl(v.video_id) })) ?? null,
     genres: raw.genres?.map((g) => ({ name: g.name })) ?? null,
-    artworks: raw.artworks?.map((a) => ({ image_id: a.image_id })) ?? null,
+    artworks: raw.artworks?.map((a) => ({ url: mapImageIdToUrl(a.image_id, ImageSize.screenshot_big) })) ?? null,
     release_dates: raw.release_dates?.map((r) => ({ date: r.date })) ?? null,
   };
 }
@@ -24,7 +36,41 @@ export function mapExternalGame(data: object[]): IGDBGame[] {
   return rawList.map((raw) => ({
     id: raw.id,
     name: raw.name,
-    cover: raw.cover ? { image_id: raw.cover.image_id } : null,
+    cover: raw.cover ? { url: mapImageIdToUrl(raw.cover.image_id, ImageSize.r_1080p) } : null,
   }));
 }
 
+export function mapImageIdToUrl(imageId: string, imageSize: ImageSize): string {
+  switch (imageSize) {
+    case ImageSize.cover_small:
+      break;
+    case ImageSize.screenshot_med:
+      break;
+    case ImageSize.cover_big:
+      break;
+    case ImageSize.logo_med:
+      break;
+    case ImageSize.screenshot_big:
+      break;
+    case ImageSize.thumb:
+      break;
+    case ImageSize.micro:
+      break;
+    case ImageSize.r_720p:
+      break;
+    case ImageSize.r_1080p:
+      break;
+    default:
+      imageSize = ImageSize.thumb;
+  }
+
+  const imageUrl = `https://images.igdb.com/igdb/image/upload/t_${imageSize}/${imageId}.jpg`;
+
+  return imageUrl;
+}
+
+export function mapVideoIdToUrl(videoId: string): string {
+  const videoUrl = `https://www.youtube.com/watch?v=${videoId}`;
+
+  return videoUrl
+}
