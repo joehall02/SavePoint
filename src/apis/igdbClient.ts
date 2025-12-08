@@ -1,6 +1,6 @@
 import axios from "axios";
 import config from "../config/config.js";
-import { IGDBGame } from "../models/igdbGame.js";
+import { IGDBGame, ExternalGameDetails } from "../models/igdbGame.js";
 import { IGDBClientProtocol } from "./protocols/IGDBClientProtocol.js";
 
 axios.defaults.baseURL = config.igdbBaseUrl;
@@ -14,6 +14,12 @@ export class IGDBClient implements IGDBClientProtocol {
     const response = await axios.post("/games", `search "${searchParam}"; fields name, cover.image_id; limit ${searchLimit};`);
 
     return response.data as Array<IGDBGame>;
+  };
+
+  async fetchGameDetails (gameId: number): Promise<ExternalGameDetails> {
+    const response = await axios.post("/games", `fields name, storyline, summary, platforms.name, cover.url, videos.video_id, genres.name, artworks.url, release_dates.date; where id = ${gameId};`);
+
+    return response.data as ExternalGameDetails;
   };
 }
 

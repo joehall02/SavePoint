@@ -1,5 +1,5 @@
 import { Game, GameDetails, PartialGame } from "../models/game.js";
-import { IGDBGame } from "../models/igdbGame.js";
+import { ExternalGameDetails, IGDBGame } from "../models/igdbGame.js";
 import { throwError } from "../middlewares/errorHandler.js";
 import { GameServiceProtocol } from "./protocols/gameServiceProtocol.js";
 import { IGDBClientProtocol } from "../apis/protocols/IGDBClientProtocol.js";
@@ -126,4 +126,18 @@ export class GameService implements GameServiceProtocol {
 
     return searchResults;
   };
+
+  async fetchExternalGameDetails(gameId: number): Promise<ExternalGameDetails> {
+    if (!gameId) {
+      throwError("No game ID provided", 400);
+    }
+
+    const externalGameDetails = await this.igdbClient.fetchGameDetails(gameId) as ExternalGameDetails;
+
+    if (!externalGameDetails) {
+      throwError("No game found", 404)
+    }
+
+    return externalGameDetails
+  }
 }

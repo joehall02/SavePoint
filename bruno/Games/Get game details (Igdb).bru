@@ -1,0 +1,20 @@
+meta {
+  name: Get game details (Igdb)
+  type: http
+  seq: 8
+}
+
+post {
+  url: {{base_url}}/{{game_route}}/game-details?igdbId=119305
+  body: none
+  auth: inherit
+}
+
+params:query {
+  igdbId: 119305
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}

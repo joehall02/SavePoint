@@ -113,4 +113,17 @@ export class GameController {
       next(error);
     }
   };
+
+  // Fetch game details from external api
+  public fetchExternalGameDetails = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const gameId: number = Number(req.query.igdbId);
+
+      const response = await this.service.fetchExternalGameDetails(gameId);
+
+      res.status(200).send(response);
+    } catch(error) {
+      next(error);
+    }
+  }
 }

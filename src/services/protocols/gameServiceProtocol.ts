@@ -1,5 +1,5 @@
 import { Game, GameDetails, PartialGame } from "../../models/game.js";
-import { IGDBGame } from "../../models/igdbGame.js";
+import { IGDBGame, ExternalGameDetails } from "../../models/igdbGame.js";
 
 export interface GameServiceProtocol {
   addGame(
@@ -24,4 +24,5 @@ export interface GameServiceProtocol {
   ): Promise<GameDetails>;
   removeGame(gameId: number): Promise<void>;
   searchIgdbGame(searchParam: string, searchLimit: number): Promise<Array<IGDBGame>>;
+  fetchExternalGameDetails(gameId: number): Promise<ExternalGameDetails>;
 }

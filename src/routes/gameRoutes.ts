@@ -15,6 +15,7 @@ export function GameRouter(gameController: GameController): Router {
   router.delete("/:id", gameController.deleteGame);
   router.post("/search", validateRequest(Schema.searchGameHomeSchema), gameController.searchGameHome); 
   router.post("/result/", gameController.searchGameResults);
+  router.post("/game-details", gameController.fetchExternalGameDetails);
 
   return router;
 }

@@ -1,3 +1,5 @@
+import { ExternalGameDetails } from "../../../../models/igdbGame.js";
+
 export const mockSearchIgdbResponseData: object[] = [
   {
     id: 26041,
@@ -230,5 +232,174 @@ export const mockSearchIgdbResponseData: object[] = [
       image_id: "co9c7t",
     },
     name: "Barcode Battler II: Batman Returns - Batman",
+  },
+];
+
+export const mockExternalGameDetails: object[] = [
+  {
+    id: 472,
+    artworks: [
+      {
+        id: 177,
+        url: "//images.igdb.com/igdb/image/upload/t_thumb/p5nul4inxjpvi05tnn1r.jpg",
+      },
+      {
+        id: 169,
+        url: "//images.igdb.com/igdb/image/upload/t_thumb/snmb2kvu6uz2vr7uzgzp.jpg",
+      },
+      {
+        id: 179,
+        url: "//images.igdb.com/igdb/image/upload/t_thumb/q6d8jv0yflv8hbomthqm.jpg",
+      },
+      {
+        id: 171,
+        url: "//images.igdb.com/igdb/image/upload/t_thumb/c7mid4aolyj7fboecnuu.jpg",
+      },
+      {
+        id: 170,
+        url: "//images.igdb.com/igdb/image/upload/t_thumb/egrcjzat6ssiuymf0pwb.jpg",
+      },
+      {
+        id: 178,
+        url: "//images.igdb.com/igdb/image/upload/t_thumb/dootpbeulmf5yxwqulvx.jpg",
+      },
+      {
+        id: 172,
+        url: "//images.igdb.com/igdb/image/upload/t_thumb/tplycmyhelqc4kx8lxzn.jpg",
+      },
+      {
+        id: 180,
+        url: "//images.igdb.com/igdb/image/upload/t_thumb/ksgt1c400zmgamznhh9h.jpg",
+      },
+      {
+        id: 174,
+        url: "//images.igdb.com/igdb/image/upload/t_thumb/ypfrlwt0ybgkbx6fsprq.jpg",
+      },
+      {
+        id: 175,
+        url: "//images.igdb.com/igdb/image/upload/t_thumb/beb3c77tggywfbygohpg.jpg",
+      },
+      {
+        id: 173,
+        url: "//images.igdb.com/igdb/image/upload/t_thumb/bblukgqk83m8xqimar6h.jpg",
+      },
+      {
+        id: 176,
+        url: "//images.igdb.com/igdb/image/upload/t_thumb/eh5ythnopfxa6hrcmd5v.jpg",
+      },
+      {
+        id: 216656,
+        url: "//images.igdb.com/igdb/image/upload/t_thumb/ar4n68.jpg",
+      },
+    ],
+    cover: {
+      id: 85100,
+      url: "//images.igdb.com/igdb/image/upload/t_thumb/co1tnw.jpg",
+    },
+    genres: [
+      {
+        id: 12,
+        name: "Role-playing (RPG)",
+      },
+      {
+        id: 31,
+        name: "Adventure",
+      },
+    ],
+    name: "The Elder Scrolls V: Skyrim",
+    platforms: [
+      {
+        id: 9,
+        name: "PlayStation 3",
+      },
+      {
+        id: 6,
+        name: "PC (Microsoft Windows)",
+      },
+      {
+        id: 12,
+        name: "Xbox 360",
+      },
+    ],
+    release_dates: [
+      {
+        id: 106167,
+        date: 1323302400,
+      },
+      {
+        id: 417931,
+        date: 1320883200,
+      },
+      {
+        id: 106168,
+        date: 1320969600,
+      },
+      {
+        id: 21154,
+        date: 1320969600,
+      },
+      {
+        id: 21666,
+        date: 1323302400,
+      },
+      {
+        id: 282088,
+        date: 1320883200,
+      },
+      {
+        id: 106169,
+        date: 1320969600,
+      },
+      {
+        id: 21664,
+        date: 1323302400,
+      },
+      {
+        id: 21155,
+        date: 1320969600,
+      },
+    ],
+    storyline:
+      "The Empire of Tamriel is on the edge. The High King of Skyrim has been murdered. Alliances form as claims to the throne are made. In the midst of this conflict, a far more dangerous, ancient evil is awakened. Dragons, long lost to the passages of the Elder Scrolls, have returned to Tamriel. The future of Skyrim, even the Empire itself, hangs in the balance as they wait for the prophesized Dragonborn to come; a hero born with the power of The Voice, and the only one who can stand amongst the dragons.",
+    summary:
+      "Skyrim reimagines and revolutionizes the open-world fantasy epic, bringing to life a complete virtual world open for you to explore any way you choose. Play any type of character you can imagine, and do whatever you want; the legendary freedom of choice, storytelling, and adventure of The Elder Scrolls is realized like never before.",
+    videos: [
+      {
+        id: 17548,
+        video_id: "2doLV4hNMIg",
+      },
+      {
+        id: 17547,
+        video_id: "TvrqsDdy2ok",
+      },
+      {
+        id: 17549,
+        video_id: "6IEoZXM8WZY",
+      },
+      {
+        id: 17550,
+        video_id: "482QMfHHgcY",
+      },
+      {
+        id: 17551,
+        video_id: "EIIWmutIT6w",
+      },
+      {
+        id: 17554,
+        video_id: "3aJ2jG1gt44",
+      },
+      {
+        id: 17546,
+        video_id: "0mHGygvlKCQ",
+      },
+      {
+        id: 17552,
+        video_id: "Ft9MNJxky1Y",
+      },
+      {
+        id: 17553,
+        video_id: "skf7Dim1duI",
+      },
+    ],
   },
 ];
