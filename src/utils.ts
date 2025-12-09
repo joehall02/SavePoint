@@ -26,7 +26,7 @@ export function mapExternalGameDetails(data: object[]): ExternalGameDetails {
     videos: raw.videos?.map((v) => ({ url: mapVideoIdToUrl(v.video_id) })) ?? null,
     genres: raw.genres?.map((g) => ({ name: g.name })) ?? null,
     artworks: raw.artworks?.map((a) => ({ url: mapImageIdToUrl(a.image_id, ImageSize.screenshot_big) })) ?? null,
-    release_dates: raw.release_dates?.map((r) => ({ date: r.date })) ?? null,
+    release_dates: raw.release_dates?.map((r) => ({ date: convertUnixTimestamp(r.date), region: r.release_region.region })) ?? null,
   };
 }
 
@@ -73,4 +73,31 @@ export function mapVideoIdToUrl(videoId: string): string {
   const videoUrl = `https://www.youtube.com/watch?v=${videoId}`;
 
   return videoUrl
+}
+
+export function convertUnixTimestamp(timestamp: string): string {
+  const unixSeconds = Number(timestamp);
+  if (Number.isNaN(unixSeconds)) {
+    throw new Error("Invalid timestamp");
+  }
+  const date = new Date(unixSeconds * 1000); // seconds → ms
+  const day = date.getUTCDate();
+  const year = date.getUTCFullYear();
+  const monthIndex = date.getUTCMonth(); // 0–11
+  const months = [
+    "January", "February", "March", "April", "May", "June",
+    "July", "August", "September", "October", "November", "December",
+  ];
+  const getOrdinalSuffix = (d: number): string => {
+    if (d >= 11 && d <= 13) return "th";
+    switch (d % 10) {
+      case 1: return "st";
+      case 2: return "nd";
+      case 3: return "rd";
+      default: return "th";
+    }
+  };
+  const dayWithSuffix = `${day}${getOrdinalSuffix(day)}`;
+  const monthName = months[monthIndex];
+  return `${dayWithSuffix} ${monthName} ${year}`;
 }

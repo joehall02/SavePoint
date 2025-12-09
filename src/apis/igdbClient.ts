@@ -19,7 +19,7 @@ export class IGDBClient implements IGDBClientProtocol {
 
 
   async fetchGameDetails (gameId: number): Promise<ExternalGameDetails> {
-    const response = await axios.post("/games", `fields name, storyline, summary, platforms.name, cover.image_id, videos.video_id, genres.name, artworks.image_id, release_dates.date; where id = ${gameId};`);
+    const response = await axios.post("/games", `fields name, storyline, summary, platforms.name, cover.image_id, videos.video_id, genres.name, artworks.image_id, release_dates.date, release_dates.release_region.region; where id = ${gameId};`);
 
     const data = response.data as RawExternalGameDetails[];
 

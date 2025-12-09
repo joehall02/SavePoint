@@ -325,39 +325,75 @@ export const mockExternalGameDetails: RawExternalGameDetails[] = [
     release_dates: [
       {
         id: 106167,
-        date: 1323302400,
+        date: "1323302400",
+        release_region: {
+          id: 1234567,
+          region: "europe"
+        }
       },
       {
         id: 417931,
-        date: 1320883200,
+        date: "1320883200",
+        release_region: {
+          id: 1234567,
+          region: "europe"
+        }
       },
       {
         id: 106168,
-        date: 1320969600,
+        date: "1320969600",
+        release_region: {
+          id: 1234567,
+          region: "europe"
+        }
       },
       {
         id: 21154,
-        date: 1320969600,
+        date: "1320969600",
+        release_region: {
+          id: 1234567,
+          region: "europe"
+        }
       },
       {
         id: 21666,
-        date: 1323302400,
+        date: "1323302400",
+        release_region: {
+          id: 1234567,
+          region: "europe"
+        }
       },
       {
         id: 282088,
-        date: 1320883200,
+        date: "1320883200",
+        release_region: {
+          id: 1234567,
+          region: "europe"
+        }
       },
       {
         id: 106169,
-        date: 1320969600,
+        date: "1320969600",
+        release_region: {
+          id: 1234567,
+          region: "europe"
+        }
       },
       {
         id: 21664,
-        date: 1323302400,
+        date: "1323302400",
+        release_region: {
+          id: 1234567,
+          region: "europe"
+        }
       },
       {
         id: 21155,
-        date: 1320969600,
+        date: "1320969600",
+        release_region: {
+          id: 1234567,
+          region: "europe"
+        }
       },
     ],
     storyline:
