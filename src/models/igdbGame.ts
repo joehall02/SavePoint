@@ -19,7 +19,7 @@ export interface RawIGDBGame {
 
 export interface ReleaseRegion {
     id: number;
-    region: string;
+    region?: string;
 }
 
 export interface RawExternalGameDetails {
@@ -51,7 +51,7 @@ export interface RawExternalGameDetails {
   release_dates?: Array<{
     id: number;
     date: string; // unix timestamp
-    release_region: ReleaseRegion
+    release_region?: ReleaseRegion | null;
   }> | null;
 }
 
@@ -61,22 +61,22 @@ export interface ExternalGameDetails {
   storyline?: string | null;
   summary?: string | null;
   platforms?: Array<{
-    name: string;
+    name?: string;
   }> | null;
   cover?: {
-    url: string;
+    url?: string;
   } | null;
   videos?: Array<{
-    url: string;
+    url?: string;
   }> | null;
   genres?: Array<{
-    name: string;
+    name?: string;
   }> | null;
   artworks?: Array<{
-    url: string;
+    url?: string;
   }> | null;
   release_dates?: Array<{
-    date: string; // unix timestamp
-    region: string;
+    date?: string; // unix timestamp
+    region?: string | null;
   }> | null;
 }

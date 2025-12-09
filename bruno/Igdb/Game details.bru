@@ -16,7 +16,7 @@ headers {
 }
 
 body:text {
-  fields name, storyline, summary, platforms.name, cover.image_id, videos.video_id, genres.name, artworks.image_id, release_dates.date; where id = 472;
+  fields name, storyline, summary, platforms.name, cover.image_id, videos.video_id, genres.name, artworks.image_id, release_dates.date, release_dates.release_region.region; where id = 472;
 }
 
 settings {

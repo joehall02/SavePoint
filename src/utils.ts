@@ -1,4 +1,9 @@
-import { RawExternalGameDetails, ExternalGameDetails, IGDBGame, RawIGDBGame } from "./models/igdbGame.js";
+import {
+  RawExternalGameDetails,
+  ExternalGameDetails,
+  IGDBGame,
+  RawIGDBGame,
+} from "./models/igdbGame.js";
 
 enum ImageSize {
   cover_small = "cover_small",
@@ -12,8 +17,20 @@ enum ImageSize {
   r_1080p = "1080p",
 }
 
-export function mapExternalGameDetails(data: object[]): ExternalGameDetails {
+enum RegionName {
+  north_america = "north_america",
+  australia = "australia",
+  europe = "europe",
+  new_zealand = "new_zealand",
+  japan = "japan",
+  china = "china",
+  korea = "korea",
+  brazil = "brazil",
+  asia = "asia",
+  worldwide = "worldwide",
+}
 
+export function mapExternalGameDetails(data: object[]): ExternalGameDetails {
   const raw = data[0] as RawExternalGameDetails;
 
   return {
@@ -25,8 +42,13 @@ export function mapExternalGameDetails(data: object[]): ExternalGameDetails {
     cover: raw.cover ? { url: mapImageIdToUrl(raw.cover.image_id, ImageSize.cover_small) } : null,
     videos: raw.videos?.map((v) => ({ url: mapVideoIdToUrl(v.video_id) })) ?? null,
     genres: raw.genres?.map((g) => ({ name: g.name })) ?? null,
-    artworks: raw.artworks?.map((a) => ({ url: mapImageIdToUrl(a.image_id, ImageSize.screenshot_big) })) ?? null,
-    release_dates: raw.release_dates?.map((r) => ({ date: convertUnixTimestamp(r.date), region: r.release_region.region })) ?? null,
+    artworks:
+      raw.artworks?.map((a) => ({ url: mapImageIdToUrl(a.image_id, ImageSize.screenshot_big) })) ?? null,
+    release_dates:
+      raw.release_dates?.map((r) => ({
+        date: convertUnixTimestamp(r.date),
+        region: r.release_region?.region ? mapRegionName(r.release_region.region) : null,
+      })) ?? null,
   };
 }
 
@@ -69,10 +91,37 @@ export function mapImageIdToUrl(imageId: string, imageSize: ImageSize): string {
   return imageUrl;
 }
 
+export function mapRegionName(regionName: string): string {
+  switch (regionName) {
+    case RegionName.asia:
+      return "Asia";
+    case RegionName.europe:
+      return "Europe";
+    case RegionName.north_america:
+      return "North America";
+    case RegionName.australia:
+      return "Australia";
+    case RegionName.brazil:
+      return "Brazil";
+    case RegionName.china:
+      return "China";
+    case RegionName.japan:
+      return "Japan";
+    case RegionName.korea:
+      return "Korea";
+    case RegionName.new_zealand:
+      return "New Zealand";
+    case RegionName.worldwide:
+      return "Worldwide";
+    default:
+      return "N/A";
+  }
+}
+
 export function mapVideoIdToUrl(videoId: string): string {
   const videoUrl = `https://www.youtube.com/watch?v=${videoId}`;
 
-  return videoUrl
+  return videoUrl;
 }
 
 export function convertUnixTimestamp(timestamp: string): string {
@@ -85,16 +134,30 @@ export function convertUnixTimestamp(timestamp: string): string {
   const year = date.getUTCFullYear();
   const monthIndex = date.getUTCMonth(); // 0–11
   const months = [
-    "January", "February", "March", "April", "May", "June",
-    "July", "August", "September", "October", "November", "December",
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
   ];
   const getOrdinalSuffix = (d: number): string => {
     if (d >= 11 && d <= 13) return "th";
     switch (d % 10) {
-      case 1: return "st";
-      case 2: return "nd";
-      case 3: return "rd";
-      default: return "th";
+      case 1:
+        return "st";
+      case 2:
+        return "nd";
+      case 3:
+        return "rd";
+      default:
+        return "th";
     }
   };
   const dayWithSuffix = `${day}${getOrdinalSuffix(day)}`;
