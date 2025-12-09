@@ -1,9 +1,4 @@
-import {
-  RawExternalGameDetails,
-  ExternalGameDetails,
-  IGDBGame,
-  RawIGDBGame,
-} from "./models/igdbGame.js";
+import { RawExternalGameDetails, ExternalGameDetails, IGDBGame, RawIGDBGame } from "./models/igdbGame.js";
 
 enum ImageSize {
   cover_small = "cover_small",
@@ -91,6 +86,12 @@ export function mapImageIdToUrl(imageId: string, imageSize: ImageSize): string {
   return imageUrl;
 }
 
+export function mapVideoIdToUrl(videoId: string): string {
+  const videoUrl = `https://www.youtube.com/watch?v=${videoId}`;
+
+  return videoUrl;
+}
+
 export function mapRegionName(regionName: string): string {
   switch (regionName) {
     case RegionName.asia:
@@ -118,21 +119,15 @@ export function mapRegionName(regionName: string): string {
   }
 }
 
-export function mapVideoIdToUrl(videoId: string): string {
-  const videoUrl = `https://www.youtube.com/watch?v=${videoId}`;
-
-  return videoUrl;
-}
-
 export function convertUnixTimestamp(timestamp: string): string {
   const unixSeconds = Number(timestamp);
   if (Number.isNaN(unixSeconds)) {
     throw new Error("Invalid timestamp");
   }
-  const date = new Date(unixSeconds * 1000); // seconds → ms
+  const date = new Date(unixSeconds * 1000);
   const day = date.getUTCDate();
   const year = date.getUTCFullYear();
-  const monthIndex = date.getUTCMonth(); // 0–11
+  const monthIndex = date.getUTCMonth();
   const months = [
     "January",
     "February",

@@ -17,11 +17,6 @@ export interface RawIGDBGame {
     name: string;
 }
 
-export interface ReleaseRegion {
-    id: number;
-    region?: string;
-}
-
 export interface RawExternalGameDetails {
 
   id: number;
@@ -51,7 +46,10 @@ export interface RawExternalGameDetails {
   release_dates?: Array<{
     id: number;
     date: string; // unix timestamp
-    release_region?: ReleaseRegion | null;
+    release_region?: {
+      id: number;
+      region?: string;
+    } | null;
   }> | null;
 }
 
