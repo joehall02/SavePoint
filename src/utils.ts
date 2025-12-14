@@ -39,12 +39,58 @@ export function mapExternalGameDetails(data: object[]): ExternalGameDetails {
     genres: raw.genres?.map((g) => ({ name: g.name })) ?? null,
     artworks:
       raw.artworks?.map((a) => ({ url: mapImageIdToUrl(a.image_id, ImageSize.screenshot_big) })) ?? null,
-    release_dates:
-      raw.release_dates?.map((r) => ({
-        date: convertUnixTimestamp(r.date),
-        region: r.release_region?.region ? mapRegionName(r.release_region.region) : null,
-      })) ?? null,
+    release_dates: (() => {
+      const filtered = filterRepeatedReleaseDates(raw.release_dates);
+      return (
+        filtered?.map((r) => ({
+          date: convertUnixTimestamp(r.date),
+          region: r.release_region?.region ? mapRegionName(r.release_region.region) : null,
+        })) ?? null
+      );
+    })(),
   };
+}
+
+// Return array of release dates with no repeated regions and 
+// with only the earliest release dates for each region
+export function filterRepeatedReleaseDates(
+  releaseDates?: RawExternalGameDetails["release_dates"],
+): RawExternalGameDetails["release_dates"] | undefined {
+  // If there are no release dates or only one, return the original array
+  if (!releaseDates || releaseDates.length <= 1) {
+    return releaseDates ?? undefined;
+  }
+
+  // Create map (key/value pair) with the earliest date per region
+  // String | undefined = key
+  // (typeof releaseDates)[number] = value
+  // [number] effectively saying return one releaseDates object from array
+  const earliestByRegion = new Map<string | undefined, (typeof releaseDates)[number]>();
+
+  // Iterate over the array of release dates and update the map with the earliest date per region
+  for (const release of releaseDates) {
+    if (!release?.date) continue; // Continue moves onto next value in loop
+
+    // Get region key and check if there is already a value for this region
+    const regionKey = release.release_region?.region;
+    const current = earliestByRegion.get(regionKey);
+
+    // Check if current is truthy, if so then convert current.date
+    // to a number, if not then set it to undefined
+    const currentTimestamp = current ? Number(current.date) : undefined;
+    const newTimestamp = Number(release.date);
+
+    if (Number.isNaN(newTimestamp)) continue;
+
+    // If region doesn't have a current timestamp OR new timestamp is earlier than current
+    if (currentTimestamp === undefined || newTimestamp < currentTimestamp) {
+      earliestByRegion.set(regionKey, release);
+    }
+  }
+
+  // Creates array from iterable object - earliestByRegion
+  // .values() returns the values of the key/value pairs
+  return Array.from(earliestByRegion.values())
 }
 
 export function mapExternalGame(data: object[]): IGDBGame[] {

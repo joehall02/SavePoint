@@ -18,7 +18,6 @@ export interface RawIGDBGame {
 }
 
 export interface RawExternalGameDetails {
-
   id: number;
   name: string;
   storyline?: string | null;
