@@ -73,203 +73,203 @@ export const mockSearchIgdbData: object[] = [
   {
     id: 26041,
     cover: {
-      image_id: "co2fx3",
+      url: "https://images.igdb.com/igdb/image/upload/t_1080p/co2fx3.jpg",
     },
     name: "Batman: Arkham Knight - 2008 Movie Batman Skin",
   },
   {
     id: 75545,
     cover: {
-      image_id: "onujdb7krwmvflsgiicg",
+      url: "https://images.igdb.com/igdb/image/upload/t_1080p/onujdb7krwmvflsgiicg.jpg",
     },
     name: "Batman: Arkham City - Arkham City Skins Pack",
   },
   {
     id: 138111,
     cover: {
-      image_id: "co3zh1",
+      url: "https://images.igdb.com/igdb/image/upload/t_1080p/co3zh1.jpg",
     },
     name: "Batman: Arkham City - Batman Inc. Batsuit Skin",
   },
   {
     id: 26042,
     cover: {
-      image_id: "co2fva",
+      url: "https://images.igdb.com/igdb/image/upload/t_1080p/co2fva.jpg",
     },
     name: "Batman: Arkham Knight - Batman: Noel Skin",
   },
   {
     id: 198676,
     cover: {
-      image_id: "co4wti",
+      url: "https://images.igdb.com/igdb/image/upload/t_1080p/co4wti.jpg",
     },
     name: "Batman",
   },
   {
     id: 198672,
     cover: {
-      image_id: "co7xjx",
+      url: "https://images.igdb.com/igdb/image/upload/t_1080p/co7xjx.jpg",
     },
     name: "Batman",
   },
   {
     id: 25997,
     cover: {
-      image_id: "co7xj9",
+      url: "https://images.igdb.com/igdb/image/upload/t_1080p/co7xj9.jpg",
     },
     name: "Batman: Arkham Knight - PlayStation 4 Exclusive Skins Pack",
   },
   {
     id: 51525,
     cover: {
-      image_id: "co208l",
+      url: "https://images.igdb.com/igdb/image/upload/t_1080p/co208l.jpg",
     },
     name: "Batman: The Enemy Within",
   },
   {
     id: 2738,
     cover: {
-      image_id: "co1qrn",
+      url: "https://images.igdb.com/igdb/image/upload/t_1080p/co1qrn.jpg",
     },
     name: "LEGO Batman: The Videogame",
   },
   {
     id: 7685,
     cover: {
-      image_id: "co3jk7",
+      url: "https://images.igdb.com/igdb/image/upload/t_1080p/co3jk7.jpg",
     },
     name: "LEGO Batman 3: Beyond Gotham",
   },
   {
     id: 77258,
     cover: {
-      image_id: "co3zcm",
+      url: "https://images.igdb.com/igdb/image/upload/t_1080p/co3zcm.jpg",
     },
     name: "Batman: Arkham City Lockdown",
   },
   {
     id: 45203,
     cover: {
-      image_id: "co1ssv",
+      url: "https://images.igdb.com/igdb/image/upload/t_1080p/co1ssv.jpg",
     },
     name: "The Adventures of Batman & Robin",
   },
   {
     id: 5346,
     cover: {
-      image_id: "co69sz",
+      url: "https://images.igdb.com/igdb/image/upload/t_1080p/co69sz.jpg",
     },
     name: "The Adventures of Batman & Robin",
   },
   {
     id: 214896,
     cover: {
-      image_id: "co5yv4",
+      url: "https://images.igdb.com/igdb/image/upload/t_1080p/co5yv4.jpg",
     },
     name: "Batman",
   },
   {
     id: 14288,
     cover: {
-      image_id: "co2kxj",
+      url: "https://images.igdb.com/igdb/image/upload/t_1080p/co2kxj.jpg",
     },
     name: "Batman",
   },
   {
     id: 164313,
     cover: {
-      image_id: "co6l6c",
+      url: "https://images.igdb.com/igdb/image/upload/t_1080p/co6l6c.jpg",
     },
     name: "Batman",
   },
   {
     id: 73262,
     cover: {
-      image_id: "co3071",
+      url: "https://images.igdb.com/igdb/image/upload/t_1080p/co3071.jpg",
     },
     name: "Batman: The Enemy Within - Episode 2: The Pact",
   },
   {
     id: 91033,
     cover: {
-      image_id: "co2zuc",
+      url: "https://images.igdb.com/igdb/image/upload/t_1080p/co2zuc.jpg",
     },
     name: "Batman: The Enemy Within - Episode 1: The Enigma",
   },
   {
     id: 96066,
     cover: {
-      image_id: "co1vdt",
+      url: "https://images.igdb.com/igdb/image/upload/t_1080p/co1vdt.jpg",
     },
     name: "Batman: The Enemy Within - Episode 5: Same Stitch",
   },
   {
     id: 81123,
     cover: {
-      image_id: "co1vds",
+      url: "https://images.igdb.com/igdb/image/upload/t_1080p/co1vds.jpg",
     },
     name: "Batman: The Enemy Within - Episode 4: What Ails You",
   },
   {
     id: 80910,
     cover: {
-      image_id: "co3072",
+      url: "https://images.igdb.com/igdb/image/upload/t_1080p/co3072.jpg",
     },
     name: "Batman: The Enemy Within - Episode 3: Fractured Mask",
   },
   {
     id: 304232,
     cover: {
-      image_id: "co8amt",
+      url: "https://images.igdb.com/igdb/image/upload/t_1080p/co8amt.jpg",
     },
     name: "Lexibook Batman Compact Cyber Arcade Portable Console",
   },
   {
     id: 115072,
     cover: {
-      image_id: "co1vde",
+      url: "https://images.igdb.com/igdb/image/upload/t_1080p/co1vde.jpg",
     },
     name: "Batman: The Telltale Series - Episode 5: City of Light",
   },
   {
     id: 26993,
     cover: {
-      image_id: "co1vdc",
+      url: "https://images.igdb.com/igdb/image/upload/t_1080p/co1vdc.jpg",
     },
     name: "Batman: The Telltale Series - Episode 3: New World Order",
   },
   {
     id: 26638,
     cover: {
-      image_id: "ygu3ksbago1vxditorig",
+      url: "https://images.igdb.com/igdb/image/upload/t_1080p/ygu3ksbago1vxditorig.jpg",
     },
     name: "Batman: The Telltale Series - Episode 1: Realm of Shadows",
   },
   {
     id: 115071,
     cover: {
-      image_id: "co1vdd",
+      url: "https://images.igdb.com/igdb/image/upload/t_1080p/co1vdd.jpg",
     },
     name: "Batman: The Telltale Series - Episode 4: Guardian of Gotham",
   },
   {
     id: 26964,
     cover: {
-      image_id: "t8r49fxxltxttweo2dv6",
+      url: "https://images.igdb.com/igdb/image/upload/t_1080p/t8r49fxxltxttweo2dv6.jpg",
     },
     name: "Batman: The Telltale Series - Episode 2: Children of Arkham",
   },
   {
     id: 198678,
     cover: {
-      image_id: "co7xji",
+      url: "https://images.igdb.com/igdb/image/upload/t_1080p/co7xji.jpg",
     },
     name: "Batman Returns",
   },
   {
     id: 329827,
     cover: {
-      image_id: "co9c7t",
+      url: "https://images.igdb.com/igdb/image/upload/t_1080p/co9c7t.jpg",
     },
     name: "Barcode Battler II: Batman Returns - Batman",
   },
