@@ -6,7 +6,7 @@ import { IGDBClientProtocol } from "../apis/protocols/IGDBClientProtocol.js";
 import { GameRepoProtocol } from "../repositories/protocols/gameRepoProtocol.js";
 import { inject, injectable } from "tsyringe";
 import { TOKENS } from "../di/tokens.js";
-import { PlatformApiId, PlatformName } from "../enums.js";
+import { getPlatformApiId } from "../utils.js";
 
 @injectable()
 export class GameService implements GameServiceProtocol {
@@ -123,63 +123,7 @@ export class GameService implements GameServiceProtocol {
       searchLimit = 10;
     }
     
-    let igdbPlatformId;
-
-    switch (platformName) {
-      case PlatformName.ps1:
-        igdbPlatformId = PlatformApiId.ps1;
-        break;
-      case PlatformName.ps2:
-        igdbPlatformId = PlatformApiId.ps2;
-        break;
-      case PlatformName.ps3:
-        igdbPlatformId = PlatformApiId.ps3;
-        break;
-      case PlatformName.ps4:
-        igdbPlatformId = PlatformApiId.ps4;
-        break;
-      case PlatformName.ps5:
-        igdbPlatformId = PlatformApiId.ps5;
-        break;
-      case PlatformName.psp:
-        igdbPlatformId = PlatformApiId.psp;
-        break;
-      case PlatformName.ps_vita:
-        igdbPlatformId = PlatformApiId.ps_vita;
-        break;
-      case PlatformName.original_xbox:
-        igdbPlatformId = PlatformApiId.original_xbox;
-        break;
-      case PlatformName.xbox_360:
-        igdbPlatformId = PlatformApiId.xbox_360;
-        break;
-      case PlatformName.xbox_one:
-        igdbPlatformId = PlatformApiId.xbox_one;
-        break;
-      case PlatformName.xbox_series_x_s:
-        igdbPlatformId = PlatformApiId.xbox_series_x_s;
-        break;
-      case PlatformName.sega_mega_drive:
-        igdbPlatformId = PlatformApiId.sega_mega_drive;
-        break;
-      case PlatformName.wii:
-        igdbPlatformId = PlatformApiId.wii;
-        break;
-      case PlatformName.switch:
-        igdbPlatformId = PlatformApiId.switch;
-        break;
-      case PlatformName.nes:
-        igdbPlatformId = PlatformApiId.nes;
-        break;
-      case PlatformName.ds:
-        igdbPlatformId = PlatformApiId.ds;
-        break;
-      case PlatformName.pc:
-        igdbPlatformId = PlatformApiId.pc;
-        break;
-      default:
-        igdbPlatformId = null;
-    }
+    let igdbPlatformId = getPlatformApiId(platformName);
 
     const searchResults = await this.igdbClient.searchGame(searchParam, searchLimit, igdbPlatformId) as Array<IGDBGame>;
 

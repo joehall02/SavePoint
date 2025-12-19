@@ -103,4 +103,21 @@ describe("games test", () => {
     assert.equal(res.status, 200);
     assert.deepEqual(res.body, response.slice(0, searchLimit));
   });
+
+    test("POST /result returns x number of games when given a search, limit and platform parameter", async () => {
+    // Given
+    const searchParam = mockData.mockSearchParam;
+    const searchLimit: number = 10;
+    const platform = mockData.mockPlatformName;
+    const response = mockData.mockSearchIgdbData;
+
+    // When
+    const res = await request(app).post(
+      `/api/games/result/?search=${searchParam}&limit=${searchLimit}&platform=${platform}`
+    );
+
+    // Then
+    assert.equal(res.status, 200);
+    assert.deepEqual(res.body, response.slice(0, searchLimit));
+  });
 });

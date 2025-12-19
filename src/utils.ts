@@ -181,3 +181,44 @@ export function convertUnixTimestamp(timestamp: string): string {
   const monthName = months[monthIndex];
   return `${dayWithSuffix} ${monthName} ${year}`;
 }
+
+export function getPlatformApiId(platformName: string): number | null {
+  switch (platformName) {
+    case enums.PlatformName.ps1:
+      return enums.PlatformApiId.ps1;
+    case enums.PlatformName.ps2:
+      return enums.PlatformApiId.ps2;
+    case enums.PlatformName.ps3:
+      return enums.PlatformApiId.ps3;
+    case enums.PlatformName.ps4:
+      return enums.PlatformApiId.ps4;
+    case enums.PlatformName.ps5:
+      return enums.PlatformApiId.ps5;
+    case enums.PlatformName.psp:
+      return enums.PlatformApiId.psp;
+    case enums.PlatformName.ps_vita:
+      return enums.PlatformApiId.ps_vita;
+    case enums.PlatformName.original_xbox:
+      return enums.PlatformApiId.original_xbox;
+    case enums.PlatformName.xbox_360:
+      return enums.PlatformApiId.xbox_360;
+    case enums.PlatformName.xbox_one:
+      return enums.PlatformApiId.xbox_one;
+    case enums.PlatformName.xbox_series_x_s:
+      return enums.PlatformApiId.xbox_series_x_s;
+    case enums.PlatformName.sega_mega_drive:
+      return enums.PlatformApiId.sega_mega_drive;
+    case enums.PlatformName.wii:
+      return enums.PlatformApiId.wii;
+    case enums.PlatformName.switch:
+      return enums.PlatformApiId.switch;
+    case enums.PlatformName.nes:
+      return enums.PlatformApiId.nes;
+    case enums.PlatformName.ds:
+      return enums.PlatformApiId.ds;
+    case enums.PlatformName.pc:
+      return enums.PlatformApiId.pc;
+    default:
+      return null;
+  }
+}

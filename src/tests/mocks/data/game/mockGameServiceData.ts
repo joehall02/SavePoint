@@ -278,3 +278,7 @@ export const mockSearchIgdbData: object[] = [
 export const mockSearchParam: object = {
   searchParam: "Batman",
 };
+
+export const mockPlatformName: object = {
+  platform: "original_xbox"
+}
