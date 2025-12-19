@@ -92,9 +92,9 @@ export class GameController {
     try {
       const { searchParam } = req.body;
       const searchLimit = 6;
-      const platformId = null;
+      const platformName = null;
   
-      const response = await this.service.searchIgdbGame(searchParam, searchLimit, platformId);
+      const response = await this.service.searchIgdbGame(searchParam, searchLimit, platformName);
   
       res.status(200).json(response);
     } catch (error) {

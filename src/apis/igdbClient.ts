@@ -11,8 +11,14 @@ axios.defaults.headers.common["Content-Type"] = "text/plain";
 axios.defaults.timeout = 5000; // 5 Seconds Timeout
 
 export class IGDBClient implements IGDBClientProtocol {
-  async searchGame (searchParam: string, searchLimit: number): Promise<Array<IGDBGame>> {
-    const response = await axios.post("/games", `search "${searchParam}"; fields name, cover.image_id; limit ${searchLimit};`);
+  async searchGame (searchParam: string, searchLimit: number, igdbPlatformId: number | null): Promise<Array<IGDBGame>> {
+    let query = `search "${searchParam}"; fields name, cover.image_id; limit ${searchLimit};`
+
+    if (igdbPlatformId !== null) {
+      query += `where (platforms = [${igdbPlatformId}]);`
+    }
+
+    const response = await axios.post("/games", query);
 
     return mapExternalGame(response.data as object[]);
   };

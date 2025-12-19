@@ -5,7 +5,7 @@ meta {
 }
 
 post {
-  url: {{base_url}}/{{game_route}}/result?search=Lego&limit=10
+  url: {{base_url}}/{{game_route}}/result?search=Lego&limit=10&platform=original_xbox
   body: none
   auth: inherit
 }
@@ -13,6 +13,7 @@ post {
 params:query {
   search: Lego
   limit: 10
+  platform: original_xbox
 }
 
 settings {

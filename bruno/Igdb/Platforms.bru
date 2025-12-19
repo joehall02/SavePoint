@@ -1,0 +1,25 @@
+meta {
+  name: Platforms
+  type: http
+  seq: 4
+}
+
+post {
+  url: {{igdb_base_url}}/platforms
+  body: text
+  auth: inherit
+}
+
+headers {
+  Authorization: Bearer {{igdb_access_token}}
+  Client-ID: {{igdb_client_id}}
+}
+
+body:text {
+  search "pc"; fields name;
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}
