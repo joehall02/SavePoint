@@ -1,29 +1,5 @@
 import { RawExternalGameDetails, ExternalGameDetails, IGDBGame, RawIGDBGame } from "./models/igdbGame.js";
-
-enum ImageSize {
-  cover_small = "cover_small",
-  screenshot_med = "screenshot_med",
-  cover_big = "cover_big",
-  logo_med = "logo_med",
-  screenshot_big = "screenshot_big",
-  thumb = "thumb",
-  micro = "micro",
-  r_720p = "720p",
-  r_1080p = "1080p",
-}
-
-enum RegionName {
-  north_america = "north_america",
-  australia = "australia",
-  europe = "europe",
-  new_zealand = "new_zealand",
-  japan = "japan",
-  china = "china",
-  korea = "korea",
-  brazil = "brazil",
-  asia = "asia",
-  worldwide = "worldwide",
-}
+import * as enums from "./enums.js"
 
 export function mapExternalGameDetails(data: object[]): ExternalGameDetails {
   const raw = data[0] as RawExternalGameDetails;
@@ -34,11 +10,11 @@ export function mapExternalGameDetails(data: object[]): ExternalGameDetails {
     storyline: raw.storyline ?? null,
     summary: raw.summary ?? null,
     platforms: raw.platforms?.map((p) => ({ name: p.name })) ?? null,
-    cover: raw.cover ? { url: mapImageIdToUrl(raw.cover.image_id, ImageSize.cover_small) } : null,
+    cover: raw.cover ? { url: mapImageIdToUrl(raw.cover.image_id, enums.ImageSize.cover_small) } : null,
     videos: raw.videos?.map((v) => ({ url: mapVideoIdToUrl(v.video_id) })) ?? null,
     genres: raw.genres?.map((g) => ({ name: g.name })) ?? null,
     artworks:
-      raw.artworks?.map((a) => ({ url: mapImageIdToUrl(a.image_id, ImageSize.screenshot_big) })) ?? null,
+      raw.artworks?.map((a) => ({ url: mapImageIdToUrl(a.image_id, enums.ImageSize.screenshot_big) })) ?? null,
     release_dates: (() => {
       const filtered = filterRepeatedReleaseDates(raw.release_dates);
       return (
@@ -99,32 +75,32 @@ export function mapExternalGame(data: object[]): IGDBGame[] {
   return rawList.map((raw) => ({
     id: raw.id,
     name: raw.name,
-    cover: raw.cover ? { url: mapImageIdToUrl(raw.cover.image_id, ImageSize.r_1080p) } : null,
+    cover: raw.cover ? { url: mapImageIdToUrl(raw.cover.image_id, enums.ImageSize.r_1080p) } : null,
   }));
 }
 
-export function mapImageIdToUrl(imageId: string, imageSize: ImageSize): string {
+export function mapImageIdToUrl(imageId: string, imageSize: enums.ImageSize): string {
   switch (imageSize) {
-    case ImageSize.cover_small:
+    case enums.ImageSize.cover_small:
       break;
-    case ImageSize.screenshot_med:
+    case enums.ImageSize.screenshot_med:
       break;
-    case ImageSize.cover_big:
+    case enums.ImageSize.cover_big:
       break;
-    case ImageSize.logo_med:
+    case enums.ImageSize.logo_med:
       break;
-    case ImageSize.screenshot_big:
+    case enums.ImageSize.screenshot_big:
       break;
-    case ImageSize.thumb:
+    case enums.ImageSize.thumb:
       break;
-    case ImageSize.micro:
+    case enums.ImageSize.micro:
       break;
-    case ImageSize.r_720p:
+    case enums.ImageSize.r_720p:
       break;
-    case ImageSize.r_1080p:
+    case enums.ImageSize.r_1080p:
       break;
     default:
-      imageSize = ImageSize.thumb;
+      imageSize = enums.ImageSize.thumb;
   }
 
   const imageUrl = `https://images.igdb.com/igdb/image/upload/t_${imageSize}/${imageId}.jpg`;
@@ -140,25 +116,25 @@ export function mapVideoIdToUrl(videoId: string): string {
 
 export function mapRegionName(regionName: string): string {
   switch (regionName) {
-    case RegionName.asia:
+    case enums.RegionName.asia:
       return "Asia";
-    case RegionName.europe:
+    case enums.RegionName.europe:
       return "Europe";
-    case RegionName.north_america:
+    case enums.RegionName.north_america:
       return "North America";
-    case RegionName.australia:
+    case enums.RegionName.australia:
       return "Australia";
-    case RegionName.brazil:
+    case enums.RegionName.brazil:
       return "Brazil";
-    case RegionName.china:
+    case enums.RegionName.china:
       return "China";
-    case RegionName.japan:
+    case enums.RegionName.japan:
       return "Japan";
-    case RegionName.korea:
+    case enums.RegionName.korea:
       return "Korea";
-    case RegionName.new_zealand:
+    case enums.RegionName.new_zealand:
       return "New Zealand";
-    case RegionName.worldwide:
+    case enums.RegionName.worldwide:
       return "Worldwide";
     default:
       return "N/A";

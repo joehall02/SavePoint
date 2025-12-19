@@ -3,3 +3,8 @@ export interface Platform {
   title: string;
   cover: string;
 }
+
+export interface IgdbPlatformId {
+    igdbId: number;
+    name: string;
+}

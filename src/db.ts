@@ -12,25 +12,25 @@ db.exec(`
         cover TEXT NOT NULL
     );
 
-    INSERT OR IGNORE INTO platforms (title, cover)
+    INSERT OR IGNORE INTO platforms (id, title, cover)
     VALUES 
-        ('PS1', 'ps1.jpg'),
-        ('PS2', 'ps2.jpg'),
-        ('PS3', 'ps3.jpg'),
-        ('PS4', 'ps4.jpg'),
-        ('PS5', 'ps5.jpg'),
-        ('PSP', 'psp.jpg'),
-        ('PS Vita', 'psVita.jpg'),
-        ('Original Xbox', 'originalXbox.jpg'),
-        ('Xbox 360', 'xbox360.jpg'),
-        ('Xbox One', 'xboxOne.jpg'),
-        ('Xbox Series X|S', 'xboxSeries.jpg'),
-        ('Sega Mega Drive', 'segaMegaDrive.jpg'),
-        ('WII', 'wii.jpg'),
-        ('Switch', 'switch.jpg'),
-        ('NES', 'nes.jpg'),
-        ('DS', 'ds.jpg'),
-        ('PC', 'pc.jpg');
+        (1, 'PS1', 'ps1.jpg'),
+        (2, 'PS2', 'ps2.jpg'),
+        (3, 'PS3', 'ps3.jpg'),
+        (4, 'PS4', 'ps4.jpg'),
+        (5, 'PS5', 'ps5.jpg'),
+        (6, 'PSP', 'psp.jpg'),
+        (7, 'PS Vita', 'psVita.jpg'),
+        (8, 'Original Xbox', 'originalXbox.jpg'),
+        (9, 'Xbox 360', 'xbox360.jpg'),
+        (10, 'Xbox One', 'xboxOne.jpg'),
+        (11, 'Xbox Series X|S', 'xboxSeries.jpg'),
+        (12, 'Sega Mega Drive', 'segaMegaDrive.jpg'),
+        (13, 'WII', 'wii.jpg'),
+        (14, 'Switch', 'switch.jpg'),
+        (15, 'NES', 'nes.jpg'),
+        (16, 'DS', 'ds.jpg'),
+        (17, 'PC', 'pc.jpg');
 
     CREATE TABLE IF NOT EXISTS games (
         id INTEGER PRIMARY KEY AUTOINCREMENT,

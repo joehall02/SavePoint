@@ -6,6 +6,7 @@ import { IGDBClientProtocol } from "../apis/protocols/IGDBClientProtocol.js";
 import { GameRepoProtocol } from "../repositories/protocols/gameRepoProtocol.js";
 import { inject, injectable } from "tsyringe";
 import { TOKENS } from "../di/tokens.js";
+import { PlatformApiId, PlatformName } from "../enums.js";
 
 @injectable()
 export class GameService implements GameServiceProtocol {
@@ -113,7 +114,7 @@ export class GameService implements GameServiceProtocol {
     await this.gameRepo.deleteGame(gameId);
   };
 
-  async searchIgdbGame(searchParam: string, searchLimit: number): Promise<Array<IGDBGame>> {
+  async searchIgdbGame(searchParam: string, searchLimit: number, platformName: string): Promise<Array<IGDBGame>> {
     if (searchParam === null) {
       throwError("No search term provided", 400);
     }
@@ -121,8 +122,19 @@ export class GameService implements GameServiceProtocol {
     if (searchLimit === null) {
       searchLimit = 10;
     }
+
+    let igdbPlatformId;
+      
+    switch(platformName) {
+      case PlatformName.ps1:
+        igdbPlatformId = PlatformApiId.ps1
+
+      default:
+        igdbPlatformId = 0
+    }
+
     
-    const searchResults = await this.igdbClient.searchGame(searchParam, searchLimit) as Array<IGDBGame>;
+    const searchResults = await this.igdbClient.searchGame(searchParam, searchLimit, igdbPlatformId) as Array<IGDBGame>;
 
     return searchResults;
   };

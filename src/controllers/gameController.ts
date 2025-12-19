@@ -87,12 +87,14 @@ export class GameController {
     }
   };
 
+  // Search game api for search page
   public searchGameHome = async (req: Request, res: Response, next: NextFunction) => {
     try {
       const { searchParam } = req.body;
       const searchLimit = 6;
+      const platformId = null;
   
-      const response = await this.service.searchIgdbGame(searchParam, searchLimit);
+      const response = await this.service.searchIgdbGame(searchParam, searchLimit, platformId);
   
       res.status(200).json(response);
     } catch (error) {
@@ -100,13 +102,14 @@ export class GameController {
     }
   };
   
-  // Search igdb for game results page
+  // Search game api for game results page
   public searchGameResults = async (req: Request, res: Response, next: NextFunction) => {
     try {
       const searchParam: string = String(req.query.search);
       const searchLimit: number = Number(req.query.limit);
+      const platformId: number = Number(req.query.platform);
   
-      const response = await this.service.searchIgdbGame(searchParam, searchLimit);
+      const response = await this.service.searchIgdbGame(searchParam, searchLimit, platformId);
   
       res.status(200).send(response);
     } catch (error) {
