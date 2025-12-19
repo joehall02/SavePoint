@@ -107,9 +107,9 @@ export class GameController {
     try {
       const searchParam: string = String(req.query.search);
       const searchLimit: number = Number(req.query.limit);
-      const platformId: number = Number(req.query.platform);
+      const platformName: string = String(req.query.platform);
   
-      const response = await this.service.searchIgdbGame(searchParam, searchLimit, platformId);
+      const response = await this.service.searchIgdbGame(searchParam, searchLimit, platformName);
   
       res.status(200).send(response);
     } catch (error) {
