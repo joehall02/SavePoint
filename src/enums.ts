@@ -1,5 +1,3 @@
-import { IgdbPlatformId } from "./models/platform.js"
-
 export enum ImageSize {
   cover_small = "cover_small",
   screenshot_med = "screenshot_med",
@@ -25,44 +23,24 @@ export enum RegionName {
   worldwide = "worldwide",
 }
 
-const platformIds: IgdbPlatformId[] = [
-  { igdbId: 7, name: "ps1" },
-  { igdbId: 8, name: "ps2" },
-  { igdbId: 9, name: "ps3" },
-  { igdbId: 48, name: "ps4" },
-  { igdbId: 167, name: "ps5" },
-  { igdbId: 38, name: "psp" },
-  { igdbId: 46, name: "ps_vita" },
-  { igdbId: 11, name: "original_xbox" },
-  { igdbId: 12, name: "xbox_360" },
-  { igdbId: 49, name: "xbox_one" },
-  { igdbId: 169, name: "xbox_series_x_s" },
-  { igdbId: 29, name: "sega_mega_drive" },
-  { igdbId: 5, name: "wii" },
-  { igdbId: 130, name: "switch" },
-  { igdbId: 18, name: "nes" },
-  { igdbId: 20, name: "ds" },
-  { igdbId: 6, name: "pc" },
-];
-
 export enum PlatformApiId {
-    ps1 = platformIds[0].igdbId,
-    ps2 = platformIds[1].igdbId,
-    ps3 = platformIds[2].igdbId,
-    ps4 = platformIds[3].igdbId,
-    ps5 = platformIds[4].igdbId,
-    psp = platformIds[5].igdbId,
-    ps_vita = platformIds[6].igdbId,
-    original_xbox = platformIds[7].igdbId,
-    xbox_360 = platformIds[8].igdbId,
-    xbox_one = platformIds[9].igdbId,
-    xbox_series_x_s = platformIds[10].igdbId,
-    sega_mega_drive = platformIds[11].igdbId,
-    wii = platformIds[12].igdbId,
-    switch = platformIds[13].igdbId,
-    nes = platformIds[14].igdbId,
-    ds = platformIds[15].igdbId,
-    pc = platformIds[16].igdbId,
+    ps1 = 7,
+    ps2 = 8,
+    ps3 = 9,
+    ps4 = 48,
+    ps5 = 167,
+    psp = 38,
+    ps_vita = 46,
+    original_xbox = 11,
+    xbox_360 = 12,
+    xbox_one = 49,
+    xbox_series_x_s = 169,
+    sega_mega_drive = 29,
+    wii = 5,
+    switch = 130,
+    nes = 18,
+    ds = 20,
+    pc = 6,
 }
 
 export enum PlatformName {

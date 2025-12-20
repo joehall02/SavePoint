@@ -8,7 +8,7 @@ import config from "../config/config.js";
 import { createApp } from "../app.js";
 import { Express } from "express";
 
-describe("platforms test", () => {
+describe("Platform Test Suite", () => {
   let app: Express;
 
   beforeEach(async () => {
