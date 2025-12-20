@@ -54,7 +54,7 @@ export class GameRepository implements GameRepoProtocol {
     return games as Array<PartialGame>;
   };
 
- async getGame(gameId: number): Promise<GameDetails> {
+ async getGame(gameId: number): Promise<GameDetails | undefined> {
     // Selects game with the same id from the game table and asserts its type as Game
     const getGamequery = db.prepare(`
           SELECT 
@@ -70,7 +70,7 @@ export class GameRepository implements GameRepoProtocol {
           WHERE id = ?
       `);
 
-    const gameDetails = getGamequery.get(gameId) as GameDetails;
+    const gameDetails = getGamequery.get(gameId) as GameDetails | undefined;
 
     return gameDetails;
   };

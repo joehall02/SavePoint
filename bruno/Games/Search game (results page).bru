@@ -5,15 +5,15 @@ meta {
 }
 
 post {
-  url: {{base_url}}/{{game_route}}/result?search=Lego&limit=10&platform=original_xbox
+  url: {{base_url}}/{{game_route}}/result?search=counter strike&limit=10
   body: none
   auth: inherit
 }
 
 params:query {
-  search: Lego
+  search: counter strike
   limit: 10
-  platform: original_xbox
+  ~platform: pc
 }
 
 settings {

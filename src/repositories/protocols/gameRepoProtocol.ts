@@ -4,6 +4,6 @@ export interface GameRepoProtocol {
     insertGame(game: Game): Promise<void>;
     editGame(game: GameDetails, gameId: number): Promise<void>;
     getAllGames(): Promise<Array<PartialGame>>;
-    getGame(gameId: number): Promise<GameDetails>;
+    getGame(gameId: number): Promise<GameDetails | undefined>;
     deleteGame(gameId: number): Promise<void>;
 }

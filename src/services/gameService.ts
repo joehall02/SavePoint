@@ -1,6 +1,6 @@
 import { Game, GameDetails, PartialGame } from "../models/game.js";
 import { ExternalGameDetails, IGDBGame } from "../models/igdbGame.js";
-import { throwError } from "../middlewares/errorHandler.js";
+import { assertExists, throwError } from "../middlewares/errorHandler.js";
 import { GameServiceProtocol } from "./protocols/gameServiceProtocol.js";
 import { IGDBClientProtocol } from "../apis/protocols/IGDBClientProtocol.js";
 import { GameRepoProtocol } from "../repositories/protocols/gameRepoProtocol.js";
@@ -41,10 +41,8 @@ export class GameService implements GameServiceProtocol {
     // Get game details from the database
     const gameDetails = await this.gameRepo.getGame(gameId);
 
-    // Check to make sure the game is in the database, if not throw an error
-    if (!gameDetails) {
-      throwError("Game not found", 404);
-    }
+    // Assert gameDetails is GameDetails type
+    assertExists(gameDetails, "Game not found")
 
     const game: Game = {
       title: gameDetails.title,
@@ -71,10 +69,8 @@ export class GameService implements GameServiceProtocol {
     // Get game from the database
     const game = await this.gameRepo.getGame(gameId);
 
-    // Check to make sure the game is in the database, if not throw an error
-    if (!game) {
-      throwError("Game not found", 404);
-    }
+    // Assert gameDetails is GameDetails type
+    assertExists(game, "Game not found")
 
     // Defines a type to allow for optional attributes
     type updateGameInput = {
