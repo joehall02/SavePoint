@@ -10,6 +10,14 @@ export const mockNewGameData: Game = {
   platformId: 1,
 };
 
+export const mockIncorrectGameData: Object = {
+  name: "Game1",
+  notes: "Example",
+  isBox: true,
+  userRating: 3,
+  platform: 1,
+}
+
 export const mockGetAllGamesData: object[] = [
   {
     id: 740,
@@ -59,13 +67,31 @@ export const mockGetGameByIdData: Game = {
   platformId: 12,
 };
 
-export const mockEditGameData: Game = {
+export const mockEditGameData: Object = {
   title: "Super Smash TV",
   condition: "Bad",
   notes: "Condition of the disc is very good but the box is damaged.",
   boxIncluded: true,
   rating: 4.2,
+  platformId: 12,
+};
+
+export const mockEditGameIncorrectConfitionData: Object = {
+  title: "Super Smash TV",
+  condition: "Meh",
+  notes: "Condition of the disc is very good but the box is damaged.",
+  boxIncluded: true,
+  rating: 4.2,
+  platformId: 12,
+};
+
+export const mockEditGameReturnData: Object = {
+  title: "Super Smash TV",
+  condition: "Bad",
   igdbId: 123,
+  notes: "Condition of the disc is very good but the box is damaged.",
+  boxIncluded: true,
+  rating: 4.2,
   platformId: 12,
 };
 
