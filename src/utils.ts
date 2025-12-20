@@ -141,7 +141,7 @@ export function mapRegionName(regionName: string): string {
   }
 }
 
-export function convertUnixTimestamp(timestamp: string): string {
+export function convertUnixTimestamp(timestamp: number): string {
   const unixSeconds = Number(timestamp);
   if (Number.isNaN(unixSeconds)) {
     throw new Error("Invalid timestamp");

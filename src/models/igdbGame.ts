@@ -44,7 +44,7 @@ export interface RawExternalGameDetails {
   }> | null;
   release_dates?: Array<{
     id: number;
-    date: string; // unix timestamp
+    date: number; // unix timestamp
     release_region?: {
       id: number;
       region?: string;

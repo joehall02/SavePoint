@@ -120,7 +120,7 @@ export class GameController {
   // Fetch game details from external api
   public fetchExternalGameDetails = async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const gameId: number | undefined = req.query.igdbId ? Number(req.query.igdbId) : undefined;
+      const gameId: number | undefined = req.query.gameId ? Number(req.query.gameId) : undefined;
 
       const response = await this.service.fetchExternalGameDetails(gameId);
 
