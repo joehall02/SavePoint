@@ -90,6 +90,32 @@ describe("Game Test Suite", () => {
       assert.equal(res.status, 200);
       assert.deepEqual(res.body, games);
     });
+
+    test("GET /games/ should get all games for a platform when given a platform name", async () => {
+      // Given
+      const games = mockData.mockGetAllGamesData;
+      const platformName = mockData.mockPlatformName
+
+      // When
+      const res = await request(app).get(`/api/games?platform=${platformName}`);
+      
+      // Then
+      assert.equal(res.status, 200);
+      assert.deepEqual(res.body, games);
+    });
+
+    test("GET /games/ should get all games when given an incorrect platform name", async () => {
+      // Given
+      const games = mockData.mockGetAllGamesData;
+      const platformName = mockData.mockIncorrectPlatformName
+
+      // When
+      const res = await request(app).get(`/api/games?platform=${platformName}`);
+      
+      // Then
+      assert.equal(res.status, 200);
+      assert.deepEqual(res.body, games);
+    });
   })
 
   // TESTS: Game details
