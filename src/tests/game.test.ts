@@ -229,7 +229,7 @@ describe("Game Test Suite", () => {
   describe("API Search Results Tests", () => {
     test("POST /result returns x number of games when given a search and limit parameter", async () => {
       // Given
-      const searchParam = mockData.mockSearchParam;
+      const searchParam = mockData.mockResultSearchParam;
       const searchLimit: number = 10;
       const response = mockData.mockSearchIgdbData;
 
@@ -245,7 +245,7 @@ describe("Game Test Suite", () => {
 
     test("POST /result returns x number of games when given a search, limit and platform parameter", async () => {
       // Given
-      const searchParam = mockData.mockSearchParam;
+      const searchParam = mockData.mockResultSearchParam;
       const searchLimit: number = 10;
       const platform = mockData.mockPlatformName;
       const response = mockData.mockSearchIgdbData;
@@ -262,7 +262,7 @@ describe("Game Test Suite", () => {
 
     test("POST /result returns x games from all platforms when not given a correct platform", async () => {
       // Given
-      const searchParam = mockData.mockSearchParam;
+      const searchParam = mockData.mockResultSearchParam;
       const searchLimit: number = 10;
       const platform = mockData.mockIncorrectPlatformName;
       const response = mockData.mockSearchIgdbData;
@@ -279,7 +279,7 @@ describe("Game Test Suite", () => {
 
     test("POST /result handles unauthorized error for when token is not provided", async () => {
       // Given
-      const searchParam = "unauthorized";
+      const searchParam = mockData.mockUnauthorizedResultsParam;
       const searchLimit: number = 10;
 
       // When
@@ -300,5 +300,46 @@ describe("Game Test Suite", () => {
       // Then
       assert.equal(res.status, 400);
     });
+  })
+
+  // TESTS: API get game details
+  describe("API Fetch Game Details Tests", () => {
+    test("POST /game-details returns game details when given a game id", async () => {
+      // Given
+      const igdbId = 1;
+      const response = mockData.mockFetchGameIgdbData
+      
+      // When
+      const res = await request(app).post(
+        `/api/games/game-details?gameId=${igdbId}`
+      )
+
+      // Then
+      assert.equal(res.status, 200);
+      assert.deepEqual(res.body, response);
+    })
+    
+    test("POST /game-details return bad request error when not given a game id", async () => {      
+      // When
+      const res = await request(app).post(
+        `/api/games/game-details?`
+      )
+
+      // Then
+      assert.equal(res.status, 400);
+    })
+
+    test("POST /game-details handles unauthorized error for when token is not provided", async () => {
+      // Given
+      const igdbId = 2;
+      
+      // When
+      const res = await request(app).post(
+        `/api/games/game-details?gameId=${igdbId}`
+      )
+
+      // Then
+      assert.equal(res.status, 401);
+    })
   })
 });

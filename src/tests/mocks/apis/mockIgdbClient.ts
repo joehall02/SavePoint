@@ -14,6 +14,8 @@ export class MockIGDBClient implements IGDBClientProtocol {
     }
     
     async fetchGameDetails(gameId: number): Promise<ExternalGameDetails> {
+        if (gameId === 2) throwError("Request failed with status code 401", 401) // Simulating no tokens being passed and how service reacts
+        
         const rawDetailsList = mockExternalGameDetails as RawExternalGameDetails[];
 
         return mapExternalGameDetails(rawDetailsList);

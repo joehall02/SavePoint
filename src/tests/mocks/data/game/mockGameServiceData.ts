@@ -16,7 +16,7 @@ export const mockIncorrectGameData: Object = {
   isBox: true,
   userRating: 3,
   platform: 1,
-}
+};
 
 export const mockGetAllGamesData: object[] = [
   {
@@ -305,14 +305,133 @@ export const mockSearchParam: object = {
   searchParam: "Batman",
 };
 
+export const mockResultSearchParam = "Batman"
+
 export const mockUnauthorizedSearchParam: object = {
   searchParam: "unauthorized",
 }
 
-export const mockPlatformName: object = {
-  platform: "original_xbox"
-}
+export const mockUnauthorizedResultsParam = "unauthorized"
 
-export const mockIncorrectPlatformName: object = {
-  platform: "zbox"
-}
+export const mockPlatformName = "original_xbox"
+
+export const mockIncorrectPlatformName = "zbox"
+
+export const mockFetchGameIgdbData: object = {
+  id: 472,
+  name: "The Elder Scrolls V: Skyrim",
+  storyline:
+    "The Empire of Tamriel is on the edge. The High King of Skyrim has been murdered. Alliances form as claims to the throne are made. In the midst of this conflict, a far more dangerous, ancient evil is awakened. Dragons, long lost to the passages of the Elder Scrolls, have returned to Tamriel. The future of Skyrim, even the Empire itself, hangs in the balance as they wait for the prophesized Dragonborn to come; a hero born with the power of The Voice, and the only one who can stand amongst the dragons.",
+  summary:
+    "Skyrim reimagines and revolutionizes the open-world fantasy epic, bringing to life a complete virtual world open for you to explore any way you choose. Play any type of character you can imagine, and do whatever you want; the legendary freedom of choice, storytelling, and adventure of The Elder Scrolls is realized like never before.",
+  platforms: [
+    {
+      name: "PlayStation 3",
+    },
+    {
+      name: "PC (Microsoft Windows)",
+    },
+    {
+      name: "Xbox 360",
+    },
+  ],
+  cover: {
+    url: "https://images.igdb.com/igdb/image/upload/t_cover_small/co1tnw.jpg",
+  },
+  videos: [
+    {
+      url: "https://www.youtube.com/watch?v=2doLV4hNMIg",
+    },
+    {
+      url: "https://www.youtube.com/watch?v=TvrqsDdy2ok",
+    },
+    {
+      url: "https://www.youtube.com/watch?v=6IEoZXM8WZY",
+    },
+    {
+      url: "https://www.youtube.com/watch?v=482QMfHHgcY",
+    },
+    {
+      url: "https://www.youtube.com/watch?v=EIIWmutIT6w",
+    },
+    {
+      url: "https://www.youtube.com/watch?v=3aJ2jG1gt44",
+    },
+    {
+      url: "https://www.youtube.com/watch?v=0mHGygvlKCQ",
+    },
+    {
+      url: "https://www.youtube.com/watch?v=Ft9MNJxky1Y",
+    },
+    {
+      url: "https://www.youtube.com/watch?v=skf7Dim1duI",
+    },
+  ],
+  genres: [
+    {
+      name: "Role-playing (RPG)",
+    },
+    {
+      name: "Adventure",
+    },
+  ],
+  artworks: [
+    {
+      url: "https://images.igdb.com/igdb/image/upload/t_screenshot_big/p5nul4inxjpvi05tnn1r.jpg",
+    },
+    {
+      url: "https://images.igdb.com/igdb/image/upload/t_screenshot_big/snmb2kvu6uz2vr7uzgzp.jpg",
+    },
+    {
+      url: "https://images.igdb.com/igdb/image/upload/t_screenshot_big/q6d8jv0yflv8hbomthqm.jpg",
+    },
+    {
+      url: "https://images.igdb.com/igdb/image/upload/t_screenshot_big/c7mid4aolyj7fboecnuu.jpg",
+    },
+    {
+      url: "https://images.igdb.com/igdb/image/upload/t_screenshot_big/egrcjzat6ssiuymf0pwb.jpg",
+    },
+    {
+      url: "https://images.igdb.com/igdb/image/upload/t_screenshot_big/dootpbeulmf5yxwqulvx.jpg",
+    },
+    {
+      url: "https://images.igdb.com/igdb/image/upload/t_screenshot_big/tplycmyhelqc4kx8lxzn.jpg",
+    },
+    {
+      url: "https://images.igdb.com/igdb/image/upload/t_screenshot_big/ksgt1c400zmgamznhh9h.jpg",
+    },
+    {
+      url: "https://images.igdb.com/igdb/image/upload/t_screenshot_big/ypfrlwt0ybgkbx6fsprq.jpg",
+    },
+    {
+      url: "https://images.igdb.com/igdb/image/upload/t_screenshot_big/beb3c77tggywfbygohpg.jpg",
+    },
+    {
+      url: "https://images.igdb.com/igdb/image/upload/t_screenshot_big/bblukgqk83m8xqimar6h.jpg",
+    },
+    {
+      url: "https://images.igdb.com/igdb/image/upload/t_screenshot_big/eh5ythnopfxa6hrcmd5v.jpg",
+    },
+    {
+      url: "https://images.igdb.com/igdb/image/upload/t_screenshot_big/ar4n68.jpg",
+    },
+  ],
+  release_dates: [
+    {
+      date: "8th December 2011",
+      region: "Japan",
+    },
+    {
+      date: "10th November 2011",
+      region: "Worldwide",
+    },
+    {
+      date: "10th November 2011",
+      region: "North America",
+    },
+    {
+      date: "11th November 2011",
+      region: "Europe",
+    },
+  ],
+};

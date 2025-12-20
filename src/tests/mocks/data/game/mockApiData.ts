@@ -1,7 +1,6 @@
 import { RawExternalGameDetails, RawIGDBGame } from "../../../../models/igdbGame.js";
 
 export const mockSearchIgdbResponseData: RawIGDBGame[] = [
-
   {
     id: 26041,
     cover: {
@@ -242,60 +241,60 @@ export const mockExternalGameDetails: RawExternalGameDetails[] = [
     artworks: [
       {
         id: 177,
-        image_id: "//images.igdb.com/igdb/image/upload/t_thumb/p5nul4inxjpvi05tnn1r.jpg",
+        image_id: "p5nul4inxjpvi05tnn1r",
       },
       {
         id: 169,
-        image_id: "//images.igdb.com/igdb/image/upload/t_thumb/snmb2kvu6uz2vr7uzgzp.jpg",
+        image_id: "snmb2kvu6uz2vr7uzgzp",
       },
       {
         id: 179,
-        image_id: "//images.igdb.com/igdb/image/upload/t_thumb/q6d8jv0yflv8hbomthqm.jpg",
+        image_id: "q6d8jv0yflv8hbomthqm",
       },
       {
         id: 171,
-        image_id: "//images.igdb.com/igdb/image/upload/t_thumb/c7mid4aolyj7fboecnuu.jpg",
+        image_id: "c7mid4aolyj7fboecnuu",
       },
       {
         id: 170,
-        image_id: "//images.igdb.com/igdb/image/upload/t_thumb/egrcjzat6ssiuymf0pwb.jpg",
+        image_id: "egrcjzat6ssiuymf0pwb",
       },
       {
         id: 178,
-        image_id: "//images.igdb.com/igdb/image/upload/t_thumb/dootpbeulmf5yxwqulvx.jpg",
+        image_id: "dootpbeulmf5yxwqulvx",
       },
       {
         id: 172,
-        image_id: "//images.igdb.com/igdb/image/upload/t_thumb/tplycmyhelqc4kx8lxzn.jpg",
+        image_id: "tplycmyhelqc4kx8lxzn",
       },
       {
         id: 180,
-        image_id: "//images.igdb.com/igdb/image/upload/t_thumb/ksgt1c400zmgamznhh9h.jpg",
+        image_id: "ksgt1c400zmgamznhh9h",
       },
       {
         id: 174,
-        image_id: "//images.igdb.com/igdb/image/upload/t_thumb/ypfrlwt0ybgkbx6fsprq.jpg",
+        image_id: "ypfrlwt0ybgkbx6fsprq",
       },
       {
         id: 175,
-        image_id: "//images.igdb.com/igdb/image/upload/t_thumb/beb3c77tggywfbygohpg.jpg",
+        image_id: "beb3c77tggywfbygohpg",
       },
       {
         id: 173,
-        image_id: "//images.igdb.com/igdb/image/upload/t_thumb/bblukgqk83m8xqimar6h.jpg",
+        image_id: "bblukgqk83m8xqimar6h",
       },
       {
         id: 176,
-        image_id: "//images.igdb.com/igdb/image/upload/t_thumb/eh5ythnopfxa6hrcmd5v.jpg",
+        image_id: "eh5ythnopfxa6hrcmd5v",
       },
       {
         id: 216656,
-        image_id: "//images.igdb.com/igdb/image/upload/t_thumb/ar4n68.jpg",
+        image_id: "ar4n68",
       },
     ],
     cover: {
       id: 85100,
-      image_id: "//images.igdb.com/igdb/image/upload/t_thumb/co1tnw.jpg",
+      image_id: "co1tnw",
     },
     genres: [
       {
@@ -325,75 +324,75 @@ export const mockExternalGameDetails: RawExternalGameDetails[] = [
     release_dates: [
       {
         id: 106167,
-        date: "1323302400",
+        date: 1323302400,
         release_region: {
-          id: 1234567,
-          region: "europe"
-        }
+          id: 5,
+          region: "japan",
+        },
       },
       {
         id: 417931,
-        date: "1320883200",
+        date: 1320883200,
         release_region: {
-          id: 1234567,
-          region: "europe"
-        }
+          id: 8,
+          region: "worldwide",
+        },
       },
       {
         id: 106168,
-        date: "1320969600",
+        date: 1320969600,
         release_region: {
-          id: 1234567,
-          region: "europe"
-        }
+          id: 2,
+          region: "north_america",
+        },
       },
       {
         id: 21154,
-        date: "1320969600",
+        date: 1320969600,
         release_region: {
-          id: 1234567,
-          region: "europe"
-        }
+          id: 8,
+          region: "worldwide",
+        },
       },
       {
         id: 21666,
-        date: "1323302400",
+        date: 1323302400,
         release_region: {
-          id: 1234567,
-          region: "europe"
-        }
+          id: 5,
+          region: "japan",
+        },
       },
       {
         id: 282088,
-        date: "1320883200",
+        date: 1320883200,
         release_region: {
-          id: 1234567,
-          region: "europe"
-        }
+          id: 2,
+          region: "north_america",
+        },
       },
       {
         id: 106169,
-        date: "1320969600",
+        date: 1320969600,
         release_region: {
-          id: 1234567,
-          region: "europe"
-        }
+          id: 1,
+          region: "europe",
+        },
       },
       {
         id: 21664,
-        date: "1323302400",
+        date: 1323302400,
         release_region: {
-          id: 1234567,
-          region: "europe"
-        }
+          id: 5,
+          region: "japan",
+        },
       },
       {
         id: 21155,
-        date: "1320969600",
+        date: 1320969600,
         release_region: {
-          id: 1234567,
-          region: "europe"
-        }
+          id: 8,
+          region: "worldwide",
+        },
       },
     ],
     storyline:
