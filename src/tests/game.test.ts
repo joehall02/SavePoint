@@ -33,7 +33,7 @@ describe("Game Test Suite", () => {
       assert.deepEqual(res.body, newGame);
     });
   
-    test("POST /games should return validation error when not provided data", async () => {
+    test("POST /games should return bad request error when not provided data", async () => {
       // When
       const res = await request(app).post("/api/games/");
   
@@ -41,7 +41,7 @@ describe("Game Test Suite", () => {
       assert.equal(res.status, 400);
     });
   
-    test("POST /games should return validation error when given incorrect data", async () => {
+    test("POST /games should return bad request error when given incorrect data", async () => {
       // Given
       const newGame = mockData.mockIncorrectGameData;
   
@@ -52,7 +52,7 @@ describe("Game Test Suite", () => {
       assert.equal(res.status, 400);
     });
 
-    test("POST /games should return validation error when given incorrect condition", async () => {
+    test("POST /games should return bad request error when given incorrect condition", async () => {
       // Given
       const newGame = mockData.mockNewGameData;
       newGame.condition = "Meh"
@@ -64,7 +64,7 @@ describe("Game Test Suite", () => {
       assert.equal(res.status, 400);
     });
   
-    test("POST /games should return validation error when given partial data", async () => {
+    test("POST /games should return bad request error when given partial data", async () => {
       // Given
       const newGame = mockData.mockNewGameData;
       const { condition, ...gameWithoutCondition } = newGame;
@@ -140,7 +140,7 @@ describe("Game Test Suite", () => {
       assert.equal(res.status, 404);
     });
     
-    test("PUT /games/:id should return validation error if given incorrect data", async () => {
+    test("PUT /games/:id should return bad request error if given incorrect data", async () => {
       // Given
       const updatedGame = mockData.mockIncorrectGameData;
 
@@ -151,7 +151,7 @@ describe("Game Test Suite", () => {
       assert.equal(res.status, 400);
     });
    
-    test("PUT /games/:id should return validation error if given incorrect condition", async () => {
+    test("PUT /games/:id should return bad request error if given incorrect condition", async () => {
       // Given
       const updatedGame = mockData.mockEditGameIncorrectConfitionData;
 
@@ -162,7 +162,7 @@ describe("Game Test Suite", () => {
       assert.equal(res.status, 400);
     });
 
-    test("PUT /games/:id should return validation error if not given data", async () => {
+    test("PUT /games/:id should return bad request error if not given data", async () => {
       // When
       const res = await request(app).put("/api/games/1")
 
@@ -191,50 +191,114 @@ describe("Game Test Suite", () => {
   })
 
   // TESTS: API search games
-  test("POST /search returns a max of 6 game results when given a search parameter", async () => {
-    // Given
-    const searchParam = mockData.mockSearchParam;
-    const response = mockData.mockSearchIgdbData
+  describe("API Search Game Tests", () => {
+    test("POST /search returns a max of 6 game results when given a search parameter", async () => {
+      // Given
+      const searchParam = mockData.mockSearchParam;
+      const response = mockData.mockSearchIgdbData
 
-    // When
-    const res = await request(app).post("/api/games/search").send(searchParam);
+      // When
+      const res = await request(app).post("/api/games/search").send(searchParam);
 
-    // Then
-    assert.equal(res.status, 200);
-    assert.deepEqual(res.body, response.slice(0, 6)); // Slice mock data to 6 to match search limit
-  });
+      // Then
+      assert.equal(res.status, 200);
+      assert.deepEqual(res.body, response.slice(0, 6)); // Slice mock data to 6 to match search limit
+    });
+    
+    test("POST /search returns bad request error when search param is not provided", async () => {
+      // When
+      const res = await request(app).post("/api/games/search");
+
+      // Then
+      assert.equal(res.status, 400);
+    });
+
+    test("POST /search handles unauthorized error for when token is not provided", async () => {
+      // Given
+      const searchParam = mockData.mockUnauthorizedSearchParam;
+      
+      // When
+      const res = await request(app).post("/api/games/search").send(searchParam);
+
+      // Then
+      assert.equal(res.status, 401);
+    });
+  })
 
   // TESTS: API search results
-  test("POST /result returns x number of games when given a search and limit parameter", async () => {
-    // Given
-    const searchParam = mockData.mockSearchParam;
-    const searchLimit: number = 10;
-    const response = mockData.mockSearchIgdbData;
+  describe("API Search Results Tests", () => {
+    test("POST /result returns x number of games when given a search and limit parameter", async () => {
+      // Given
+      const searchParam = mockData.mockSearchParam;
+      const searchLimit: number = 10;
+      const response = mockData.mockSearchIgdbData;
 
-    // When
-    const res = await request(app).post(
-      `/api/games/result/?search=${searchParam}&limit=${searchLimit}`
-    );
+      // When
+      const res = await request(app).post(
+        `/api/games/result/?search=${searchParam}&limit=${searchLimit}`
+      );
 
-    // Then
-    assert.equal(res.status, 200);
-    assert.deepEqual(res.body, response.slice(0, searchLimit));
-  });
+      // Then
+      assert.equal(res.status, 200);
+      assert.deepEqual(res.body, response.slice(0, searchLimit));
+    });
 
-  test("POST /result returns x number of games when given a search, limit and platform parameter", async () => {
-    // Given
-    const searchParam = mockData.mockSearchParam;
-    const searchLimit: number = 10;
-    const platform = mockData.mockPlatformName;
-    const response = mockData.mockSearchIgdbData;
+    test("POST /result returns x number of games when given a search, limit and platform parameter", async () => {
+      // Given
+      const searchParam = mockData.mockSearchParam;
+      const searchLimit: number = 10;
+      const platform = mockData.mockPlatformName;
+      const response = mockData.mockSearchIgdbData;
 
-    // When
-    const res = await request(app).post(
-      `/api/games/result/?search=${searchParam}&limit=${searchLimit}&platform=${platform}`
-    );
+      // When
+      const res = await request(app).post(
+        `/api/games/result/?search=${searchParam}&limit=${searchLimit}&platform=${platform}`
+      );
 
-    // Then
-    assert.equal(res.status, 200);
-    assert.deepEqual(res.body, response.slice(0, searchLimit));
-  });
+      // Then
+      assert.equal(res.status, 200);
+      assert.deepEqual(res.body, response.slice(0, searchLimit));
+    });
+
+    test("POST /result returns x games from all platforms when not given a correct platform", async () => {
+      // Given
+      const searchParam = mockData.mockSearchParam;
+      const searchLimit: number = 10;
+      const platform = mockData.mockIncorrectPlatformName;
+      const response = mockData.mockSearchIgdbData;
+
+      // When
+      const res = await request(app).post(
+        `/api/games/result/?search=${searchParam}&limit=${searchLimit}&platform=${platform}`
+      );
+
+      // Then
+      assert.equal(res.status, 200);
+      assert.deepEqual(res.body, response.slice(0, searchLimit));
+    });
+
+    test("POST /result handles unauthorized error for when token is not provided", async () => {
+      // Given
+      const searchParam = "unauthorized";
+      const searchLimit: number = 10;
+
+      // When
+      const res = await request(app).post(
+        `/api/games/result/?search=${searchParam}&limit=${searchLimit}`
+      );
+
+      // Then
+      assert.equal(res.status, 401);
+    });
+ 
+    test("POST /result returns bad request error when search param isn't provided", async () => {
+      // When
+      const res = await request(app).post(
+        `/api/games/result/`
+      );
+
+      // Then
+      assert.equal(res.status, 400);
+    });
+  })
 });

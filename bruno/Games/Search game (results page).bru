@@ -5,7 +5,7 @@ meta {
 }
 
 post {
-  url: {{base_url}}/{{game_route}}/result?search=counter strike&limit=10
+  url: {{base_url}}/{{game_route}}/result?search=counter strike&limit=10&platform=xbox_360
   body: none
   auth: inherit
 }
@@ -13,7 +13,7 @@ post {
 params:query {
   search: counter strike
   limit: 10
-  ~platform: pc
+  platform: xbox_360
 }
 
 settings {

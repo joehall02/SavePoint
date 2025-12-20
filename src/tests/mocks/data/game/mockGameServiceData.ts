@@ -305,6 +305,14 @@ export const mockSearchParam: object = {
   searchParam: "Batman",
 };
 
+export const mockUnauthorizedSearchParam: object = {
+  searchParam: "unauthorized",
+}
+
 export const mockPlatformName: object = {
   platform: "original_xbox"
+}
+
+export const mockIncorrectPlatformName: object = {
+  platform: "zbox"
 }
