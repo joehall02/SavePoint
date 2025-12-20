@@ -62,3 +62,11 @@ export enum PlatformName {
     ds = "ds",
     pc = "pc"
 }
+
+export enum Conditions {
+  very_good = "Very Good",
+  good = "Good",
+  okay = "Okay",
+  bad = "Bad",
+  very_bad = "Very Bad"
+}

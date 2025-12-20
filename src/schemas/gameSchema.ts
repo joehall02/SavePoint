@@ -1,21 +1,14 @@
 import * as z from "zod";
-
-const CONDITIONS = [
-  "Very Good",
-  "Good",
-  "Okay",
-  "Bad",
-  "Very Bad"
-] as const
+import * as enums from "../enums.js";
 
 export const createGameSchema = z.object({
   title: z.string(),
-  condition: z.enum(CONDITIONS),
+  condition: z.enum(enums.Conditions),
   notes: z.string(),
   boxIncluded: z.boolean(),
   rating: z.number(),
   igdbId: z.number(),
-  platformId: z.number(),
+  platformId: z.enum(enums.PlatformApiId),
 })
 
 export const getGameDetailsSchema = z.object({
@@ -36,11 +29,11 @@ export const getAllGamesSchema = z.object({
 export const editGameSchema = z
   .object({
     title: z.string().optional(),
-    condition: z.enum(CONDITIONS).optional(),
+    condition: z.enum(enums.Conditions).optional(),
     notes: z.string().optional(),
     boxIncluded: z.boolean().optional(),
     rating: z.number().optional(),
-    platformId: z.number().optional(),
+    platformId: z.enum(enums.PlatformApiId).optional(),
   })
   .strict() // Throw error if any unknown attributes are provided, even if known values are passed
   .refine((data) => {

@@ -7,7 +7,7 @@ export const mockNewGameData: Game = {
   boxIncluded: true,
   rating: 3,
   igdbId: 21,
-  platformId: 1,
+  platformId: 7,
 };
 
 export const mockIncorrectGameData: Object = {
