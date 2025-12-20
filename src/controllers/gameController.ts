@@ -92,7 +92,7 @@ export class GameController {
     try {
       const { searchParam } = req.body;
       const searchLimit = 6;
-      const platformName = null;
+      const platformName = undefined;
   
       const response = await this.service.searchIgdbGame(searchParam, searchLimit, platformName);
   
@@ -105,9 +105,9 @@ export class GameController {
   // Search game api for game results page
   public searchGameResults = async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const searchParam: string = String(req.query.search);
-      const searchLimit: number = Number(req.query.limit);
-      const platformName: string = String(req.query.platform);
+      const searchParam: string | undefined = req.query.search as string | undefined;
+      const searchLimit: number | undefined = req.query.limit ? Number(req.query.limit) : undefined;
+      const platformName: string | undefined = req.query.platform as string | undefined;
   
       const response = await this.service.searchIgdbGame(searchParam, searchLimit, platformName);
   
@@ -120,7 +120,7 @@ export class GameController {
   // Fetch game details from external api
   public fetchExternalGameDetails = async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const gameId: number = Number(req.query.igdbId);
+      const gameId: number | undefined = req.query.igdbId ? Number(req.query.igdbId) : undefined;
 
       const response = await this.service.fetchExternalGameDetails(gameId);
 

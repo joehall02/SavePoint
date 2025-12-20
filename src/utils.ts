@@ -182,7 +182,7 @@ export function convertUnixTimestamp(timestamp: string): string {
   return `${dayWithSuffix} ${monthName} ${year}`;
 }
 
-export function getPlatformApiId(platformName: string): number | null {
+export function getPlatformApiId(platformName: string): number | undefined {
   switch (platformName) {
     case enums.PlatformName.ps1:
       return enums.PlatformApiId.ps1;
@@ -219,6 +219,6 @@ export function getPlatformApiId(platformName: string): number | null {
     case enums.PlatformName.pc:
       return enums.PlatformApiId.pc;
     default:
-      return null;
+      return undefined;
   }
 }

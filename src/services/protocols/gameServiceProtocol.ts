@@ -23,6 +23,6 @@ export interface GameServiceProtocol {
     newPlatformId: number
   ): Promise<GameDetails>;
   removeGame(gameId: number): Promise<void>;
-  searchIgdbGame(searchParam: string, searchLimit: number, platformName: string | null): Promise<Array<IGDBGame>>;
-  fetchExternalGameDetails(gameId: number): Promise<ExternalGameDetails>;
+  searchIgdbGame(searchParam: string | undefined, searchLimit: number | undefined, platformName: string | undefined): Promise<Array<IGDBGame>>;
+  fetchExternalGameDetails(gameId: number | undefined): Promise<ExternalGameDetails>;
 }

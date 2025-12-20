@@ -111,11 +111,11 @@ export class GameService implements GameServiceProtocol {
   };
 
   async searchIgdbGame(searchParam: string, searchLimit: number, platformName: string): Promise<Array<IGDBGame>> {
-    if (searchParam === null) {
+    if (searchParam === undefined) {
       throwError("No search term provided", 400);
     }
 
-    if (searchLimit === null) {
+    if (searchLimit === undefined) {
       searchLimit = 10;
     }
     
@@ -127,7 +127,7 @@ export class GameService implements GameServiceProtocol {
   };
 
   async fetchExternalGameDetails(gameId: number): Promise<ExternalGameDetails> {
-    if (!gameId) {
+    if (gameId === undefined) {
       throwError("No game ID provided", 400);
     }
 
