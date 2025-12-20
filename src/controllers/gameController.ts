@@ -24,8 +24,10 @@ export class GameController {
 
   public getAllGames = async (req: Request, res: Response, next: NextFunction) => {
     try {
+      const platformName: string | undefined = req.query.platform as string | undefined;
+
       // fetchGames service to handle business logic
-      const games = await this.service.fetchAllGames();
+      const games = await this.service.fetchAllGames(platformName);
 
       // Return response 200 with games, validating the data against the schema
       res.status(200).json(games);

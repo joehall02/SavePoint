@@ -222,3 +222,45 @@ export function getPlatformApiId(platformName: string): number | undefined {
       return undefined;
   }
 }
+
+// TODO: definetly a better way to do this without repeating getPlatformApiId
+export function getPlatformId(platformName: string): number | undefined {
+  switch (platformName) {
+    case enums.PlatformName.ps1:
+      return enums.PlatformId.ps1;
+    case enums.PlatformName.ps2:
+      return enums.PlatformId.ps2;
+    case enums.PlatformName.ps3:
+      return enums.PlatformId.ps3;
+    case enums.PlatformName.ps4:
+      return enums.PlatformId.ps4;
+    case enums.PlatformName.ps5:
+      return enums.PlatformId.ps5;
+    case enums.PlatformName.psp:
+      return enums.PlatformId.psp;
+    case enums.PlatformName.ps_vita:
+      return enums.PlatformId.ps_vita;
+    case enums.PlatformName.original_xbox:
+      return enums.PlatformId.original_xbox;
+    case enums.PlatformName.xbox_360:
+      return enums.PlatformId.xbox_360;
+    case enums.PlatformName.xbox_one:
+      return enums.PlatformId.xbox_one;
+    case enums.PlatformName.xbox_series_x_s:
+      return enums.PlatformId.xbox_series_x_s;
+    case enums.PlatformName.sega_mega_drive:
+      return enums.PlatformId.sega_mega_drive;
+    case enums.PlatformName.wii:
+      return enums.PlatformId.wii;
+    case enums.PlatformName.switch:
+      return enums.PlatformId.switch;
+    case enums.PlatformName.nes:
+      return enums.PlatformId.nes;
+    case enums.PlatformName.ds:
+      return enums.PlatformId.ds;
+    case enums.PlatformName.pc:
+      return enums.PlatformId.pc;
+    default:
+      return undefined;
+  }
+}

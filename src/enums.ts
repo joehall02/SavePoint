@@ -43,6 +43,26 @@ export enum PlatformApiId {
     pc = 6,
 }
 
+export enum PlatformId {
+    ps1 = 1,
+    ps2 = 2,
+    ps3 = 3,
+    ps4 = 4,
+    ps5 = 5,
+    psp = 6,
+    ps_vita = 7,
+    original_xbox = 8,
+    xbox_360 = 9,
+    xbox_one = 10,
+    xbox_series_x_s = 11,
+    sega_mega_drive = 12,
+    wii = 13,
+    switch = 14,
+    nes = 15,
+    ds = 16,
+    pc = 17,
+}
+
 export enum PlatformName {
     ps1 = "ps1",
     ps2 = "ps2",

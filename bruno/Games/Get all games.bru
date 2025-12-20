@@ -5,9 +5,13 @@ meta {
 }
 
 get {
-  url: {{base_url}}/{{game_route}}/
+  url: {{base_url}}/{{game_route}}?platform=ps2
   body: none
   auth: inherit
+}
+
+params:query {
+  platform: ps2
 }
 
 settings {

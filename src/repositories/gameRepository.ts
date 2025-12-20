@@ -47,9 +47,16 @@ export class GameRepository implements GameRepoProtocol {
     });
   };
 
- async getAllGames(): Promise<Array<PartialGame>>{
+ async getAllGames(platformId: number | undefined): Promise<Array<PartialGame>>{
+    let query = `SELECT id, title FROM games`  
+
+    if (platformId !== undefined) {
+      query += ` WHERE platform_id = ?`;
+      return db.prepare(query).all(platformId) as Array<PartialGame>;
+    }
+
     // Select all game titles from games table in the database
-    const games = db.prepare("SELECT id, title FROM games").all();
+    const games = db.prepare(query).all() as Array<PartialGame>;
 
     return games as Array<PartialGame>;
   };

@@ -6,7 +6,7 @@ import { IGDBClientProtocol } from "../apis/protocols/IGDBClientProtocol.js";
 import { GameRepoProtocol } from "../repositories/protocols/gameRepoProtocol.js";
 import { inject, injectable } from "tsyringe";
 import { TOKENS } from "../di/tokens.js";
-import { getPlatformApiId } from "../utils.js";
+import { getPlatformApiId, getPlatformId } from "../utils.js";
 
 @injectable()
 export class GameService implements GameServiceProtocol {
@@ -30,9 +30,11 @@ export class GameService implements GameServiceProtocol {
     return newGame;
   }
 
-  async fetchAllGames(): Promise<Array<PartialGame>> {
+  async fetchAllGames(platformName: string): Promise<Array<PartialGame>> {
+    let platformId = getPlatformId(platformName)
+    
     // Get games from the database
-    const games = await this.gameRepo.getAllGames();
+    const games = await this.gameRepo.getAllGames(platformId);
 
     return games;
   }
