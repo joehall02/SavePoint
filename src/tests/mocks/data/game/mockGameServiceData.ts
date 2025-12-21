@@ -10,6 +10,33 @@ export const mockNewGameData: Game = {
   platformId: 7,
 };
 
+export const mockNewGameDataNoRating: Game = {
+  title: "Game1",
+  condition: "Good",
+  notes: "Example",
+  boxIncluded: true,
+  igdbId: 21,
+  platformId: 7,
+};
+
+export const mockNewGameDataNoNotes: Game = {
+  title: "Game1",
+  condition: "Good",
+  boxIncluded: true,
+  rating: 3,
+  igdbId: 21,
+  platformId: 7,
+};
+
+export const mockNewGameDataAlreadyExists: Game = {
+  title: "Exists",
+  condition: "Good",
+  boxIncluded: true,
+  rating: 3,
+  igdbId: 21,
+  platformId: 7,
+};
+
 export const mockIncorrectGameData: Object = {
   name: "Game1",
   notes: "Example",

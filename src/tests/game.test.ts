@@ -32,6 +32,41 @@ describe("Game Test Suite", () => {
       assert.equal(res.status, 201);
       assert.deepEqual(res.body, newGame);
     });
+
+    test("POST /games should create a new game when not providing notes", async () => {
+      // Given
+      const newGame = mockData.mockNewGameDataNoNotes;
+  
+      // When
+      const res = await request(app).post("/api/games/").send(newGame);
+  
+      // Then
+      assert.equal(res.status, 201);
+      assert.deepEqual(res.body, newGame);
+    });
+  
+    test("POST /games should create a new game when not providing rating", async () => {
+      // Given
+      const newGame = mockData.mockNewGameDataNoRating;
+  
+      // When
+      const res = await request(app).post("/api/games/").send(newGame);
+  
+      // Then
+      assert.equal(res.status, 201);
+      assert.deepEqual(res.body, newGame);
+    });
+ 
+    test("POST /games should return 409 error if game already exists", async () => {
+      // Given
+      const newGame = mockData.mockNewGameDataAlreadyExists;
+  
+      // When
+      const res = await request(app).post("/api/games/").send(newGame);
+  
+      // Then
+      assert.equal(res.status, 409);
+    });
   
     test("POST /games should return bad request error when not provided data", async () => {
       // When

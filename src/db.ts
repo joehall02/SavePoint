@@ -40,7 +40,8 @@ db.exec(`
         rating INT NULL,
         box_included BOOLEAN NOT NULL,
         igdb_id INT NOT NULL,
-        platform_id INT NOT NULL
+        platform_id INT NOT NULL,
+        UNIQUE (igdb_id, platform_id)
     );
 `);
 

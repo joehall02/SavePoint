@@ -1,9 +1,9 @@
 export interface Game {
   title: string;
   condition: string;
-  notes: string;
+  notes?: string;
   boxIncluded: boolean;
-  rating: number;
+  rating?: number;
   igdbId: number;
   platformId: number;
 }
@@ -16,9 +16,9 @@ export interface PartialGame {
 export interface GameDetails {
   title: string;
   condition: string;
-  notes: string;
+  notes?: string;
   boxIncluded: number;
-  rating: number;
+  rating?: number;
   igdbId: number;
   platformId: number;
 }

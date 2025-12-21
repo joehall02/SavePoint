@@ -4,7 +4,9 @@ import { GameRepoProtocol } from "../../../repositories/protocols/gameRepoProtoc
 import * as mockData from "../data/game/mockGameRepoData.js";
 
 export class MockGameRepo implements GameRepoProtocol {
-    async insertGame(game: Game): Promise<void> {}
+    async insertGame(game: Game): Promise<void> {
+        if (game.title === "Exists") throwError("Game already added.", 409)
+    }
 
     async editGame(game: GameDetails, gameId: number): Promise<void> {}
 

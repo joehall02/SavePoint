@@ -7,11 +7,11 @@ export class GameRepository implements GameRepoProtocol {
  async insertGame(game: Game): Promise<void> {
     // Insert game attributes into a new row in the games table in the database
     const query = db.prepare(`
-      INSERT INTO games (title, condition, notes, box_included, rating, igdb_id, platform_id) 
+      INSERT OR IGNORE INTO games (title, condition, notes, box_included, rating, igdb_id, platform_id) 
       VALUES (@title, @condition, @notes, @boxIncluded, @rating, @igdbId, @platformId )
     `);
 
-    query.run({
+    const result = query.run({
       title: game.title,
       condition: game.condition,
       notes: game.notes,
@@ -20,6 +20,10 @@ export class GameRepository implements GameRepoProtocol {
       igdbId: game.igdbId,
       platformId: game.platformId,
     });
+
+    if (result.changes === 0) {
+      throwError("Game already added.", 409)
+    }
   };
 
  async editGame(game: GameDetails, gameId: number): Promise<void> {

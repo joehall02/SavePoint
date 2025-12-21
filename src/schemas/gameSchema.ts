@@ -4,9 +4,9 @@ import * as enums from "../enums.js";
 export const createGameSchema = z.object({
   title: z.string(),
   condition: z.enum(enums.Conditions),
-  notes: z.string(),
+  notes: z.string().optional(),
   boxIncluded: z.boolean(),
-  rating: z.number(),
+  rating: z.number().optional(),
   igdbId: z.number(),
   platformId: z.enum(enums.PlatformApiId),
 })
@@ -14,9 +14,9 @@ export const createGameSchema = z.object({
 export const getGameDetailsSchema = z.object({
   title: z.string(),
   condition: z.string(),
-  notes: z.string(),
+  notes: z.string().optional(),
   boxIncluded: z.boolean(),
-  rating: z.number(),
+  rating: z.number().optional(),
   igdbId: z.number(),
   platformId: z.number(),
 });
