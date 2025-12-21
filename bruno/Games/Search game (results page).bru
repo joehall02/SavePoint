@@ -1,19 +1,19 @@
 meta {
   name: Search game (results page)
   type: http
-  seq: 7
+  seq: 8
 }
 
 post {
-  url: {{base_url}}/{{game_route}}/result?search=counter strike&limit=10&platform=xbox_360
+  url: {{base_url}}/{{game_route}}/result?search=crash&limit=10&platform=pc
   body: none
   auth: inherit
 }
 
 params:query {
-  search: counter strike
+  search: crash
   limit: 10
-  platform: xbox_360
+  platform: pc
 }
 
 settings {

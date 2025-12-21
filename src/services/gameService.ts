@@ -112,6 +112,16 @@ export class GameService implements GameServiceProtocol {
     await this.gameRepo.deleteGame(gameId);
   };
 
+  async searchGamesByTitle(search: string): Promise<Array<PartialGame>> {
+    if (!search || search.trim() === "") {
+      throwError("No search term provided", 400);
+    }
+
+    const games = await this.gameRepo.searchGamesByTitle(search);
+
+    return games;
+  };
+
   async searchIgdbGame(searchParam: string, searchLimit: number, platformName: string): Promise<Array<IGDBGame>> {
     if (searchParam === undefined) {
       throwError("No search term provided", 400);

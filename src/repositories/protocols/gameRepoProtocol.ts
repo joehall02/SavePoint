@@ -6,4 +6,5 @@ export interface GameRepoProtocol {
     getAllGames(platformId: number | undefined): Promise<Array<PartialGame>>;
     getGame(gameId: number): Promise<GameDetails | undefined>;
     deleteGame(gameId: number): Promise<void>;
+    searchGamesByTitle(search: string): Promise<Array<PartialGame>>;
 }

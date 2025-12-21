@@ -89,6 +89,18 @@ export class GameController {
     }
   };
 
+  public searchGamesByTitle = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const title: string = req.query.title as string;
+
+      const games = await this.service.searchGamesByTitle(title);
+
+      res.status(200).json(games);
+    } catch (error) {
+      next(error);
+    }
+  };
+
   // Search game api for search page
   public searchGameHome = async (req: Request, res: Response, next: NextFunction) => {
     try {

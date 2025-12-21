@@ -62,7 +62,7 @@ export class GameRepository implements GameRepoProtocol {
     // Select all game titles from games table in the database
     const games = db.prepare(query).all() as Array<PartialGame>;
 
-    return games as Array<PartialGame>;
+    return games;
   };
 
  async getGame(gameId: number): Promise<GameDetails | undefined> {
@@ -86,7 +86,7 @@ export class GameRepository implements GameRepoProtocol {
     return gameDetails;
   };
 
- async deleteGame(gameId: number): Promise<void> {
+  async deleteGame(gameId: number): Promise<void> {
     const query = db.prepare(`
           DELETE FROM games
           WHERE id = @id  
@@ -98,5 +98,30 @@ export class GameRepository implements GameRepoProtocol {
     if (result.changes === 0) {
       throwError("Game not found", 404);
     }
+  }
+
+  async searchGamesByTitle(search: string): Promise<Array<PartialGame>> {
+    // Fetches games that match the search term, first checks for exact matches
+    // then checks for titles like the search term. Then orders matches
+    // with the exact results appearing first 
+    const query = db.prepare(`
+      SELECT id, title
+      FROM games
+      WHERE LOWER(title) = LOWER(?)
+         OR LOWER(title) LIKE LOWER(?)
+      ORDER BY
+        CASE
+          WHEN LOWER(title) = LOWER(?) THEN 0
+          ELSE 1
+        END,
+        title
+    `);
+
+    // Wildcard - used with LIKE operator to get titles that contain the search term
+    const searchLike = `%${search}%`;
+
+    const games = query.all(search, searchLike, search) as Array<PartialGame>;
+
+    return games;
   }
 }

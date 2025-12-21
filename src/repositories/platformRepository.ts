@@ -5,8 +5,8 @@ import { PlatformRepoProtocol } from "./protocols/platformRepoProtocol.js";
 export class PlatformRepository implements PlatformRepoProtocol {
   async getAllPlatforms(): Promise<Array<Platform>> {
     // Select all platform titles from platforms table in the database
-    const platforms = db.prepare("SELECT id, title, cover FROM platforms").all();
+    const platforms = db.prepare("SELECT id, title, cover FROM platforms").all() as Array<Platform>;
   
-    return platforms as Array<Platform>;
+    return platforms;
   }
 };

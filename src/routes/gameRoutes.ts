@@ -10,6 +10,7 @@ export function GameRouter(gameController: GameController): Router {
   // Define Routes
   router.post("/", validateRequest(Schema.createGameSchema), gameController.createGame);
   router.get("/", gameController.getAllGames);
+  router.get("/search", gameController.searchGamesByTitle);
   router.get("/:id", gameController.getGameDetails);
   router.put("/:id", validateRequest(Schema.editGameSchema), gameController.editGame);
   router.delete("/:id", gameController.deleteGame);
