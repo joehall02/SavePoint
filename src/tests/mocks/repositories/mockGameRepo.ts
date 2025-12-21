@@ -22,4 +22,9 @@ export class MockGameRepo implements GameRepoProtocol {
     async deleteGame(gameId: number): Promise<void> {
         if (gameId !== 1) throwError("Game not found", 404);
     }
+
+    async searchGamesByTitle(search: string): Promise<Array<PartialGame>> {
+        if (search === "No match") return []
+        return mockData.mockGetAllGamesData as Array<PartialGame>       
+    }
 }

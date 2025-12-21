@@ -251,6 +251,53 @@ describe("Game Test Suite", () => {
     });
   })
 
+  // TESTS: Search game by title
+  describe("Search Game By Title Tests", () => {
+    test("GET /games/search should return games that match the search term", async () => {
+      // Given
+      const response = mockData.mockGetAllGamesData
+      const searchParam = mockData.mockSearchByTitleParam
+
+      // When
+      const res = await request(app).get(`/api/games/search?title=${searchParam}`)
+
+      // Then
+      assert.equal(res.status, 200);
+      assert.deepEqual(res.body, response);
+    })
+
+    test("GET /games/search should return empty if no games match search term", async () => {
+      // Given
+      const searchParam = mockData.mockSearchByTitleParamNoMatch
+
+      // When
+      const res = await request(app).get(`/api/games/search?title=${searchParam}`)
+
+      // Then
+      assert.equal(res.status, 200);
+      assert.deepEqual(res.body, []);
+    })
+
+    test("GET /games/search should return bad request error when no search term is provided", async () => {
+      // When
+      const res = await request(app).get(`/api/games/search`)
+
+      // Then
+      assert.equal(res.status, 400);
+    })
+
+    test("GET /games/search should return bad request error when search term is empty", async () => {
+      // Given
+      const searchParam = ""
+
+      // When
+      const res = await request(app).get(`/api/games/search?title=${searchParam}`)
+
+      // Then
+      assert.equal(res.status, 400);
+    })
+  })
+
   // TESTS: API search games
   describe("API Search Game Tests", () => {
     test("POST /search returns a max of 6 game results when given a search parameter", async () => {

@@ -334,6 +334,10 @@ export const mockSearchParam: object = {
 
 export const mockResultSearchParam = "Batman"
 
+export const mockSearchByTitleParam = "Halo"
+
+export const mockSearchByTitleParamNoMatch = "No match"
+
 export const mockUnauthorizedSearchParam: object = {
   searchParam: "unauthorized",
 }
