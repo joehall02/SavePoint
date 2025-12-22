@@ -5,13 +5,15 @@ meta {
 }
 
 get {
-  url: {{base_url}}/{{game_route}}
+  url: {{base_url}}/{{game_route}}?page=1&limit=10
   body: none
   auth: inherit
 }
 
 params:query {
-  ~platform: psx
+  page: 1
+  limit: 10
+  ~platform: original_xbox
 }
 
 settings {

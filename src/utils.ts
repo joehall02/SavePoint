@@ -1,5 +1,7 @@
 import { RawExternalGameDetails, ExternalGameDetails, IGDBGame, RawIGDBGame } from "./models/igdbGame.js";
+import { Request } from "express";
 import * as enums from "./enums.js"
+import { Pagination } from "./models/pagination.js";
 
 export function mapExternalGameDetails(data: object[]): ExternalGameDetails {
   const raw = data[0] as RawExternalGameDetails;
@@ -263,4 +265,17 @@ export function getPlatformId(platformName: string): number | undefined {
     default:
       return undefined;
   }
+}
+
+export function getPagination(req: Request) {
+  const page = Math.max(Number(req.query.page) || 1, 1) // Ensure page is at least 1
+  const limit = Math.min(Number(req.query.limit) || 10, 30) // Ensure page defaults to 10 and has a max of 30 
+  const offset = (page - 1) * limit; // Offset for SQL query, example if page is 2 and limit is 10, offset would be 10
+  
+  const pagination: Pagination = {
+    limit,
+    offset
+  }
+
+  return pagination;
 }

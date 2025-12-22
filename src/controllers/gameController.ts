@@ -2,6 +2,7 @@ import { Request, Response, NextFunction } from "express";
 import { inject, injectable } from "tsyringe";
 import { GameServiceProtocol } from "../services/protocols/gameServiceProtocol.js";
 import { TOKENS } from "../di/tokens.js";
+import { getPagination } from "../utils.js";
 
 @injectable()
 export class GameController {
@@ -25,9 +26,12 @@ export class GameController {
   public getAllGames = async (req: Request, res: Response, next: NextFunction) => {
     try {
       const platformName: string | undefined = req.query.platform as string | undefined;
-
+ 
+      // Pagination
+      const pagination = getPagination(req);
+        
       // fetchGames service to handle business logic
-      const games = await this.service.fetchAllGames(platformName);
+      const games = await this.service.fetchAllGames(platformName, pagination);
 
       // Return response 200 with games, validating the data against the schema
       res.status(200).json(games);
@@ -93,7 +97,10 @@ export class GameController {
     try {
       const title: string = req.query.title as string;
 
-      const games = await this.service.searchGamesByTitle(title);
+      // Pagination
+      const pagination = getPagination(req);
+
+      const games = await this.service.searchGamesByTitle(title, pagination);
 
       res.status(200).json(games);
     } catch (error) {

@@ -7,6 +7,7 @@ import { GameRepoProtocol } from "../repositories/protocols/gameRepoProtocol.js"
 import { inject, injectable } from "tsyringe";
 import { TOKENS } from "../di/tokens.js";
 import { getPlatformApiId, getPlatformId } from "../utils.js";
+import { Pagination } from "../models/pagination.js";
 
 @injectable()
 export class GameService implements GameServiceProtocol {
@@ -30,11 +31,11 @@ export class GameService implements GameServiceProtocol {
     return newGame;
   }
 
-  async fetchAllGames(platformName: string): Promise<Array<PartialGame>> {
+  async fetchAllGames(platformName: string, pagination: Pagination): Promise<Array<PartialGame>> {
     let platformId = getPlatformId(platformName)
     
     // Get games from the database
-    const games = await this.gameRepo.getAllGames(platformId);
+    const games = await this.gameRepo.getAllGames(platformId, pagination);
 
     return games;
   }
@@ -112,12 +113,12 @@ export class GameService implements GameServiceProtocol {
     await this.gameRepo.deleteGame(gameId);
   };
 
-  async searchGamesByTitle(search: string): Promise<Array<PartialGame>> {
-    if (!search || search.trim() === "") {
+  async searchGamesByTitle(search: string, pagination: Pagination): Promise<Array<PartialGame>> {
+    if (search === undefined || search.trim() === "") {
       throwError("No search term provided", 400);
     }
 
-    const games = await this.gameRepo.searchGamesByTitle(search);
+    const games = await this.gameRepo.searchGamesByTitle(search, pagination);
 
     return games;
   };

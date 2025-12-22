@@ -2,6 +2,7 @@ import db from "../db.js";
 import { Game, GameDetails, PartialGame } from "../models/game.js";
 import { GameRepoProtocol } from "./protocols/gameRepoProtocol.js";
 import { throwError } from "../middlewares/errorHandler.js";
+import { Pagination } from "../models/pagination.js";
 
 export class GameRepository implements GameRepoProtocol {
  async insertGame(game: Game): Promise<void> {
@@ -51,16 +52,22 @@ export class GameRepository implements GameRepoProtocol {
     });
   };
 
- async getAllGames(platformId: number | undefined): Promise<Array<PartialGame>>{
+ async getAllGames(platformId: number | undefined, pagination: Pagination): Promise<Array<PartialGame>>{
     let query = `SELECT id, title FROM games`  
 
     if (platformId !== undefined) {
       query += ` WHERE platform_id = ?`;
+      query += ` ORDER BY title ASC`
       return db.prepare(query).all(platformId) as Array<PartialGame>;
     }
+    
+    // Order alphabetically by title in ascending order
+    query += ` ORDER BY title ASC`
+
+    query += ` LIMIT ? OFFSET ?`;
 
     // Select all game titles from games table in the database
-    const games = db.prepare(query).all() as Array<PartialGame>;
+    const games = db.prepare(query).all(pagination.limit, pagination.offset) as Array<PartialGame>;
 
     return games;
   };
@@ -100,7 +107,7 @@ export class GameRepository implements GameRepoProtocol {
     }
   }
 
-  async searchGamesByTitle(search: string): Promise<Array<PartialGame>> {
+  async searchGamesByTitle(search: string, pagination: Pagination): Promise<Array<PartialGame>> {
     // Fetches games that match the search term, first checks for exact matches
     // then checks for titles like the search term. Then orders matches
     // with the exact results appearing first 
@@ -114,13 +121,14 @@ export class GameRepository implements GameRepoProtocol {
           WHEN LOWER(title) = LOWER(?) THEN 0
           ELSE 1
         END,
-        title
+        title ASC
+      LIMIT ? OFFSET ?
     `);
 
     // Wildcard - used with LIKE operator to get titles that contain the search term
     const searchLike = `%${search}%`;
 
-    const games = query.all(search, searchLike, search) as Array<PartialGame>;
+    const games = query.all(search, searchLike, search, pagination.limit, pagination.offset) as Array<PartialGame>;
 
     return games;
   }
