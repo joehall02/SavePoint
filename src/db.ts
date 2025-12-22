@@ -5,6 +5,7 @@ import config from "./config/config.js";
 const db = new Database(config.databaseUri);
 
 // Execute table create if they don't already exist
+// TODO: title may benefit from an index for faster search by title look up
 db.exec(`
     CREATE TABLE IF NOT EXISTS platforms (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
