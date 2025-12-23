@@ -2,6 +2,7 @@ import { throwError } from "../../../middlewares/errorHandler.js";
 import { Game, GameDetails, PartialGame } from "../../../models/game.js";
 import { GameRepoProtocol } from "../../../repositories/protocols/gameRepoProtocol.js";
 import * as mockData from "../data/game/mockGameRepoData.js";
+import { Pagination } from "../../../models/pagination.js";
 
 export class MockGameRepo implements GameRepoProtocol {
     async insertGame(game: Game): Promise<void> {
@@ -10,7 +11,7 @@ export class MockGameRepo implements GameRepoProtocol {
 
     async editGame(game: GameDetails, gameId: number): Promise<void> {}
 
-    async getAllGames(): Promise<Array<PartialGame>> {
+    async getAllGames(platformId: number | undefined, pagination: Pagination): Promise<Array<PartialGame>> {
         return mockData.mockGetAllGamesData as Array<PartialGame>
     }
 
@@ -23,7 +24,7 @@ export class MockGameRepo implements GameRepoProtocol {
         if (gameId !== 1) throwError("Game not found", 404);
     }
 
-    async searchGamesByTitle(search: string): Promise<Array<PartialGame>> {
+    async searchGamesByTitle(search: string, pagination: Pagination): Promise<Array<PartialGame>> {
         if (search === "No match") return []
         return mockData.mockGetAllGamesData as Array<PartialGame>       
     }

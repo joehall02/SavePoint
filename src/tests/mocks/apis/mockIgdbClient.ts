@@ -3,12 +3,13 @@ import { ExternalGameDetails, IGDBGame, RawExternalGameDetails} from '../../../m
 import { mockSearchIgdbResponseData, mockExternalGameDetails } from '../data/game/mockApiData.js'
 import { mapExternalGameDetails, mapExternalGame } from '../../../utils.js'
 import { throwError } from '../../../middlewares/errorHandler.js'
+import { Pagination } from '../../../models/pagination.js'
 
 export class MockIGDBClient implements IGDBClientProtocol {
-    async searchGame(searchParam: string, searchLimit: number, igdbPlatformId: number | undefined): Promise<Array<IGDBGame>> {
+    async searchGame(searchParam: string, igdbPlatformId: number | undefined, pagination: Pagination): Promise<Array<IGDBGame>> {
         if (searchParam === 'unauthorized') throwError("Request failed with status code 401", 401) // Simulating no tokens being passed and how service reacts
         
-        const rawResults = mockSearchIgdbResponseData.slice(0, searchLimit);
+        const rawResults = mockSearchIgdbResponseData.slice(0, pagination.limit);
 
         return mapExternalGame(rawResults as object[]);
     }

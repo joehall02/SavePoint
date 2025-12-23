@@ -1,5 +1,5 @@
 import "reflect-metadata";
-import test, { beforeEach, describe } from "node:test";
+import test, { beforeEach, describe, mock } from "node:test";
 import assert from "node:assert/strict";
 import request from "supertest";
 import { createContainer } from "../di/bootstrap.js";
@@ -151,6 +151,21 @@ describe("Game Test Suite", () => {
       assert.equal(res.status, 200);
       assert.deepEqual(res.body, games);
     });
+    
+    test("GET /games/ should get games based on pagination parameters", async () => {
+      // Given
+      const games = mockData.mockGetAllGamesData;
+      const platformName = mockData.mockIncorrectPlatformName
+      const paginationPage = mockData.paginationPage
+      const paginationLimit = mockData.paginationLimit
+
+      // When
+      const res = await request(app).get(`/api/games?platform=${platformName}&page=${paginationPage}&limit=${paginationLimit}`);
+      
+      // Then
+      assert.equal(res.status, 200);
+      assert.deepEqual(res.body, games);
+    });
   })
 
   // TESTS: Game details
@@ -265,39 +280,54 @@ describe("Game Test Suite", () => {
       assert.equal(res.status, 200);
       assert.deepEqual(res.body, response);
     })
-
+    
     test("GET /games/search should return empty if no games match search term", async () => {
       // Given
       const searchParam = mockData.mockSearchByTitleParamNoMatch
-
+      
       // When
       const res = await request(app).get(`/api/games/search?title=${searchParam}`)
-
+      
       // Then
       assert.equal(res.status, 200);
       assert.deepEqual(res.body, []);
+    })
+    
+    test("GET /games/search should return games based on pagination parameters", async () => {
+      // Given
+      const response = mockData.mockGetAllGamesData
+      const searchParam = mockData.mockSearchByTitleParam
+      const paginationPage = mockData.paginationPage
+      const paginationLimit = mockData.paginationLimit
+  
+      // When
+      const res = await request(app).get(`/api/games/search?title=${searchParam}&page=${paginationPage}&limit=${paginationLimit}`)
+  
+      // Then
+      assert.equal(res.status, 200);
+      assert.deepEqual(res.body, response);
     })
 
     test("GET /games/search should return bad request error when no search term is provided", async () => {
       // When
       const res = await request(app).get(`/api/games/search`)
-
+      
       // Then
       assert.equal(res.status, 400);
     })
-
+    
     test("GET /games/search should return bad request error when search term is empty", async () => {
       // Given
       const searchParam = ""
-
+      
       // When
       const res = await request(app).get(`/api/games/search?title=${searchParam}`)
-
+      
       // Then
       assert.equal(res.status, 400);
     })
   })
-
+  
   // TESTS: API search games
   describe("API Search Game Tests", () => {
     test("POST /search returns a max of 6 game results when given a search parameter", async () => {
@@ -349,6 +379,23 @@ describe("Game Test Suite", () => {
       // Then
       assert.equal(res.status, 200);
       assert.deepEqual(res.body, response.slice(0, searchLimit));
+    });
+    
+    test("POST /result returns x number of games based on pagination parameters", async () => {
+      // Given
+      const searchParam = mockData.mockResultSearchParam;
+      const paginationPage = mockData.paginationPage
+      const paginationLimit = mockData.paginationLimit
+      const response = mockData.mockSearchIgdbData;
+
+      // When
+      const res = await request(app).post(
+        `/api/games/result/?search=${searchParam}&page=${paginationPage}&limit=${paginationLimit}`
+      );
+
+      // Then
+      assert.equal(res.status, 200);
+      assert.deepEqual(res.body, response.slice(0, paginationLimit));
     });
 
     test("POST /result returns x number of games when given a search, limit and platform parameter", async () => {

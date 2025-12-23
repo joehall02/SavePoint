@@ -1,4 +1,5 @@
 import { Game } from "../../../../models/game.js";
+import { Pagination } from "../../../../models/pagination.js";
 
 export const mockNewGameData: Game = {
   title: "Game1",
@@ -347,6 +348,10 @@ export const mockUnauthorizedResultsParam = "unauthorized"
 export const mockPlatformName = "original_xbox"
 
 export const mockIncorrectPlatformName = "zbox"
+
+export const paginationPage = 2
+
+export const paginationLimit = 5  
 
 export const mockFetchGameIgdbData: object = {
   id: 472,
