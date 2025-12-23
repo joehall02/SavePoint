@@ -18,7 +18,7 @@ interface Config {
 }
 
 const config: Config = {
-  port: Number(process.env.PORT) || 5000, // Sets the 5000 if no port available
+  port: Number(process.env.PORT) || 5050, // Sets the 5050 if no port available
   nodeEnv: process.env.NODE_ENV || "development", // Sets to 'development' if no port available
   databaseUri: process.env.DATABASE_URI || "app.db", // Sets to app.db if no database uri available
   igdbBaseUrl: process.env.IGDB_BASE_URL || "https://api.igdb.com/v4",
