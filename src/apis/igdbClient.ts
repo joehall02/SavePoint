@@ -3,6 +3,7 @@ import config from "../config/config.js";
 import { IGDBGame, ExternalGameDetails, RawExternalGameDetails } from "../models/igdbGame.js";
 import { IGDBClientProtocol } from "./protocols/IGDBClientProtocol.js";
 import { mapExternalGameDetails, mapExternalGame } from "../utils.js";
+import { Pagination } from "../models/pagination.js";
 
 axios.defaults.baseURL = config.igdbBaseUrl;
 axios.defaults.headers.common["Authorization"] = `Bearer ${config.igdbAccessToken}`;
@@ -11,8 +12,8 @@ axios.defaults.headers.common["Content-Type"] = "text/plain";
 axios.defaults.timeout = 5000; // 5 Seconds Timeout
 
 export class IGDBClient implements IGDBClientProtocol {
-  async searchGame (searchParam: string, searchLimit: number, igdbPlatformId: number | undefined): Promise<Array<IGDBGame>> {
-    let query = `search "${searchParam}"; fields name, cover.image_id; limit ${searchLimit};`
+  async searchGame (searchParam: string, igdbPlatformId: number | undefined, pagination: Pagination): Promise<Array<IGDBGame>> {
+    let query = `search "${searchParam}"; fields name, cover.image_id; limit ${pagination.limit}; offset ${pagination.offset};`
 
     if (igdbPlatformId !== undefined) {
       query += `where (platforms = [${igdbPlatformId}]);`

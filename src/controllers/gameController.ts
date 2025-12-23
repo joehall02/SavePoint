@@ -112,10 +112,11 @@ export class GameController {
   public searchGameHome = async (req: Request, res: Response, next: NextFunction) => {
     try {
       const { searchParam } = req.body;
-      const searchLimit = 6;
       const platformName = undefined;
+
+      const pagination = getPagination(req)
   
-      const response = await this.service.searchIgdbGame(searchParam, searchLimit, platformName);
+      const response = await this.service.searchIgdbGame(searchParam, platformName, pagination);
   
       res.status(200).json(response);
     } catch (error) {
@@ -127,10 +128,11 @@ export class GameController {
   public searchGameResults = async (req: Request, res: Response, next: NextFunction) => {
     try {
       const searchParam: string | undefined = req.query.search as string | undefined;
-      const searchLimit: number | undefined = req.query.limit ? Number(req.query.limit) : undefined;
       const platformName: string | undefined = req.query.platform as string | undefined;
-  
-      const response = await this.service.searchIgdbGame(searchParam, searchLimit, platformName);
+
+      const pagination = getPagination(req);
+
+      const response = await this.service.searchIgdbGame(searchParam, platformName, pagination);
   
       res.status(200).send(response);
     } catch (error) {

@@ -20,8 +20,8 @@ body:json {
 }
 
 body:text {
-  search "halo 3"; fields name, cover.image_id; limit 6;
-  where (platforms = [49]);
+  search "halo 3"; fields name, cover.image_id; limit 6; offset 3;
+  where (platforms = [12]);
 }
 
 settings {

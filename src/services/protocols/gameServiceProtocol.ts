@@ -24,7 +24,7 @@ export interface GameServiceProtocol {
     newPlatformId: number
   ): Promise<GameDetails>;
   removeGame(gameId: number): Promise<void>;
-  searchIgdbGame(searchParam: string | undefined, searchLimit: number | undefined, platformName: string | undefined): Promise<Array<IGDBGame>>;
+  searchIgdbGame(searchParam: string | undefined, platformName: string | undefined, pagination: Pagination): Promise<Array<IGDBGame>>;
   fetchExternalGameDetails(gameId: number | undefined): Promise<ExternalGameDetails>;
   searchGamesByTitle(search: string | undefined, pagination: Pagination): Promise<Array<PartialGame>>;
 }

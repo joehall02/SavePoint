@@ -123,18 +123,14 @@ export class GameService implements GameServiceProtocol {
     return games;
   };
 
-  async searchIgdbGame(searchParam: string, searchLimit: number, platformName: string): Promise<Array<IGDBGame>> {
+  async searchIgdbGame(searchParam: string, platformName: string, pagination: Pagination): Promise<Array<IGDBGame>> {
     if (searchParam === undefined) {
       throwError("No search term provided", 400);
-    }
-
-    if (searchLimit === undefined) {
-      searchLimit = 10;
     }
     
     let igdbPlatformId = getPlatformApiId(platformName);
 
-    const searchResults = await this.igdbClient.searchGame(searchParam, searchLimit, igdbPlatformId) as Array<IGDBGame>;
+    const searchResults = await this.igdbClient.searchGame(searchParam, igdbPlatformId, pagination) as Array<IGDBGame>;
 
     return searchResults;
   };

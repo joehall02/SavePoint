@@ -5,15 +5,16 @@ meta {
 }
 
 post {
-  url: {{base_url}}/{{game_route}}/result?search=crash&limit=10&platform=pc
+  url: {{base_url}}/{{game_route}}/result?search=crash&platform=pc&limit=10&page=10
   body: none
   auth: inherit
 }
 
 params:query {
   search: crash
-  limit: 10
   platform: pc
+  limit: 10
+  page: 10
 }
 
 settings {
