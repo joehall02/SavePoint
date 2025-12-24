@@ -1,0 +1,22 @@
+# Node modules and logs
+node_modules
+
+# Build output
+dist
+
+# Environment files
+.env
+.env.*
+!.env.production
+
+# Git and editor stuff
+.git
+.gitignore
+.vscode
+
+# OS files
+.DS_Store
+
+# Docker artifacts
+Dockerfile*
+.dockerignore

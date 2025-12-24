@@ -1,0 +1,13 @@
+services:
+  savepoint:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: savepoint
+    ports:
+      - "5050:5050"
+    env_file:
+      - .env.production
+    environment:
+      NODE_ENV: production
+    restart: unless-stopped
