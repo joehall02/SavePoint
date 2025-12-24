@@ -8,6 +8,8 @@ services:
       - "5050:5050"
     env_file:
       - .env.production
+    volumes:
+      - ./data:/usr/src/app/data
     environment:
       NODE_ENV: production
     restart: unless-stopped
