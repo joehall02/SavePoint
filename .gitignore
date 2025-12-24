@@ -3,7 +3,7 @@
 .env.development
 .env.production
 .env.test
-app.db
+/data/
 test.db
 prod.db
 /dist
