@@ -155,3 +155,8 @@ npm test
 Test suite uses Node’s test runner with `ts-node` and `supertest` to test the API.
 
 ---
+
+## 6. 📄 Licence
+
+This project is licenced under the [MIT Licence](LICENCE).
+
