@@ -4,6 +4,7 @@
 .env.production
 .env.test
 /data/
+app.db
 test.db
 prod.db
 /dist
