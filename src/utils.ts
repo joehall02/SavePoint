@@ -3,6 +3,12 @@ import { Request } from "express";
 import * as enums from "./enums.js"
 import { Pagination } from "./models/pagination.js";
 
+/**
+ * Function to map game details fetched by an external API into the ExternalGameDetails format
+ * 
+ * @param data - Object returned from external API call
+ * @returns ExternalGameDetails - Filtered game object
+ */
 export function mapExternalGameDetails(data: object[]): ExternalGameDetails {
   const raw = data[0] as RawExternalGameDetails;
 
@@ -29,8 +35,11 @@ export function mapExternalGameDetails(data: object[]): ExternalGameDetails {
   };
 }
 
-// Return array of release dates with no repeated regions and 
-// with only the earliest release dates for each region
+/**
+ * Function to filter repeated release date regions and keep only the earliest release
+ * @param releaseDates - Array of raw external game details release dates
+ * @returns Array of filtered and sorted release dates with unique regions
+ */
 export function filterRepeatedReleaseDates(
   releaseDates?: RawExternalGameDetails["release_dates"],
 ): RawExternalGameDetails["release_dates"] | undefined {
@@ -71,6 +80,11 @@ export function filterRepeatedReleaseDates(
   return Array.from(earliestByRegion.values())
 }
 
+/**
+ * Function to map external minimal game details to array of IGDBGame objects
+ * @param data - Object returned from external API call
+ * @returns  Array of IGDBGame objects
+ */
 export function mapExternalGame(data: object[]): IGDBGame[] {
   const rawList = data as RawIGDBGame[];
 
@@ -81,6 +95,12 @@ export function mapExternalGame(data: object[]): IGDBGame[] {
   }));
 }
 
+/**
+ * Function to generate and image URL by checking imageSize against the provided enum, defaults imageSize to 'thumb'
+ * @param imageId - Id used to generate the image URL
+ * @param imageSize - Enum used to determine the size of the image
+ * @returns Image URL
+ */
 export function mapImageIdToUrl(imageId: string, imageSize: enums.ImageSize): string {
   switch (imageSize) {
     case enums.ImageSize.cover_small:
@@ -110,12 +130,22 @@ export function mapImageIdToUrl(imageId: string, imageSize: enums.ImageSize): st
   return imageUrl;
 }
 
+/**
+ * Function to generate a video URL using the provided video ID
+ * @param videoId - Id used to generate the URL
+ * @returns YouTube Video URL
+ */
 export function mapVideoIdToUrl(videoId: string): string {
   const videoUrl = `https://www.youtube.com/watch?v=${videoId}`;
 
   return videoUrl;
 }
 
+/**
+ * Function to map region name enums to a string
+ * @param regionName - Region name enum
+ * @returns Region name as a string
+ */
 export function mapRegionName(regionName: string): string {
   switch (regionName) {
     case enums.RegionName.asia:
@@ -143,6 +173,11 @@ export function mapRegionName(regionName: string): string {
   }
 }
 
+/**
+ * Function to convert unix timestamp to a human readable format
+ * @param timestamp - Unix timestamp
+ * @returns A human readable string in the format "Day, Month Year"
+ */
 export function convertUnixTimestamp(timestamp: number): string {
   const unixSeconds = Number(timestamp);
   if (Number.isNaN(unixSeconds)) {
@@ -267,7 +302,12 @@ export function getPlatformId(platformName: string): number | undefined {
   }
 }
 
-export function getPagination(req: Request) {
+/**
+ * Function to get pagination limit + offset from the request parameters
+ * @param req - HTTP Request
+ * @returns Pagination object
+ */
+export function getPagination(req: Request): Pagination {
   const page = Math.max(Number(req.query.page) || 1, 1) // Ensure page is at least 1
   const limit = Math.min(Number(req.query.limit) || 6, 30) // Ensure page defaults to 6 and has a max of 30 
   const offset = (page - 1) * limit; // Offset for SQL query, example if page is 2 and limit is 10, offset would be 10
