@@ -32,7 +32,7 @@ export function createApp() {
   app.use("/api/platforms", PlatformRouter(platformController));
 
   // 404 Error handler
-  app.use((req: Request, res: Response, next: NextFunction) => {
+  app.use((_req: Request, res: Response, _next: NextFunction) => {
     res.status(404).json({ error: "Requested resource not found" });
   });
 

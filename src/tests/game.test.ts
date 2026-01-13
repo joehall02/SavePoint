@@ -1,5 +1,5 @@
 import "reflect-metadata";
-import test, { beforeEach, describe, mock } from "node:test";
+import test, { beforeEach, describe } from "node:test";
 import assert from "node:assert/strict";
 import request from "supertest";
 import { createContainer } from "../di/bootstrap.js";
@@ -102,7 +102,7 @@ describe("Game Test Suite", () => {
     test("POST /games should return bad request error when given partial data", async () => {
       // Given
       const newGame = mockData.mockNewGameData;
-      const { condition, ...gameWithoutCondition } = newGame;
+      const { condition: _condition, ...gameWithoutCondition } = newGame;
   
       // When
       const res = await request(app).post("/api/games/").send(gameWithoutCondition);

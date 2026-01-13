@@ -9,9 +9,9 @@ export class MockGameRepo implements GameRepoProtocol {
         if (game.title === "Exists") throwError("Game already added.", 409)
     }
 
-    async editGame(game: GameDetails, gameId: number): Promise<void> {}
+    async editGame(_game: GameDetails, _gameId: number): Promise<void> {}
 
-    async getAllGames(platformId: number | undefined, pagination: Pagination): Promise<Array<PartialGame>> {
+    async getAllGames(_platformId: number | undefined, _pagination: Pagination): Promise<Array<PartialGame>> {
         return mockData.mockGetAllGamesData as Array<PartialGame>
     }
 
@@ -24,7 +24,7 @@ export class MockGameRepo implements GameRepoProtocol {
         if (gameId !== 1) throwError("Game not found", 404);
     }
 
-    async searchGamesByTitle(search: string, pagination: Pagination): Promise<Array<PartialGame>> {
+    async searchGamesByTitle(search: string, _pagination: Pagination): Promise<Array<PartialGame>> {
         if (search === "No match") return []
         return mockData.mockGetAllGamesData as Array<PartialGame>       
     }

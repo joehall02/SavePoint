@@ -10,7 +10,7 @@ export interface Game {
 
 export interface PartialGame {
   id: number;
-  title: String;
+  title: string;
 }
 
 export interface GameDetails {

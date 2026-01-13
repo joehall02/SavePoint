@@ -1,5 +1,4 @@
 import { Game } from "../../../../models/game.js";
-import { Pagination } from "../../../../models/pagination.js";
 
 export const mockNewGameData: Game = {
   title: "Game1",
@@ -38,7 +37,7 @@ export const mockNewGameDataAlreadyExists: Game = {
   platformId: 7,
 };
 
-export const mockIncorrectGameData: Object = {
+export const mockIncorrectGameData: object = {
   name: "Game1",
   notes: "Example",
   isBox: true,
@@ -95,7 +94,7 @@ export const mockGetGameByIdData: Game = {
   platformId: 12,
 };
 
-export const mockEditGameData: Object = {
+export const mockEditGameData: object = {
   title: "Super Smash TV",
   condition: "Bad",
   notes: "Condition of the disc is very good but the box is damaged.",
@@ -104,7 +103,7 @@ export const mockEditGameData: Object = {
   platformId: 12,
 };
 
-export const mockEditGameIncorrectConfitionData: Object = {
+export const mockEditGameIncorrectConfitionData: object = {
   title: "Super Smash TV",
   condition: "Meh",
   notes: "Condition of the disc is very good but the box is damaged.",
@@ -113,7 +112,7 @@ export const mockEditGameIncorrectConfitionData: Object = {
   platformId: 12,
 };
 
-export const mockEditGameReturnData: Object = {
+export const mockEditGameReturnData: object = {
   title: "Super Smash TV",
   condition: "Bad",
   igdbId: 123,

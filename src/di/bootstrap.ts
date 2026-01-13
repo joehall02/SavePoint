@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import { DependencyContainer, container } from "tsyringe";
 import { registerProd } from "./environments/registerProd.js";
 import { registerTest } from "./environments/registerTest.js";
