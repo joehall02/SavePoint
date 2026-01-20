@@ -5,9 +5,20 @@ meta {
 }
 
 post {
-  url: https://id.twitch.tv/oauth2/token
+  url: https://id.twitch.tv/oauth2/token?client_id={{igdb_client_id}}&client_secret={{igdb_client_secret}}&grant_type=client_credentials
   body: none
   auth: inherit
+}
+
+params:query {
+  client_id: {{igdb_client_id}}
+  client_secret: {{igdb_client_secret}}
+  grant_type: client_credentials
+}
+
+script:post-response {
+  let data = res.body;
+  bru.setEnvVar("igdb_access_token", data.access_token);
 }
 
 settings {
