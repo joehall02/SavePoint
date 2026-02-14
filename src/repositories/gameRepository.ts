@@ -54,11 +54,12 @@ export class GameRepository implements GameRepoProtocol {
 
  async getAllGames(platformId: number | undefined, pagination: Pagination): Promise<Array<PartialGame>>{
     let query = `SELECT id, title FROM games`  
+    
+    const params: Array<number | string> = [];
 
     if (platformId !== undefined) {
       query += ` WHERE platform_id = ?`;
-      query += ` ORDER BY title ASC`
-      return db.prepare(query).all(platformId) as Array<PartialGame>;
+      params.push(platformId);
     }
     
     // Order alphabetically by title in ascending order
@@ -66,8 +67,10 @@ export class GameRepository implements GameRepoProtocol {
 
     query += ` LIMIT ? OFFSET ?`;
 
+    params.push(pagination.limit, pagination.offset);
+
     // Select all game titles from games table in the database
-    const games = db.prepare(query).all(pagination.limit, pagination.offset) as Array<PartialGame>;
+    const games = db.prepare(query).all(...params) as Array<PartialGame>;
 
     return games;
   };
