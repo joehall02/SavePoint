@@ -84,7 +84,8 @@ export const mockGetAllGamesData: object[] = [
   },
 ];
 
-export const mockGetGameByIdData: Game = {
+export const mockGetGameByIdData = {
+  id: 1,
   title: "Super Smash TV",
   condition: "Good",
   notes: "Condition of the disc is very good but the box is damaged.",

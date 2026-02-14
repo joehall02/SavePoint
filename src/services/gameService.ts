@@ -9,6 +9,7 @@ import { TOKENS } from "../di/tokens.js";
 import { getPlatformApiId, getPlatformId } from "../utils.js";
 import { Pagination } from "../models/pagination.js";
 
+// TODO: Needs a stuctural fix to the Models, currently doing quick fixes to get the data I need
 @injectable()
 export class GameService implements GameServiceProtocol {
   constructor(@inject(TOKENS.IGDBClient) private igdbClient: IGDBClientProtocol, @inject(TOKENS.GameRepository) private gameRepo: GameRepoProtocol) {}
@@ -57,7 +58,13 @@ export class GameService implements GameServiceProtocol {
       platformId: gameDetails.platformId,
     };
 
-    return game;
+	// NOTE: This is a quick fix, not a permanent solution
+	const returnedGame = {
+		id: gameId,
+		...game,
+	} as Game
+
+    return returnedGame;
   };
 
   async updateGame(
@@ -92,6 +99,7 @@ export class GameService implements GameServiceProtocol {
       rating: newRating
     };
 
+	// TODO: Returns ID even though GameDetails does not have this, this needs to be addressed
     // Declares updatedGame with original values from the db
     // and overwrites with updated values if they are not undefined
     const updatedGame: GameDetails = {
