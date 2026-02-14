@@ -35,8 +35,7 @@ export class GameRepository implements GameRepoProtocol {
           condition = @condition,
           notes = @notes,
           box_included = @boxIncluded,
-          rating = @rating,
-          platform_id = @platformId
+          rating = @rating
       WHERE id = @id
     `);
 
@@ -47,8 +46,7 @@ export class GameRepository implements GameRepoProtocol {
       condition: game.condition,
       notes: game.notes,
       boxIncluded: game.boxIncluded ? 1 : 0, // Sets box included parameter to either 1 or 0 to be compatible with SQLite
-      rating: game.rating,
-      platformId: game.platformId,
+      rating: game.rating
     });
   };
 

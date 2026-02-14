@@ -20,8 +20,7 @@ export interface GameServiceProtocol {
     newCondition: string,
     newNotes: string,
     newBoxIncluded: boolean,
-    newRating: number,
-    newPlatformId: number
+    newRating: number
   ): Promise<GameDetails>;
   removeGame(gameId: number): Promise<void>;
   searchIgdbGame(searchParam: string | undefined, platformName: string | undefined, pagination: Pagination): Promise<Array<IGDBGame>>;

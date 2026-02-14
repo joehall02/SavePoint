@@ -67,7 +67,6 @@ export class GameService implements GameServiceProtocol {
     newNotes: string,
     newBoxIncluded: boolean,
     newRating: number,
-    newPlatformId: number
   ): Promise<GameDetails>{
     // Get game from the database
     const game = await this.gameRepo.getGame(gameId);
@@ -82,7 +81,6 @@ export class GameService implements GameServiceProtocol {
       notes?: string;
       boxIncluded?: boolean;
       rating?: number;
-      platformId?: number;
     };
 
     // Declares updates as type updateGameInput and assigns it the values passed into the function
@@ -91,8 +89,7 @@ export class GameService implements GameServiceProtocol {
       condition: newCondition,
       notes: newNotes,
       boxIncluded: newBoxIncluded,
-      rating: newRating,
-      platformId: newPlatformId,
+      rating: newRating
     };
 
     // Declares updatedGame with original values from the db

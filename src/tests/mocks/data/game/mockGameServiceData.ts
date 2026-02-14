@@ -99,8 +99,7 @@ export const mockEditGameData: object = {
   condition: "Bad",
   notes: "Condition of the disc is very good but the box is damaged.",
   boxIncluded: true,
-  rating: 4.2,
-  platformId: 12,
+  rating: 4.2
 };
 
 export const mockEditGameIncorrectConfitionData: object = {
@@ -108,8 +107,7 @@ export const mockEditGameIncorrectConfitionData: object = {
   condition: "Meh",
   notes: "Condition of the disc is very good but the box is damaged.",
   boxIncluded: true,
-  rating: 4.2,
-  platformId: 12,
+  rating: 4.2
 };
 
 export const mockEditGameReturnData: object = {

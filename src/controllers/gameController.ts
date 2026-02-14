@@ -62,7 +62,7 @@ export class GameController {
       const gameId: number = Number(req.params.id);
   
       // Get attributes from request body
-      const { title, condition, notes, boxIncluded, rating, platformId } = req.body;
+      const { title, condition, notes, boxIncluded, rating } = req.body;
   
       // updateGame service to handle business logic
       const updatedGame = await this.service.updateGame(
@@ -71,8 +71,7 @@ export class GameController {
         condition,
         notes,
         boxIncluded,
-        rating,
-        platformId
+        rating
       );
   
       res.status(200).json(updatedGame);

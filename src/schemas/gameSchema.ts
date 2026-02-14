@@ -33,7 +33,6 @@ export const editGameSchema = z
     notes: z.string().optional(),
     boxIncluded: z.boolean().optional(),
     rating: z.number().optional(),
-    platformId: z.enum(enums.PlatformApiId).optional(),
   })
   .strict() // Throw error if any unknown attributes are provided, even if known values are passed
   .refine((data) => {
