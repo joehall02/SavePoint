@@ -12,7 +12,7 @@ export interface GameServiceProtocol {
     igdbId: number,
     platformId: number
   ): Promise<Game>;
-  fetchAllGames(platformName: string | undefined, pagination: Pagination): Promise<Array<PartialGame>>;
+  fetchAllGames(title: string | undefined, platformName: string | undefined, pagination: Pagination): Promise<Array<PartialGame>>;
   fetchGameDetails(gameId: number): Promise<Game>;
   updateGame(
     gameId: number,

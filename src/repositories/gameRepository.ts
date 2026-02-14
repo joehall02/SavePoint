@@ -52,18 +52,46 @@ export class GameRepository implements GameRepoProtocol {
     });
   };
 
- async getAllGames(platformId: number | undefined, pagination: Pagination): Promise<Array<PartialGame>>{
+ async getAllGames(title: string | undefined, platformId: number | undefined, pagination: Pagination): Promise<Array<PartialGame>>{
     let query = `SELECT id, title FROM games`  
     
     const params: Array<number | string> = [];
+    const whereClauses: Array<string> = [];
 
     if (platformId !== undefined) {
-      query += ` WHERE platform_id = ?`;
+      whereClauses.push(`platform_id = ?`);
       params.push(platformId);
     }
-    
-    // Order alphabetically by title in ascending order
-    query += ` ORDER BY title ASC`
+
+    if (title !== undefined) {
+      // Fetches games that match the search term, first checks for exact matches
+      // then checks for titles like the search term. Then orders matches
+      // with the exact results appearing first 
+      whereClauses.push(`LOWER(title) = LOWER(?) OR LOWER(title) LIKE LOWER(?)`);
+
+      // Wildcard - used with LIKE operator to get titles that contain the search term
+      const titleLike = `%${title}%`;
+
+      params.push(title, titleLike)
+    }
+
+    if (whereClauses.length > 0) {
+      query += ` WHERE ${whereClauses.join(" AND ")}`;
+    }
+
+    if (title !== undefined) {
+      query += ` 
+        ORDER BY
+        CASE 
+            WHEN LOWER(title) = LOWER(?) THEN 0
+            ELSE 1
+        END,
+        title ASC`;
+      params.push(title);
+    } else {
+      // Order alphabetically by title in ascending order
+      query += ` ORDER BY title ASC`;
+    }
 
     query += ` LIMIT ? OFFSET ?`;
 
@@ -110,6 +138,9 @@ export class GameRepository implements GameRepoProtocol {
     }
   }
 
+  /**
+   * @deprecated Use getAllGames instead
+   */
   async searchGamesByTitle(search: string, pagination: Pagination): Promise<Array<PartialGame>> {
     // Fetches games that match the search term, first checks for exact matches
     // then checks for titles like the search term. Then orders matches

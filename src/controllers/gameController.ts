@@ -26,12 +26,13 @@ export class GameController {
   public getAllGames = async (req: Request, res: Response, next: NextFunction) => {
     try {
       const platformName: string | undefined = req.query.platform as string | undefined;
+      const title: string | undefined = req.query.title as string | undefined;
  
       // Pagination
       const pagination = getPagination(req);
         
       // fetchGames service to handle business logic
-      const games = await this.service.fetchAllGames(platformName, pagination);
+      const games = await this.service.fetchAllGames(title, platformName, pagination);
 
       // Return response 200 with games, validating the data against the schema
       res.status(200).json(games);
@@ -93,6 +94,9 @@ export class GameController {
     }
   };
 
+  /**
+   * @deprecated - Use getAllGames instead 
+   */
   public searchGamesByTitle = async (req: Request, res: Response, next: NextFunction) => {
     try {
       const title: string = req.query.title as string;

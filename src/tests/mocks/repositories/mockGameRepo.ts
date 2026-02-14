@@ -11,7 +11,7 @@ export class MockGameRepo implements GameRepoProtocol {
 
     async editGame(_game: GameDetails, _gameId: number): Promise<void> {}
 
-    async getAllGames(_platformId: number | undefined, _pagination: Pagination): Promise<Array<PartialGame>> {
+    async getAllGames(_title: string | undefined, _platformId: number | undefined, _pagination: Pagination): Promise<Array<PartialGame>> {
         return mockData.mockGetAllGamesData as Array<PartialGame>
     }
 

@@ -31,11 +31,11 @@ export class GameService implements GameServiceProtocol {
     return newGame;
   }
 
-  async fetchAllGames(platformName: string, pagination: Pagination): Promise<Array<PartialGame>> {
+  async fetchAllGames(title: string, platformName: string, pagination: Pagination): Promise<Array<PartialGame>> {
     let platformId = getPlatformId(platformName)
     
     // Get games from the database
-    const games = await this.gameRepo.getAllGames(platformId, pagination);
+    const games = await this.gameRepo.getAllGames(title, platformId, pagination);
 
     return games;
   }
@@ -113,6 +113,9 @@ export class GameService implements GameServiceProtocol {
     await this.gameRepo.deleteGame(gameId);
   };
 
+  /**
+   * @deprecated - Use fetchAllGames instead
+   */
   async searchGamesByTitle(search: string, pagination: Pagination): Promise<Array<PartialGame>> {
     if (search === undefined || search.trim() === "") {
       throwError("No search term provided", 400);
