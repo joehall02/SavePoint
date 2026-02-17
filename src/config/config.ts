@@ -14,7 +14,8 @@ interface Config {
   databaseUri: string; // Database URI
   igdbBaseUrl: string; // Base url for igdb api
   igdbAccessToken?: string; // Access token to access igdb api
-  igdbClientId?: string
+  igdbClientId?: string;
+  clientOrigin?: string;
 }
 
 const config: Config = {
@@ -23,7 +24,8 @@ const config: Config = {
   databaseUri: process.env.DATABASE_URI || "app.db", // Sets to app.db if no database uri available
   igdbBaseUrl: process.env.IGDB_BASE_URL || "https://api.igdb.com/v4",
   igdbAccessToken: process.env.IGDB_ACCESS_TOKEN,
-  igdbClientId: process.env.IGDB_CLIENT_ID
+  igdbClientId: process.env.IGDB_CLIENT_ID,
+  clientOrigin: process.env.CLIENT_ORIGIN || "http://localhost:5173"
 };
 
 export default config;

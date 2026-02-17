@@ -8,6 +8,7 @@ import { createContainer } from "./di/bootstrap.js";
 import { container } from "tsyringe";
 import { GameController } from "./controllers/gameController.js";
 import { PlatformController } from "./controllers/platformController.js";
+import cors from 'cors'
 
 // App Factory
 export function createApp() {
@@ -23,7 +24,13 @@ export function createApp() {
   const gameController = container.resolve(GameController);
   const platformController = container.resolve(PlatformController);
 
+  // CORS Options
+  const corsOptions = {
+	origin: config.clientOrigin
+  }
+
   // Middleware
+  app.use(cors(corsOptions));
   app.use(express.json()); // Parse incoming JSON request bodies
   app.use(morgan("combined")); // Log requests
 
