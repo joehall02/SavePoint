@@ -121,7 +121,86 @@ export const mockEditGameReturnData: object = {
   platformId: 12,
 };
 
-export const mockSearchIgdbData: object[] = [
+export const mockSearchResultIgdbData: object[] = [
+	{
+		count: 120,
+		pages: 12,
+		games: [
+		  {
+			id: 26041,
+			cover: {
+			  url: "https://images.igdb.com/igdb/image/upload/t_1080p/co2fx3.jpg",
+			},
+			name: "Batman: Arkham Knight - 2008 Movie Batman Skin",
+		  },
+		  {
+			id: 75545,
+			cover: {
+			  url: "https://images.igdb.com/igdb/image/upload/t_1080p/onujdb7krwmvflsgiicg.jpg",
+			},
+			name: "Batman: Arkham City - Arkham City Skins Pack",
+		  },
+		  {
+			id: 138111,
+			cover: {
+			  url: "https://images.igdb.com/igdb/image/upload/t_1080p/co3zh1.jpg",
+			},
+			name: "Batman: Arkham City - Batman Inc. Batsuit Skin",
+		  },
+		  {
+			id: 26042,
+			cover: {
+			  url: "https://images.igdb.com/igdb/image/upload/t_1080p/co2fva.jpg",
+			},
+			name: "Batman: Arkham Knight - Batman: Noel Skin",
+		  },
+		  {
+			id: 198676,
+			cover: {
+			  url: "https://images.igdb.com/igdb/image/upload/t_1080p/co4wti.jpg",
+			},
+			name: "Batman",
+		  },
+		  {
+			id: 198672,
+			cover: {
+			  url: "https://images.igdb.com/igdb/image/upload/t_1080p/co7xjx.jpg",
+			},
+			name: "Batman",
+		  },
+		  {
+			id: 25997,
+			cover: {
+			  url: "https://images.igdb.com/igdb/image/upload/t_1080p/co7xj9.jpg",
+			},
+			name: "Batman: Arkham Knight - PlayStation 4 Exclusive Skins Pack",
+		  },
+		  {
+			id: 51525,
+			cover: {
+			  url: "https://images.igdb.com/igdb/image/upload/t_1080p/co208l.jpg",
+			},
+			name: "Batman: The Enemy Within",
+		  },
+		  {
+			id: 2738,
+			cover: {
+			  url: "https://images.igdb.com/igdb/image/upload/t_1080p/co1qrn.jpg",
+			},
+			name: "LEGO Batman: The Videogame",
+		  },
+		  {
+			id: 7685,
+			cover: {
+			  url: "https://images.igdb.com/igdb/image/upload/t_1080p/co3jk7.jpg",
+			},
+			name: "LEGO Batman 3: Beyond Gotham",
+		  },
+		]
+	}
+];
+
+export const mockSearchHomeIgdbData: object[] = [
   {
     id: 26041,
     cover: {
@@ -349,7 +428,7 @@ export const mockIncorrectPlatformName = "zbox"
 
 export const paginationPage = 2
 
-export const paginationLimit = 5  
+export const paginationLimit = 10
 
 export const mockFetchGameIgdbData: object = {
   id: 472,

@@ -5,15 +5,15 @@ meta {
 }
 
 post {
-  url: {{base_url}}/{{game_route}}/result?search=spiderman&limit=10
+  url: {{base_url}}/{{game_route}}/result?search=lego&limit=10&platform=pc
   body: none
   auth: inherit
 }
 
 params:query {
-  search: spiderman
+  search: lego
   limit: 10
-  ~platform: pc
+  platform: pc
   ~page: 10
 }
 

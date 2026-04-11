@@ -346,7 +346,7 @@ describe("Game Test Suite", () => {
     test("POST /search returns a max of 6 game results when given a search parameter", async () => {
       // Given
       const searchParam = mockData.mockSearchParam;
-      const response = mockData.mockSearchIgdbData
+      const response = mockData.mockSearchHomeIgdbData
 
       // When
       const res = await request(app).post("/api/games/search").send(searchParam);
@@ -382,7 +382,7 @@ describe("Game Test Suite", () => {
       // Given
       const searchParam = mockData.mockResultSearchParam;
       const searchLimit: number = 10;
-      const response = mockData.mockSearchIgdbData;
+      const response = mockData.mockSearchResultIgdbData;
 
       // When
       const res = await request(app).post(
@@ -391,7 +391,7 @@ describe("Game Test Suite", () => {
 
       // Then
       assert.equal(res.status, 200);
-      assert.deepEqual(res.body, response.slice(0, searchLimit));
+      assert.deepEqual(res.body, response);
     });
     
     test("POST /result returns x number of games based on pagination parameters", async () => {
@@ -399,7 +399,7 @@ describe("Game Test Suite", () => {
       const searchParam = mockData.mockResultSearchParam;
       const paginationPage = mockData.paginationPage
       const paginationLimit = mockData.paginationLimit
-      const response = mockData.mockSearchIgdbData;
+      const response = mockData.mockSearchResultIgdbData;
 
       // When
       const res = await request(app).post(
@@ -408,7 +408,7 @@ describe("Game Test Suite", () => {
 
       // Then
       assert.equal(res.status, 200);
-      assert.deepEqual(res.body, response.slice(0, paginationLimit));
+      assert.deepEqual(res.body, response);
     });
 
     test("POST /result returns x number of games when given a search, limit and platform parameter", async () => {
@@ -416,7 +416,7 @@ describe("Game Test Suite", () => {
       const searchParam = mockData.mockResultSearchParam;
       const searchLimit: number = 10;
       const platform = mockData.mockPlatformName;
-      const response = mockData.mockSearchIgdbData;
+      const response = mockData.mockSearchResultIgdbData;
 
       // When
       const res = await request(app).post(
@@ -433,7 +433,7 @@ describe("Game Test Suite", () => {
       const searchParam = mockData.mockResultSearchParam;
       const searchLimit: number = 10;
       const platform = mockData.mockIncorrectPlatformName;
-      const response = mockData.mockSearchIgdbData;
+      const response = mockData.mockSearchResultIgdbData;
 
       // When
       const res = await request(app).post(
