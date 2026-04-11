@@ -141,13 +141,11 @@ export class GameController {
 
 	  const pages = getPages(pagination, countResponse);
 
-	  const response = [
-		{
+	  const response = {
 			count: countResponse.count,
 			pages: pages,
 			games: gameResponse
-		}
-	  ]
+	  }
 
       res.status(200).send(response);
     } catch (error) {

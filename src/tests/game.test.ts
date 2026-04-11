@@ -425,7 +425,7 @@ describe("Game Test Suite", () => {
 
       // Then
       assert.equal(res.status, 200);
-      assert.deepEqual(res.body, response.slice(0, searchLimit));
+      assert.deepEqual(res.body, response);
     });
 
     test("POST /result returns x games from all platforms when not given a correct platform", async () => {
@@ -442,7 +442,7 @@ describe("Game Test Suite", () => {
 
       // Then
       assert.equal(res.status, 200);
-      assert.deepEqual(res.body, response.slice(0, searchLimit));
+      assert.deepEqual(res.body, response);
     });
 
     test("POST /result handles unauthorized error for when token is not provided", async () => {
