@@ -1,5 +1,5 @@
 import { Game, GameDetails, PartialGame } from "../../models/game.js";
-import { IGDBGame, ExternalGameDetails } from "../../models/igdbGame.js";
+import { IGDBGame, ExternalGameDetails, IGDBCount } from "../../models/igdbGame.js";
 import { Pagination } from "../../models/pagination.js";
 
 export interface GameServiceProtocol {
@@ -24,6 +24,7 @@ export interface GameServiceProtocol {
   ): Promise<GameDetails>;
   removeGame(gameId: number): Promise<void>;
   searchIgdbGame(searchParam: string | undefined, platformName: string | undefined, pagination: Pagination): Promise<Array<IGDBGame>>;
+  countIgdbGame(searchParam: string | undefined, platformName: string | undefined): Promise<IGDBCount>;
   fetchExternalGameDetails(gameId: number | undefined): Promise<ExternalGameDetails>;
   searchGamesByTitle(search: string | undefined, pagination: Pagination): Promise<Array<PartialGame>>;
 }

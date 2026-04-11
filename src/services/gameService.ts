@@ -1,5 +1,5 @@
 import { Game, GameDetails, PartialGame } from "../models/game.js";
-import { ExternalGameDetails, IGDBGame } from "../models/igdbGame.js";
+import { ExternalGameDetails, IGDBCount, IGDBGame } from "../models/igdbGame.js";
 import { assertExists, throwError } from "../middlewares/errorHandler.js";
 import { GameServiceProtocol } from "./protocols/gameServiceProtocol.js";
 import { IGDBClientProtocol } from "../apis/protocols/IGDBClientProtocol.js";
@@ -142,6 +142,18 @@ export class GameService implements GameServiceProtocol {
 
     return searchResults;
   };
+
+  async countIgdbGame(searchParam: string, platformName: string): Promise<IGDBCount> {
+	if (searchParam === undefined) {
+	  throwError("No search term provided", 400);
+	}
+	
+	let igdbPlatformId = getPlatformApiId(platformName);
+
+	const countResult = await this.igdbClient.countGame(searchParam, igdbPlatformId);
+
+	return countResult
+  }
 
   async fetchExternalGameDetails(gameId: number): Promise<ExternalGameDetails> {
     if (gameId === undefined) {

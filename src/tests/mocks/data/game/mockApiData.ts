@@ -1,4 +1,4 @@
-import { RawExternalGameDetails, RawIGDBGame } from "../../../../models/igdbGame.js";
+import { IGDBCount, RawExternalGameDetails, RawIGDBGame } from "../../../../models/igdbGame.js";
 
 export const mockSearchIgdbResponseData: RawIGDBGame[] = [
   {
@@ -234,6 +234,10 @@ export const mockSearchIgdbResponseData: RawIGDBGame[] = [
     name: "Barcode Battler II: Batman Returns - Batman",
   },
 ];
+
+export const mockCountIgdbResponseData: IGDBCount = {
+  count: 120
+};
 
 export const mockExternalGameDetails: RawExternalGameDetails[] = [
   {

@@ -8,6 +8,10 @@ export interface IGDBGame {
     name: string;
 }
 
+export interface IGDBCount {
+	count: number
+}
+
 export interface RawIGDBGame {
     id: number;
     cover?: {

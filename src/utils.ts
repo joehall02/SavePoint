@@ -1,4 +1,4 @@
-import { RawExternalGameDetails, ExternalGameDetails, IGDBGame, RawIGDBGame } from "./models/igdbGame.js";
+import { RawExternalGameDetails, ExternalGameDetails, IGDBGame, RawIGDBGame, IGDBCount } from "./models/igdbGame.js";
 import { Request } from "express";
 import * as enums from "./enums.js"
 import { Pagination } from "./models/pagination.js";
@@ -318,4 +318,16 @@ export function getPagination(req: Request): Pagination {
   }
 
   return pagination;
+}
+
+/**
+ * Function to get number of pages based on the pagination limit and total count.
+ * @param pagination - Pagination object
+ * @param countResponse - Count of games/platforms
+ * @returns Number of pages rounded up to the nearest whole number
+ */
+export function getPages(pagination: Pagination, countResponse: IGDBCount): number {
+	const pages = Math.ceil(countResponse.count / pagination.limit);
+
+	return pages
 }

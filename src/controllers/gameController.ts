@@ -2,7 +2,7 @@ import { Request, Response, NextFunction } from "express";
 import { inject, injectable } from "tsyringe";
 import { GameServiceProtocol } from "../services/protocols/gameServiceProtocol.js";
 import { TOKENS } from "../di/tokens.js";
-import { getPagination } from "../utils.js";
+import { getPages, getPagination } from "../utils.js";
 
 @injectable()
 export class GameController {
@@ -135,8 +135,20 @@ export class GameController {
 
       const pagination = getPagination(req);
 
-      const response = await this.service.searchIgdbGame(searchParam, platformName, pagination);
+      const gameResponse = await this.service.searchIgdbGame(searchParam, platformName, pagination);
   
+	  const countResponse = await this.service.countIgdbGame(searchParam, platformName)
+
+	  const pages = getPages(pagination, countResponse);
+
+	  const response = [
+		{
+			count: countResponse.count,
+			pages: pages,
+			games: gameResponse
+		}
+	  ]
+
       res.status(200).send(response);
     } catch (error) {
       next(error);

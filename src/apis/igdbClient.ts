@@ -1,6 +1,6 @@
 import axios from "axios";
 import config from "../config/config.js";
-import { IGDBGame, ExternalGameDetails, RawExternalGameDetails } from "../models/igdbGame.js";
+import { IGDBGame, ExternalGameDetails, RawExternalGameDetails, IGDBCount } from "../models/igdbGame.js";
 import { IGDBClientProtocol } from "./protocols/IGDBClientProtocol.js";
 import { mapExternalGameDetails, mapExternalGame } from "../utils.js";
 import { Pagination } from "../models/pagination.js";
@@ -24,6 +24,17 @@ export class IGDBClient implements IGDBClientProtocol {
     return mapExternalGame(response.data as object[]);
   };
 
+  async countGame (searchParam: string, igdbPlatformId: number | undefined): Promise<IGDBCount> {
+	let query = `search "${searchParam}";`
+
+    if (igdbPlatformId !== undefined) {
+      query += `where (platforms = [${igdbPlatformId}]);`
+    }
+
+    const response = await axios.post<IGDBCount>("/games/count", query);
+
+	return response.data
+  }
 
   async fetchGameDetails (gameId: number): Promise<ExternalGameDetails> {
     const response = await axios.post("/games", `fields name, storyline, summary, platforms.name, cover.image_id, videos.video_id, genres.name, artworks.image_id, release_dates.date, release_dates.release_region.region; where id = ${gameId};`);

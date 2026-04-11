@@ -1,11 +1,11 @@
 meta {
-  name: Search game
+  name: game count
   type: http
-  seq: 1
+  seq: 5
 }
 
 post {
-  url: {{igdb_base_url}}/games/
+  url: {{igdb_base_url}}/games/count
   body: text
   auth: inherit
 }
@@ -15,12 +15,8 @@ headers {
   Client-ID: {{igdb_client_id}}
 }
 
-body:json {
-  search ${searchParam}; fields name, cover.image_id; limit 6;
-}
-
 body:text {
-  search "lego"; fields name, cover.image_id; limit 6; offset 3;
+  search "lego";
   where (platforms = [12]);
 }
 
