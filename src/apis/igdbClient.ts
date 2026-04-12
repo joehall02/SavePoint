@@ -13,11 +13,19 @@ axios.defaults.timeout = 5000; // 5 Seconds Timeout
 
 export class IGDBClient implements IGDBClientProtocol {
   async searchGame (searchParam: string, igdbPlatformId: number | undefined, pagination: Pagination): Promise<Array<IGDBGame>> {
-    let query = `search "${searchParam}"; fields name, cover.image_id; limit ${pagination.limit}; offset ${pagination.offset};`
-
+    let query = `
+		search "${searchParam}"; 
+		fields name, cover.image_id;
+		limit ${pagination.limit}; 
+		offset ${pagination.offset}; 
+	`
+	
     if (igdbPlatformId !== undefined) {
-      query += `where (platforms = [${igdbPlatformId}]);`
-    }
+		query += `where (game_type = 0) & (platforms = [${igdbPlatformId}]);`
+    } else {
+	  // Filter by main game only (removes dlcs, etc)
+	  query += `where (game_type = 0);`
+	}
 
     const response = await axios.post("/games", query);
 
@@ -28,8 +36,11 @@ export class IGDBClient implements IGDBClientProtocol {
 	let query = `search "${searchParam}";`
 
     if (igdbPlatformId !== undefined) {
-      query += `where (platforms = [${igdbPlatformId}]);`
-    }
+		query += `where (game_type = 0) & (platforms = [${igdbPlatformId}]);`
+    } else {
+	  // Filter by main game only (removes dlcs, etc)
+	  query += `where (game_type = 0);`
+	}
 
     const response = await axios.post<IGDBCount>("/games/count", query);
 

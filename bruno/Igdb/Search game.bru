@@ -20,8 +20,11 @@ body:json {
 }
 
 body:text {
-  search "lego"; fields name, cover.image_id; limit 6; offset 3;
-  where (platforms = [12]);
+  search "sonic"; 
+  fields name, cover.image_id, game_type.type; 
+  where (game_type = 0);
+  limit 20; 
+  offset 3;
 }
 
 settings {
