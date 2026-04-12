@@ -486,7 +486,7 @@ export const mockFetchGameIgdbData: object = {
       name: "Adventure",
     },
   ],
-  artworks: [
+  screenshots: [
     {
       url: "https://images.igdb.com/igdb/image/upload/t_screenshot_big/p5nul4inxjpvi05tnn1r.jpg",
     },

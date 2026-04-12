@@ -42,7 +42,7 @@ export interface RawExternalGameDetails {
     id: number;
     name: string;
   }> | null;
-  artworks?: Array<{
+  screenshots?: Array<{
     id: number;
     image_id: string;
   }> | null;
@@ -73,7 +73,7 @@ export interface ExternalGameDetails {
   genres?: Array<{
     name?: string;
   }> | null;
-  artworks?: Array<{
+  screenshots?: Array<{
     url?: string;
   }> | null;
   release_dates?: Array<{

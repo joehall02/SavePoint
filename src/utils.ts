@@ -21,8 +21,8 @@ export function mapExternalGameDetails(data: object[]): ExternalGameDetails {
     cover: raw.cover ? { url: mapImageIdToUrl(raw.cover.image_id, enums.ImageSize.cover_small) } : null,
     videos: raw.videos?.map((v) => ({ url: mapVideoIdToUrl(v.video_id) })) ?? null,
     genres: raw.genres?.map((g) => ({ name: g.name })) ?? null,
-    artworks:
-      raw.artworks?.map((a) => ({ url: mapImageIdToUrl(a.image_id, enums.ImageSize.screenshot_big) })) ?? null,
+    screenshots:
+      raw.screenshots?.map((a) => ({ url: mapImageIdToUrl(a.image_id, enums.ImageSize.screenshot_big) })) ?? null,
     release_dates: (() => {
       const filtered = filterRepeatedReleaseDates(raw.release_dates);
       return (

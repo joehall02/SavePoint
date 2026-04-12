@@ -242,7 +242,7 @@ export const mockCountIgdbResponseData: IGDBCount = {
 export const mockExternalGameDetails: RawExternalGameDetails[] = [
   {
     id: 472,
-    artworks: [
+    screenshots: [
       {
         id: 177,
         image_id: "p5nul4inxjpvi05tnn1r",
