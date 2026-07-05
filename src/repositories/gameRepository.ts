@@ -51,8 +51,8 @@ export class GameRepository implements GameRepoProtocol {
     });
   };
 
- async getAllGames(title: string | undefined, platformId: number | undefined, pagination: Pagination): Promise<Array<PartialGame>>{
-    let query = `SELECT id, title FROM games`  
+ async getAllGames(title: string | undefined, platformId: number | undefined, pagination: Pagination): Promise<Array<PartialGame & { igdbId: number }>>{
+    let query = `SELECT id, title, igdb_id AS igdbId FROM games`
     
     const params: Array<number | string> = [];
     const whereClauses: Array<string> = [];
@@ -97,7 +97,7 @@ export class GameRepository implements GameRepoProtocol {
     params.push(pagination.limit, pagination.offset);
 
     // Select all game titles from games table in the database
-    const games = db.prepare(query).all(...params) as Array<PartialGame>;
+    const games = db.prepare(query).all(...params) as Array<PartialGame & { igdbId: number }>;
 
     return games;
   };

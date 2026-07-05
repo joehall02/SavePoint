@@ -283,7 +283,7 @@ describe("Game Test Suite", () => {
   describe("Search Game By Title Tests", () => {
     test("GET /games/search should return games that match the search term", async () => {
       // Given
-      const response = mockData.mockGetAllGamesData
+      const response = mockData.mockSearchByTitleResultData
       const searchParam = mockData.mockSearchByTitleParam
 
       // When
@@ -308,14 +308,14 @@ describe("Game Test Suite", () => {
     
     test("GET /games/search should return games based on pagination parameters", async () => {
       // Given
-      const response = mockData.mockGetAllGamesData
+      const response = mockData.mockSearchByTitleResultData
       const searchParam = mockData.mockSearchByTitleParam
       const paginationPage = mockData.paginationPage
       const paginationLimit = mockData.paginationLimit
-  
+
       // When
       const res = await request(app).get(`/api/games/search?title=${searchParam}&page=${paginationPage}&limit=${paginationLimit}`)
-  
+
       // Then
       assert.equal(res.status, 200);
       assert.deepEqual(res.body, response);

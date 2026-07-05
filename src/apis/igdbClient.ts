@@ -1,8 +1,9 @@
 import axios from "axios";
 import config from "../config/config.js";
-import { IGDBGame, ExternalGameDetails, RawExternalGameDetails, IGDBCount } from "../models/igdbGame.js";
+import { IGDBGame, ExternalGameDetails, RawExternalGameDetails, IGDBCount, GameCover } from "../models/igdbGame.js";
 import { IGDBClientProtocol } from "./protocols/IGDBClientProtocol.js";
-import { mapExternalGameDetails, mapExternalGame } from "../utils.js";
+import { mapExternalGameDetails, mapExternalGame, mapImageIdToUrl } from "../utils.js";
+import * as enums from "../enums.js";
 import { Pagination } from "../models/pagination.js";
 
 axios.defaults.baseURL = config.igdbBaseUrl;
@@ -45,6 +46,16 @@ export class IGDBClient implements IGDBClientProtocol {
     const response = await axios.post<IGDBCount>("/games/count", query);
 
 	return response.data
+  }
+
+  async fetchGameCover(gameId: number): Promise<GameCover | null> {
+      const response = await axios.post("/games", `fields cover.image_id; where id = ${gameId};`);
+
+      const data = response.data as Array<{ cover?: { image_id: string } | null }>;
+      
+	  const imageId = data[0]?.cover?.image_id;
+     
+	  return imageId ? { url: mapImageIdToUrl(imageId, enums.ImageSize.r_1080p) } : null;
   }
 
   async fetchGameDetails (gameId: number): Promise<ExternalGameDetails> {

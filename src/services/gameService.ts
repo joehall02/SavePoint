@@ -34,11 +34,19 @@ export class GameService implements GameServiceProtocol {
 
   async fetchAllGames(title: string, platformName: string, pagination: Pagination): Promise<Array<PartialGame>> {
     let platformId = getPlatformId(platformName)
-    
-    // Get games from the database
+
     const games = await this.gameRepo.getAllGames(title, platformId, pagination);
 
-    return games;
+	// Await until all games cover requests have settled (fulfilled or rejected)
+    const coverResults = await Promise.allSettled(
+      games.map(game => this.igdbClient.fetchGameCover(game.igdbId))
+    );
+
+    return games.map((g, i) => ({
+      id: g.id,
+      title: g.title,
+      cover: coverResults[i].status === 'fulfilled' ? coverResults[i].value : null,
+    }));
   }
 
   async fetchGameDetails(gameId: number): Promise<Game> {

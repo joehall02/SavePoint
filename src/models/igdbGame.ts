@@ -1,4 +1,4 @@
-interface GameCover {
+export interface GameCover {
     url: string;
 }
 

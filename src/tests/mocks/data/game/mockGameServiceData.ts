@@ -46,42 +46,15 @@ export const mockIncorrectGameData: object = {
 };
 
 export const mockGetAllGamesData: object[] = [
-  {
-    id: 740,
-    name: "Halo: Combat Evolved",
-  },
-  {
-    id: 2640,
-    name: "Halo: Combat Evolved Anniversary",
-  },
-  {
-    id: 45148,
-    name: "Halo 4: Limited Edition",
-  },
-  {
-    id: 163108,
-    name: "Halo 3 + Halo Wars",
-  },
-  {
-    id: 7348,
-    name: "Halo: The Master Chief Collection",
-  },
-  {
-    id: 989,
-    name: "Halo 3: ODST",
-  },
-  {
-    id: 103281,
-    name: "Halo Infinite",
-  },
-  {
-    id: 991,
-    name: "Halo 4",
-  },
-  {
-    id: 986,
-    name: "Halo 2",
-  },
+  { id: 740, title: "Halo: Combat Evolved", cover: null },
+  { id: 2640, title: "Halo: Combat Evolved Anniversary", cover: null },
+  { id: 45148, title: "Halo 4: Limited Edition", cover: null },
+  { id: 163108, title: "Halo 3 + Halo Wars", cover: null },
+  { id: 7348, title: "Halo: The Master Chief Collection", cover: null },
+  { id: 989, title: "Halo 3: ODST", cover: null },
+  { id: 103281, title: "Halo Infinite", cover: null },
+  { id: 991, title: "Halo 4", cover: null },
+  { id: 986, title: "Halo 2", cover: null },
 ];
 
 export const mockGetGameByIdData = {
@@ -402,6 +375,18 @@ export const mockSearchHomeIgdbData: object[] = [
     },
     name: "Barcode Battler II: Batman Returns - Batman",
   },
+];
+
+export const mockSearchByTitleResultData: object[] = [
+  { id: 740, title: "Halo: Combat Evolved" },
+  { id: 2640, title: "Halo: Combat Evolved Anniversary" },
+  { id: 45148, title: "Halo 4: Limited Edition" },
+  { id: 163108, title: "Halo 3 + Halo Wars" },
+  { id: 7348, title: "Halo: The Master Chief Collection" },
+  { id: 989, title: "Halo 3: ODST" },
+  { id: 103281, title: "Halo Infinite" },
+  { id: 991, title: "Halo 4" },
+  { id: 986, title: "Halo 2" },
 ];
 
 export const mockSearchParam: object = {

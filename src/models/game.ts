@@ -1,3 +1,5 @@
+import { GameCover } from "./igdbGame.js";
+
 export interface Game {
   title: string;
   condition: string;
@@ -11,6 +13,7 @@ export interface Game {
 export interface PartialGame {
   id: number;
   title: string;
+  cover?: GameCover | null; 
 }
 
 export interface GameDetails {

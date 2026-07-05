@@ -12,8 +12,8 @@ export class MockGameRepo implements GameRepoProtocol {
 
     async editGame(_game: GameDetails, _gameId: number): Promise<void> {}
 
-    async getAllGames(_title: string | undefined, _platformId: number | undefined, _pagination: Pagination): Promise<Array<PartialGame>> {
-        return mockData.mockGetAllGamesData as Array<PartialGame>
+    async getAllGames(_title: string | undefined, _platformId: number | undefined, _pagination: Pagination): Promise<Array<PartialGame & { igdbId: number }>> {
+        return mockData.mockGetAllGamesData as Array<PartialGame & { igdbId: number }>
     }
 
     async getGame(gameId: number): Promise<GameDetails | undefined> {
@@ -31,6 +31,6 @@ export class MockGameRepo implements GameRepoProtocol {
 
     async searchGamesByTitle(search: string, _pagination: Pagination): Promise<Array<PartialGame>> {
         if (search === "No match") return []
-        return mockData.mockGetAllGamesData as Array<PartialGame>       
+        return mockData.mockSearchGamesByTitleData as Array<PartialGame>
     }
 }
