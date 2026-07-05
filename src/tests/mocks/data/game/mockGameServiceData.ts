@@ -447,7 +447,7 @@ export const mockFetchGameIgdbData: object = {
     },
   ],
   cover: {
-    url: "https://images.igdb.com/igdb/image/upload/t_cover_small/co1tnw.jpg",
+    url: "https://images.igdb.com/igdb/image/upload/t_1080p/co1tnw.jpg",
   },
   videos: [
     {

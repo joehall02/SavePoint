@@ -23,7 +23,7 @@ export class GameRepository implements GameRepoProtocol {
     });
 
     if (result.changes === 0) {
-      throwError("Game already added.", 409)
+      throwError("Game already in collection.", 409)
     }
   };
 

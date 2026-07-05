@@ -4,11 +4,18 @@
     {
       "type": "node",
       "request": "launch",
-      "name": "Launch Program",
+      "name": "Debug (ts-node)",
       "skipFiles": ["<node_internals>/**"],
-      "program": "${workspaceFolder}/dist/server.js",
-      "preLaunchTask": "tsc: build - tsconfig.json",
-      "outFiles": ["${workspaceFolder}/dist/**/*.js"]
+      "program": "${workspaceFolder}/src/server.ts",
+      "runtimeArgs": [
+        "--import",
+        "tsx/esm"
+      ],
+      "env": {
+        "NODE_ENV": "development"
+      },
+      "sourceMaps": true,
+      "resolveSourceMapLocations": ["${workspaceFolder}/**", "!**/node_modules/**"]
     }
   ]
 }

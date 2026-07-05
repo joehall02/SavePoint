@@ -18,7 +18,7 @@ export function mapExternalGameDetails(data: object[]): ExternalGameDetails {
     storyline: raw.storyline ?? null,
     summary: raw.summary ?? null,
     platforms: raw.platforms?.map((p) => ({ name: p.name })) ?? null,
-    cover: raw.cover ? { url: mapImageIdToUrl(raw.cover.image_id, enums.ImageSize.cover_small) } : null,
+    cover: raw.cover ? { url: mapImageIdToUrl(raw.cover.image_id, enums.ImageSize.r_1080p) } : null,
     videos: raw.videos?.map((v) => ({ url: mapVideoIdToUrl(v.video_id) })) ?? null,
     genres: raw.genres?.map((g) => ({ name: g.name })) ?? null,
     screenshots:
@@ -178,11 +178,10 @@ export function mapRegionName(regionName: string): string {
  * @param timestamp - Unix timestamp
  * @returns A human readable string in the format "Day, Month Year"
  */
-export function convertUnixTimestamp(timestamp: number): string {
+export function convertUnixTimestamp(timestamp?: number): string | undefined {
   const unixSeconds = Number(timestamp);
-  if (Number.isNaN(unixSeconds)) {
-    throw new Error("Invalid timestamp");
-  }
+
+  if (Number.isNaN(unixSeconds)) return undefined
   const date = new Date(unixSeconds * 1000);
   const day = date.getUTCDate();
   const year = date.getUTCFullYear();
