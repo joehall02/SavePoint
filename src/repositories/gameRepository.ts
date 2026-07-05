@@ -1,5 +1,6 @@
 import db from "../db.js";
 import { Game, GameDetails, PartialGame } from "../models/game.js";
+import { IGDBCount } from "../models/igdbGame.js";
 import { GameRepoProtocol } from "./protocols/gameRepoProtocol.js";
 import { throwError } from "../middlewares/errorHandler.js";
 import { Pagination } from "../models/pagination.js";
@@ -134,6 +135,31 @@ export class GameRepository implements GameRepoProtocol {
     if (result.changes === 0) {
       throwError("Game not found", 404);
     }
+  }
+
+  async countAllGames(title: string | undefined, platformId: number | undefined): Promise<IGDBCount> {
+    let query = `SELECT COUNT(*) AS count FROM games`;
+
+    const params: Array<number | string> = [];
+    const whereClauses: Array<string> = [];
+
+    if (platformId !== undefined) {
+      whereClauses.push(`platform_id = ?`);
+      params.push(platformId);
+    }
+
+    if (title !== undefined) {
+      whereClauses.push(`LOWER(title) = LOWER(?) OR LOWER(title) LIKE LOWER(?)`);
+      params.push(title, `%${title}%`);
+    }
+
+    if (whereClauses.length > 0) {
+      query += ` WHERE ${whereClauses.join(" AND ")}`;
+    }
+
+    const result = db.prepare(query).get(...params) as IGDBCount;
+
+    return result;
   }
 
   /**

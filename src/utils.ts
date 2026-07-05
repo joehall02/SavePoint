@@ -218,87 +218,52 @@ export function convertUnixTimestamp(timestamp?: number): string | undefined {
   return `${dayWithSuffix} ${monthName} ${year}`;
 }
 
+const platformApiIdMap: Record<enums.PlatformName, enums.PlatformApiId> = {
+  [enums.PlatformName.ps1]: enums.PlatformApiId.ps1,
+  [enums.PlatformName.ps2]: enums.PlatformApiId.ps2,
+  [enums.PlatformName.ps3]: enums.PlatformApiId.ps3,
+  [enums.PlatformName.ps4]: enums.PlatformApiId.ps4,
+  [enums.PlatformName.ps5]: enums.PlatformApiId.ps5,
+  [enums.PlatformName.psp]: enums.PlatformApiId.psp,
+  [enums.PlatformName.ps_vita]: enums.PlatformApiId.ps_vita,
+  [enums.PlatformName.original_xbox]: enums.PlatformApiId.original_xbox,
+  [enums.PlatformName.xbox_360]: enums.PlatformApiId.xbox_360,
+  [enums.PlatformName.xbox_one]: enums.PlatformApiId.xbox_one,
+  [enums.PlatformName.xbox_series_x_s]: enums.PlatformApiId.xbox_series_x_s,
+  [enums.PlatformName.sega_mega_drive]: enums.PlatformApiId.sega_mega_drive,
+  [enums.PlatformName.wii]: enums.PlatformApiId.wii,
+  [enums.PlatformName.switch]: enums.PlatformApiId.switch,
+  [enums.PlatformName.nes]: enums.PlatformApiId.nes,
+  [enums.PlatformName.ds]: enums.PlatformApiId.ds,
+  [enums.PlatformName.pc]: enums.PlatformApiId.pc,
+};
+
+const platformIdMap: Record<enums.PlatformName, enums.PlatformId> = {
+  [enums.PlatformName.ps1]: enums.PlatformId.ps1,
+  [enums.PlatformName.ps2]: enums.PlatformId.ps2,
+  [enums.PlatformName.ps3]: enums.PlatformId.ps3,
+  [enums.PlatformName.ps4]: enums.PlatformId.ps4,
+  [enums.PlatformName.ps5]: enums.PlatformId.ps5,
+  [enums.PlatformName.psp]: enums.PlatformId.psp,
+  [enums.PlatformName.ps_vita]: enums.PlatformId.ps_vita,
+  [enums.PlatformName.original_xbox]: enums.PlatformId.original_xbox,
+  [enums.PlatformName.xbox_360]: enums.PlatformId.xbox_360,
+  [enums.PlatformName.xbox_one]: enums.PlatformId.xbox_one,
+  [enums.PlatformName.xbox_series_x_s]: enums.PlatformId.xbox_series_x_s,
+  [enums.PlatformName.sega_mega_drive]: enums.PlatformId.sega_mega_drive,
+  [enums.PlatformName.wii]: enums.PlatformId.wii,
+  [enums.PlatformName.switch]: enums.PlatformId.switch,
+  [enums.PlatformName.nes]: enums.PlatformId.nes,
+  [enums.PlatformName.ds]: enums.PlatformId.ds,
+  [enums.PlatformName.pc]: enums.PlatformId.pc,
+};
+
 export function getPlatformApiId(platformName: string): number | undefined {
-  switch (platformName) {
-    case enums.PlatformName.ps1:
-      return enums.PlatformApiId.ps1;
-    case enums.PlatformName.ps2:
-      return enums.PlatformApiId.ps2;
-    case enums.PlatformName.ps3:
-      return enums.PlatformApiId.ps3;
-    case enums.PlatformName.ps4:
-      return enums.PlatformApiId.ps4;
-    case enums.PlatformName.ps5:
-      return enums.PlatformApiId.ps5;
-    case enums.PlatformName.psp:
-      return enums.PlatformApiId.psp;
-    case enums.PlatformName.ps_vita:
-      return enums.PlatformApiId.ps_vita;
-    case enums.PlatformName.original_xbox:
-      return enums.PlatformApiId.original_xbox;
-    case enums.PlatformName.xbox_360:
-      return enums.PlatformApiId.xbox_360;
-    case enums.PlatformName.xbox_one:
-      return enums.PlatformApiId.xbox_one;
-    case enums.PlatformName.xbox_series_x_s:
-      return enums.PlatformApiId.xbox_series_x_s;
-    case enums.PlatformName.sega_mega_drive:
-      return enums.PlatformApiId.sega_mega_drive;
-    case enums.PlatformName.wii:
-      return enums.PlatformApiId.wii;
-    case enums.PlatformName.switch:
-      return enums.PlatformApiId.switch;
-    case enums.PlatformName.nes:
-      return enums.PlatformApiId.nes;
-    case enums.PlatformName.ds:
-      return enums.PlatformApiId.ds;
-    case enums.PlatformName.pc:
-      return enums.PlatformApiId.pc;
-    default:
-      return undefined;
-  }
+  return platformApiIdMap[platformName as enums.PlatformName];
 }
 
-// TODO: definetly a better way to do this without repeating getPlatformApiId
 export function getPlatformId(platformName: string): number | undefined {
-  switch (platformName) {
-    case enums.PlatformName.ps1:
-      return enums.PlatformId.ps1;
-    case enums.PlatformName.ps2:
-      return enums.PlatformId.ps2;
-    case enums.PlatformName.ps3:
-      return enums.PlatformId.ps3;
-    case enums.PlatformName.ps4:
-      return enums.PlatformId.ps4;
-    case enums.PlatformName.ps5:
-      return enums.PlatformId.ps5;
-    case enums.PlatformName.psp:
-      return enums.PlatformId.psp;
-    case enums.PlatformName.ps_vita:
-      return enums.PlatformId.ps_vita;
-    case enums.PlatformName.original_xbox:
-      return enums.PlatformId.original_xbox;
-    case enums.PlatformName.xbox_360:
-      return enums.PlatformId.xbox_360;
-    case enums.PlatformName.xbox_one:
-      return enums.PlatformId.xbox_one;
-    case enums.PlatformName.xbox_series_x_s:
-      return enums.PlatformId.xbox_series_x_s;
-    case enums.PlatformName.sega_mega_drive:
-      return enums.PlatformId.sega_mega_drive;
-    case enums.PlatformName.wii:
-      return enums.PlatformId.wii;
-    case enums.PlatformName.switch:
-      return enums.PlatformId.switch;
-    case enums.PlatformName.nes:
-      return enums.PlatformId.nes;
-    case enums.PlatformName.ds:
-      return enums.PlatformId.ds;
-    case enums.PlatformName.pc:
-      return enums.PlatformId.pc;
-    default:
-      return undefined;
-  }
+  return platformIdMap[platformName as enums.PlatformName];
 }
 
 /**

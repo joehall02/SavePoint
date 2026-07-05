@@ -1,5 +1,6 @@
 import { throwError } from "../../../middlewares/errorHandler.js";
 import { Game, GameDetails, PartialGame } from "../../../models/game.js";
+import { IGDBCount } from "../../../models/igdbGame.js";
 import { GameRepoProtocol } from "../../../repositories/protocols/gameRepoProtocol.js";
 import * as mockData from "../data/game/mockGameRepoData.js";
 import { Pagination } from "../../../models/pagination.js";
@@ -22,6 +23,10 @@ export class MockGameRepo implements GameRepoProtocol {
 
     async deleteGame(gameId: number): Promise<void> {
         if (gameId !== 1) throwError("Game not found", 404);
+    }
+
+    async countAllGames(_title: string | undefined, _platformId: number | undefined): Promise<IGDBCount> {
+        return { count: mockData.mockGetAllGamesData.length };
     }
 
     async searchGamesByTitle(search: string, _pagination: Pagination): Promise<Array<PartialGame>> {

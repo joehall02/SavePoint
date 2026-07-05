@@ -116,32 +116,32 @@ describe("Game Test Suite", () => {
   describe("Get All Games Tests", () => {
     test("GET /games/ should get all games", async () => {
       // Given
-      const games = mockData.mockGetAllGamesData;
-      
+      const expected = { count: mockData.mockGetAllGamesData.length, pages: 2, games: mockData.mockGetAllGamesData };
+
       // When
       const res = await request(app).get("/api/games/");
       
       // Then
       assert.equal(res.status, 200);
-      assert.deepEqual(res.body, games);
+      assert.deepEqual(res.body, expected);
     });
 
     test("GET /games/ should get games based on title", async () => {
         // Given
-        const games = mockData.mockGetAllGamesData
-        const searchParam = mockData.mockSearchByTitleParam  
-        
+        const expected = { count: mockData.mockGetAllGamesData.length, pages: 2, games: mockData.mockGetAllGamesData };
+        const searchParam = mockData.mockSearchByTitleParam
+
         // When
-        const res = await request(app).get(`/api/games?title=${searchParam}`);  
+        const res = await request(app).get(`/api/games?title=${searchParam}`);
 
         // Then
         assert.equal(res.status, 200);
-        assert.deepEqual(res.body, games);
+        assert.deepEqual(res.body, expected);
     })
 
     test("GET /games/ should get all games for a platform when given a platform name", async () => {
       // Given
-      const games = mockData.mockGetAllGamesData;
+      const expected = { count: mockData.mockGetAllGamesData.length, pages: 2, games: mockData.mockGetAllGamesData };
       const platformName = mockData.mockPlatformName
 
       // When
@@ -149,12 +149,12 @@ describe("Game Test Suite", () => {
       
       // Then
       assert.equal(res.status, 200);
-      assert.deepEqual(res.body, games);
+      assert.deepEqual(res.body, expected);
     });
 
     test("GET /games/ should get all games when given an incorrect platform name", async () => {
       // Given
-      const games = mockData.mockGetAllGamesData;
+      const expected = { count: mockData.mockGetAllGamesData.length, pages: 2, games: mockData.mockGetAllGamesData };
       const platformName = mockData.mockIncorrectPlatformName
 
       // When
@@ -162,22 +162,22 @@ describe("Game Test Suite", () => {
       
       // Then
       assert.equal(res.status, 200);
-      assert.deepEqual(res.body, games);
+      assert.deepEqual(res.body, expected);
     });
     
     test("GET /games/ should get games based on pagination parameters", async () => {
       // Given
-      const games = mockData.mockGetAllGamesData;
-      const platformName = mockData.mockIncorrectPlatformName
       const paginationPage = mockData.paginationPage
       const paginationLimit = mockData.paginationLimit
+      const expected = { count: mockData.mockGetAllGamesData.length, pages: 1, games: mockData.mockGetAllGamesData };
+      const platformName = mockData.mockIncorrectPlatformName
 
       // When
       const res = await request(app).get(`/api/games?platform=${platformName}&page=${paginationPage}&limit=${paginationLimit}`);
       
       // Then
       assert.equal(res.status, 200);
-      assert.deepEqual(res.body, games);
+      assert.deepEqual(res.body, expected);
     });
   })
 

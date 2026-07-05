@@ -155,6 +155,11 @@ export class GameService implements GameServiceProtocol {
 	return countResult
   }
 
+  async countCollectionGame(title: string | undefined, platformName: string | undefined): Promise<IGDBCount> {
+    const platformId = getPlatformId(platformName ?? "");
+    return this.gameRepo.countAllGames(title, platformId);
+  }
+
   async fetchExternalGameDetails(gameId: number): Promise<ExternalGameDetails> {
     if (gameId === undefined) {
       throwError("No game ID provided", 400);

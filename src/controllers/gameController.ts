@@ -31,11 +31,12 @@ export class GameController {
       // Pagination
       const pagination = getPagination(req);
         
-      // fetchGames service to handle business logic
       const games = await this.service.fetchAllGames(title, platformName, pagination);
+      const countResponse = await this.service.countCollectionGame(title, platformName);
+      const pages = getPages(pagination, countResponse);
 
-      // Return response 200 with games, validating the data against the schema
-      res.status(200).json(games);
+	  // Return response 200 with games, validating the data against the schema
+      res.status(200).json({ count: countResponse.count, pages, games });
     } catch (error) {
       next(error);
     }
