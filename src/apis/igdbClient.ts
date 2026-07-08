@@ -12,6 +12,39 @@ axios.defaults.headers.common["Client-ID"] = `${config.igdbClientId}`;
 axios.defaults.headers.common["Content-Type"] = "text/plain";
 axios.defaults.timeout = 5000; // 5 Seconds Timeout
 
+const CACHE_TTL_MS = 5 * 60 * 1000; // 5 minutes
+
+interface CacheEntry<T> {
+  data: T;
+  expiresAt: number;
+}
+
+// TODO: Needs moving into a seperate file
+const makeCache = <T>() => {
+  const cache = new Map<number, CacheEntry<T>>();
+ 
+  const get = (key: number): T | undefined => {
+	const entry = cache.get(key);
+   
+	if (!entry) return undefined;
+	
+	if (Date.now() > entry.expiresAt) {
+	  cache.delete(key);
+	  return undefined;
+	}
+	return entry.data;
+  }
+
+  const set = (key: number, value: T) => {
+	cache.set(key, { data: value, expiresAt: Date.now() + CACHE_TTL_MS });
+  }
+ 
+  return { get, set }
+}
+
+const detailsCache = makeCache<ExternalGameDetails>();
+const coverCache = makeCache<GameCover | null>();
+
 export class IGDBClient implements IGDBClientProtocol {
   async searchGame (searchParam: string, igdbPlatformId: number | undefined, pagination: Pagination): Promise<Array<IGDBGame>> {
     let query = `
@@ -49,21 +82,31 @@ export class IGDBClient implements IGDBClientProtocol {
   }
 
   async fetchGameCover(gameId: number): Promise<GameCover | null> {
-      const response = await axios.post("/games", `fields cover.image_id; where id = ${gameId};`);
+    const cached = coverCache.get(gameId);
+    if (cached !== undefined) return cached;
 
-      const data = response.data as Array<{ cover?: { image_id: string } | null }>;
-      
-	  const imageId = data[0]?.cover?.image_id;
-     
-	  return imageId ? { url: mapImageIdToUrl(imageId, enums.ImageSize.r_1080p) } : null;
+    const response = await axios.post("/games", `fields cover.image_id; where id = ${gameId};`);
+    const data = response.data as Array<{ cover?: { image_id: string } | null }>;
+
+    const imageId = data[0]?.cover?.image_id;
+
+    const result = imageId ? { url: mapImageIdToUrl(imageId, enums.ImageSize.r_1080p) } : null;
+    coverCache.set(gameId, result);
+
+    return result;
   }
 
   async fetchGameDetails (gameId: number): Promise<ExternalGameDetails> {
-    const response = await axios.post("/games", `fields name, storyline, summary, platforms.name, cover.image_id, videos.video_id, genres.name, screenshots.image_id, release_dates.date, release_dates.release_region.region; where id = ${gameId};`);
+    const cached = detailsCache.get(gameId);
+    if (cached) return cached;
 
+    const response = await axios.post("/games", `fields name, storyline, summary, platforms.name, cover.image_id, videos.video_id, genres.name, screenshots.image_id, release_dates.date, release_dates.release_region.region; where id = ${gameId};`);
     const data = response.data as RawExternalGameDetails[];
 
-    return mapExternalGameDetails(data);
+    const result = mapExternalGameDetails(data);
+    detailsCache.set(gameId, result);
+
+    return result;
   };
 }
 
