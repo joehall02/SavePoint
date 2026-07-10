@@ -1,5 +1,5 @@
 import {IGDBClientProtocol} from '../../../apis/protocols/IGDBClientProtocol.js'
-import { ExternalGameDetails, GameCover, IGDBCount, IGDBGame, RawExternalGameDetails} from '../../../models/igdbGame.js'
+import { ExternalGameDetails, GameCover, IGDBCount, IGDBGame, PlatformCover, RawExternalGameDetails} from '../../../models/igdbGame.js'
 import { mockSearchIgdbResponseData, mockExternalGameDetails, mockCountIgdbResponseData } from '../data/game/mockApiData.js'
 import { mapExternalGameDetails, mapExternalGame } from '../../../utils.js'
 import { throwError } from '../../../middlewares/errorHandler.js'
@@ -32,5 +32,9 @@ export class MockIGDBClient implements IGDBClientProtocol {
 
     async fetchGameCover(_gameId: number): Promise<GameCover | null> {
         return null;
+    }
+
+    async fetchPlatformCovers(_platformIds: number[]): Promise<Array<PlatformCover>> {
+        return [];
     }
 }

@@ -1,4 +1,4 @@
-import { ExternalGameDetails, GameCover, IGDBCount, IGDBGame } from "../../models/igdbGame.js";
+import { ExternalGameDetails, GameCover, IGDBCount, IGDBGame, PlatformCover } from "../../models/igdbGame.js";
 import { Pagination } from "../../models/pagination.js";
 
 export interface IGDBClientProtocol {
@@ -6,4 +6,5 @@ export interface IGDBClientProtocol {
     countGame(searchParam: string, igdbPlatformId: number | undefined): Promise<IGDBCount>;
     fetchGameDetails(gameId: number): Promise<ExternalGameDetails>;
     fetchGameCover(gameId: number): Promise<GameCover | null>;
+    fetchPlatformCovers(platformIds: number[]): Promise<Array<PlatformCover>>;
 }

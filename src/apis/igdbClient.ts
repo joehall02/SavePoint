@@ -1,6 +1,6 @@
 import axios from "axios";
 import config from "../config/config.js";
-import { IGDBGame, ExternalGameDetails, RawExternalGameDetails, IGDBCount, GameCover } from "../models/igdbGame.js";
+import { IGDBGame, ExternalGameDetails, RawExternalGameDetails, IGDBCount, GameCover, PlatformCover } from "../models/igdbGame.js";
 import { IGDBClientProtocol } from "./protocols/IGDBClientProtocol.js";
 import { mapExternalGameDetails, mapExternalGame, mapImageIdToUrl } from "../utils.js";
 import * as enums from "../enums.js";
@@ -94,6 +94,21 @@ export class IGDBClient implements IGDBClientProtocol {
     coverCache.set(gameId, result);
 
     return result;
+  }
+
+  async fetchPlatformCovers(platformIds: number[]): Promise<Array<PlatformCover>> {
+    const response = await axios.post("/platforms", `fields platform_logo.url; where id = (${platformIds.join(', ')}); limit ${platformIds.length};`);
+    const data = response.data as Array<{ id: number; platform_logo?: { id: number; url: string } | null }>;
+
+    return data
+      .filter(p => p.platform_logo?.url)
+      .map(p => {
+		// Split URL up where there is a '/', remove last element
+		// in the array, regex to remove the file extension
+        const imageId = p.platform_logo!.url.split('/').pop()!.replace(/\.[^/.]+$/, '');
+
+        return { id: p.id, url: mapImageIdToUrl(imageId, enums.ImageSize.r_1080p) };
+      });
   }
 
   async fetchGameDetails (gameId: number): Promise<ExternalGameDetails> {

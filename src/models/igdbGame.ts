@@ -2,6 +2,11 @@ export interface GameCover {
     url: string;
 }
 
+export interface PlatformCover {
+  id: number;
+  url: string;
+}
+
 export interface IGDBGame {
     id: number;
     cover?: GameCover | null;
