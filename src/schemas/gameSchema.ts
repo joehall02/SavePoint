@@ -8,7 +8,7 @@ export const createGameSchema = z.object({
   boxIncluded: z.boolean(),
   rating: z.number().optional(),
   igdbId: z.number(),
-  platformId: z.enum(enums.PlatformApiId),
+  platformId: z.enum(enums.PlatformId),
 })
 
 export const getGameDetailsSchema = z.object({

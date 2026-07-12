@@ -16,23 +16,23 @@ db.exec(`
 
     INSERT OR IGNORE INTO platforms (id, title, igdb_id)
     VALUES
-        (1,  'PS1',             7),
-        (2,  'PS2',             8),
-        (3,  'PS3',             9),
-        (4,  'PS4',             48),
-        (5,  'PS5',             167),
-        (6,  'PSP',             38),
-        (7,  'PS Vita',         46),
-        (8,  'Original Xbox',   11),
-        (9,  'Xbox 360',        12),
-        (10, 'Xbox One',        49),
-        (11, 'Xbox Series X|S', 169),
-        (12, 'Sega Mega Drive', 29),
-        (13, 'WII',             5),
-        (14, 'Switch',          130),
-        (15, 'NES',             18),
-        (16, 'DS',              20),
-        (17, 'PC',              6);
+        (1,  'PlayStation',                    7),
+        (2,  'PlayStation 2',                  8),
+        (3,  'PlayStation 3',                  9),
+        (4,  'PlayStation 4',                  48),
+        (5,  'PlayStation 5',                  167),
+        (6,  'PlayStation Portable',           38),
+        (7,  'PlayStation Vita',               46),
+        (8,  'Xbox',                           11),
+        (9,  'Xbox 360',                       12),
+        (10, 'Xbox One',                       49),
+        (11, 'Xbox Series X|S',               169),
+        (12, 'Sega Mega Drive/Genesis',        29),
+        (13, 'Wii',                            5),
+        (14, 'Nintendo Switch',                130),
+        (15, 'Nintendo Entertainment System',  18),
+        (16, 'Nintendo DS',                    20),
+        (17, 'PC (Microsoft Windows)',          6);
 
     CREATE TABLE IF NOT EXISTS games (
         id INTEGER PRIMARY KEY AUTOINCREMENT,

@@ -97,18 +97,12 @@ export class IGDBClient implements IGDBClientProtocol {
   }
 
   async fetchPlatformCovers(platformIds: number[]): Promise<Array<PlatformCover>> {
-    const response = await axios.post("/platforms", `fields platform_logo.url; where id = (${platformIds.join(', ')}); limit ${platformIds.length};`);
-    const data = response.data as Array<{ id: number; platform_logo?: { id: number; url: string } | null }>;
+    const response = await axios.post("/platforms", `fields platform_logo.image_id; where id = (${platformIds.join(', ')}); limit ${platformIds.length};`);
+    const data = response.data as Array<{ id: number; platform_logo?: { id: number; image_id: string } | null }>;
 
     return data
-      .filter(p => p.platform_logo?.url)
-      .map(p => {
-		// Split URL up where there is a '/', remove last element
-		// in the array, regex to remove the file extension
-        const imageId = p.platform_logo!.url.split('/').pop()!.replace(/\.[^/.]+$/, '');
-
-        return { id: p.id, url: mapImageIdToUrl(imageId, enums.ImageSize.r_1080p) };
-      });
+      .filter(p => p.platform_logo?.image_id)
+      .map(p => ({ id: p.id, url: mapImageIdToUrl(p.platform_logo!.image_id, enums.ImageSize.screenshot_big) }));
   }
 
   async fetchGameDetails (gameId: number): Promise<ExternalGameDetails> {
