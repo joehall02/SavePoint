@@ -5,10 +5,10 @@
   "main": "server.ts",
   "scripts": {
     "start": "cross-env NODE_ENV=production node dist/server.js",
-    "dev": "cross-env NODE_ENV=development nodemon --watch src --ext ts --exec \"node --trace-uncaught --enable-source-maps --loader ts-node/esm src/server.ts\"",
+    "dev": "cross-env NODE_ENV=development nodemon --watch src --ext ts --exec \"node --trace-uncaught --enable-source-maps --import tsx src/server.ts\"",
     "build": "cross-env NODE_ENV=production tsc",
     "lint": "eslint \"src/**/*.ts\"",
-    "test": "cross-env NODE_ENV=test node --test --loader ts-node/esm \"src/tests/**/*.test.ts\""
+    "test": "cross-env NODE_ENV=test node --test --import tsx \"src/tests/**/*.test.ts\""
   },
   "keywords": [],
   "author": "",
