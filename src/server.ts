@@ -3,7 +3,7 @@ import { createApp } from "./app.js";
 import config from "./config/config.js";
 import db from "./db.js";
 
-const app = createApp();
+const app = await createApp();
 
 app.listen(config.port, () => {
   console.log(`${config.nodeEnv} server running on port ${config.port}`);

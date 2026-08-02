@@ -13,10 +13,10 @@ describe("Game Test Suite", () => {
 
   beforeEach(async () => {
     // Create test dependency container
-    createContainer(config.nodeEnv);
+    await createContainer(config.nodeEnv);
 
     // Create app
-    app = createApp();
+    app = await createApp();
   });
 
   // TESTS: Create Game

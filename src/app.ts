@@ -11,13 +11,13 @@ import { PlatformController } from "./controllers/platformController.js";
 import cors from 'cors'
 
 // App Factory
-export function createApp() {
+export const createApp = async () => {
   // Create an express app instance
   const app = express();
 
   // Create dependency container
   if (config.nodeEnv === "development" || config.nodeEnv === "production") {
-    createContainer(config.nodeEnv);
+    await createContainer(config.nodeEnv);
   }
 
   // Resolve controllers
@@ -47,4 +47,4 @@ export function createApp() {
   app.use(errorHandler);
 
   return app;
-}
+};

@@ -5,7 +5,4 @@
 .env.test
 /data/
 app.db
-test.db
-prod.db
 /dist
-src/platformImages/*

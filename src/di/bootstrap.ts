@@ -1,18 +1,20 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { DependencyContainer, container } from "tsyringe";
-import { registerProd } from "./environments/registerProd.js";
-import { registerTest } from "./environments/registerTest.js";
 
-export function createContainer(
+export const createContainer = async (
   env: string,
   overrides?: Array<{ token: symbol; useClass: any }>
-): DependencyContainer {
+): Promise<DependencyContainer> => {
   container.reset();
 
+  // Dynamic imports so only the env actually used gets loaded - keeps the
+  // real db/IGDB client (imported by registerProd) out of test runs entirely.
   if (env === "test") {
+    const { registerTest } = await import("./environments/registerTest.js");
     registerTest();
   } else {
+    const { registerProd } = await import("./environments/registerProd.js");
     registerProd();
   }
 
@@ -26,4 +28,4 @@ export function createContainer(
   }
 
   return container;
-}
+};

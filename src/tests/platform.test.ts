@@ -13,10 +13,10 @@ describe("Platform Test Suite", () => {
 
   beforeEach(async () => {
     // Create test dependency container
-    createContainer(config.nodeEnv);
+    await createContainer(config.nodeEnv);
 
     // Create app
-    app = createApp();  
+    app = await createApp();
   });
 
   test("GET /platforms/ should get all platforms", async () => {
